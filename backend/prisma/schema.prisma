@@ -1,0 +1,218 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  CUSTOMER
+  ADMIN
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+  NO_SHOW
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+}
+
+enum TransactionType {
+  CREDIT
+  DEBIT
+}
+
+model User {
+  id                 String         @id @default(uuid())
+  name               String
+  email              String         @unique
+  password           String
+  phone              String?
+  role               Role           @default(CUSTOMER)
+  profileImage       String?
+  isVerified         Boolean        @default(false)
+  isActive           Boolean        @default(true)
+  verificationCode   String?
+  verificationExpiry DateTime?
+  resetCode          String?
+  resetCodeExpiry    DateTime?
+  chest              Float?
+  waist              Float?
+  hips               Float?
+  height             Float?
+  weight             Float?
+  orders             Order[]
+  bookings           Booking[]
+  cart               Cart?
+  wallet             Wallet?
+  notifications      Notification[]
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
+}
+
+model Product {
+  id          String      @id @default(uuid())
+  name        String
+  description String
+  price       Float
+  images      String[]
+  sizes       String[]
+  stock       Int         @default(0)
+  category    String
+  collection  String?
+  isAvailable Boolean     @default(true)
+  orderItems  OrderItem[]
+  cartItems   CartItem[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model Cart {
+  id        String     @id @default(uuid())
+  userId    String     @unique
+  user      User       @relation(fields: [userId], references: [id])
+  items     CartItem[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model CartItem {
+  id        String   @id @default(uuid())
+  cartId    String
+  cart      Cart     @relation(fields: [cartId], references: [id])
+  productId String
+  product   Product  @relation(fields: [productId], references: [id])
+  quantity  Int      @default(1)
+  size      String?
+  createdAt DateTime @default(now())
+}
+
+model Order {
+  id              String        @id @default(uuid())
+  userId          String
+  user            User          @relation(fields: [userId], references: [id])
+  items           OrderItem[]
+  total           Float
+  status          OrderStatus   @default(PENDING)
+  deliveryAddress String
+  paymentStatus   PaymentStatus @default(PENDING)
+  paymentRef      String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+}
+
+model OrderItem {
+  id        String   @id @default(uuid())
+  orderId   String
+  order     Order    @relation(fields: [orderId], references: [id])
+  productId String
+  product   Product  @relation(fields: [productId], references: [id])
+  quantity  Int
+  size      String?
+  price     Float
+  createdAt DateTime @default(now())
+}
+
+model ConsultationService {
+  id           String         @id @default(uuid())
+  name         String
+  description  String
+  price        Float
+  duration     Int
+  isAvailable  Boolean        @default(true)
+  availability Availability[]
+  bookings     Booking[]
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+}
+
+model Availability {
+  id          String              @id @default(uuid())
+  serviceId   String
+  service     ConsultationService @relation(fields: [serviceId], references: [id])
+  dayOfWeek   Int
+  startTime   String
+  endTime     String
+  isAvailable Boolean             @default(true)
+  createdAt   DateTime            @default(now())
+}
+
+model Booking {
+  id            String              @id @default(uuid())
+  userId        String
+  user          User                @relation(fields: [userId], references: [id])
+  serviceId     String
+  service       ConsultationService @relation(fields: [serviceId], references: [id])
+  date          DateTime
+  startTime     String
+  endTime       String
+  notes         String?
+  status        BookingStatus       @default(PENDING)
+  paymentStatus PaymentStatus       @default(PENDING)
+  paymentRef    String?
+  total         Float
+  createdAt     DateTime            @default(now())
+  updatedAt     DateTime            @updatedAt
+}
+
+model Payment {
+  id        String        @id @default(uuid())
+  userId    String
+  amount    Float
+  status    PaymentStatus @default(PENDING)
+  reference String        @unique
+  channel   String?
+  metadata  Json?
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+}
+
+model Wallet {
+  id           String              @id @default(uuid())
+  userId       String              @unique
+  user         User                @relation(fields: [userId], references: [id])
+  balance      Float               @default(0)
+  transactions WalletTransaction[]
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @updatedAt
+}
+
+model WalletTransaction {
+  id          String          @id @default(uuid())
+  walletId    String
+  wallet      Wallet          @relation(fields: [walletId], references: [id])
+  amount      Float
+  type        TransactionType
+  reference   String          @unique
+  description String?
+  createdAt   DateTime        @default(now())
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  title     String
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
