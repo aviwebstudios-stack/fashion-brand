@@ -5,6 +5,7 @@ import {
   fundWallet,
   verifyWalletFunding,
   payWithWallet,
+  issueRefund,
 } from './wallet.service.js';
 
 export const getMyWallet = asyncHandler(async (req, res) => {
@@ -25,4 +26,9 @@ export const verifyFunding = asyncHandler(async (req, res) => {
 export const payFromWallet = asyncHandler(async (req, res) => {
   const wallet = await payWithWallet(req.user.id, req.body);
   successResponse(res, 'Payment successful', wallet);
+});
+
+export const adminIssueRefund = asyncHandler(async (req, res) => {
+  const wallet = await issueRefund(req.body);
+  successResponse(res, 'Refund issued successfully', wallet);
 });

@@ -60,6 +60,7 @@ model User {
   hips               Float?
   height             Float?
   weight             Float?
+  measurementsDetail Json?
   orders             Order[]
   bookings           Booking[]
   cart               Cart?
@@ -116,6 +117,7 @@ model Order {
   deliveryAddress String
   paymentStatus   PaymentStatus @default(PENDING)
   paymentRef      String?
+  statusHistory   OrderStatusHistory[]
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
 }
@@ -170,8 +172,11 @@ model Booking {
   paymentStatus PaymentStatus       @default(PENDING)
   paymentRef    String?
   total         Float
+  statusHistory BookingStatusHistory[]
   createdAt     DateTime            @default(now())
   updatedAt     DateTime            @updatedAt
+
+  @@unique([serviceId, date, startTime], name: "unique_active_slot")
 }
 
 model Payment {
@@ -216,3 +221,63 @@ model Notification {
   isRead    Boolean  @default(false)
   createdAt DateTime @default(now())
 }
+
+model Settings {
+  id                    String   @id @default(uuid())
+  telegramChatId        String?
+  telegramConnectToken  String?
+  theme                 Json?
+  updatedAt             DateTime @updatedAt
+}
+
+model SiteContent {
+  id        String   @id @default(uuid())
+  key       String   @unique
+  value     String   @db.Text
+  updatedAt DateTime @updatedAt
+}
+
+model OrderStatusHistory {
+  id        String      @id @default(uuid())
+  orderId   String
+  order     Order       @relation(fields: [orderId], references: [id])
+  status    OrderStatus
+  note      String?
+  createdAt DateTime    @default(now())
+}
+
+model BookingStatusHistory {
+  id        String        @id @default(uuid())
+  bookingId String
+  booking   Booking       @relation(fields: [bookingId], references: [id])
+  status    BookingStatus
+  note      String?
+  createdAt DateTime      @default(now())
+}
+model ContactMessage {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  message   String
+  createdAt DateTime @default(now())
+}
+
+model AcademyInquiry {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  phone     String?
+  program   String
+  createdAt DateTime @default(now())
+}
+
+model NewsletterSubscriber {
+  id         String   @id @default(uuid())
+  email      String   @unique
+  firstName  String?
+  lastName   String?
+  interests  String[]
+  subscribed Boolean  @default(true)
+  createdAt  DateTime @default(now())
+}
+

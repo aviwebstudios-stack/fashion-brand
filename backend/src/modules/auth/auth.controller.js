@@ -7,6 +7,7 @@ import {
   loginUser,
   forgotPassword,
   resetPassword,
+  verifyResetCode,
 } from './auth.service.js';
 
 export const register = asyncHandler(async (req, res) => {
@@ -31,6 +32,11 @@ export const login = asyncHandler(async (req, res) => {
 
 export const forgot = asyncHandler(async (req, res) => {
   const result = await forgotPassword(req.body);
+  successResponse(res, result.message);
+});
+
+export const verifyReset = asyncHandler(async (req, res) => {
+  const result = await verifyResetCode(req.body);
   successResponse(res, result.message);
 });
 

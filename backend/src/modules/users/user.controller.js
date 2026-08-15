@@ -5,9 +5,11 @@ import {
   updateProfile,
   uploadProfilePicture,
   updateMeasurements,
+  updateMeasurementsDetail,
   changePassword,
   getAllUsers,
   suspendUser,
+  reactivateUser,
   deleteUser,
 } from './user.service.js';
 
@@ -31,6 +33,11 @@ export const updateMyMeasurements = asyncHandler(async (req, res) => {
   successResponse(res, 'Measurements updated successfully', user);
 });
 
+export const updateMyMeasurementsDetail = asyncHandler(async (req, res) => {
+  const user = await updateMeasurementsDetail(req.user.id, req.body);
+  successResponse(res, 'Measurements saved successfully', user);
+});
+
 export const changeMyPassword = asyncHandler(async (req, res) => {
   const result = await changePassword(req.user.id, req.body);
   successResponse(res, result.message);
@@ -43,6 +50,11 @@ export const adminGetAllUsers = asyncHandler(async (req, res) => {
 
 export const adminSuspendUser = asyncHandler(async (req, res) => {
   const result = await suspendUser(req.params.id);
+  successResponse(res, result.message);
+});
+
+export const adminReactivateUser = asyncHandler(async (req, res) => {
+  const result = await reactivateUser(req.params.id);
   successResponse(res, result.message);
 });
 

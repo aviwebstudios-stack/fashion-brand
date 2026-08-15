@@ -6,6 +6,8 @@ import {
   adminCreateProduct,
   adminUpdateProduct,
   adminDeleteProduct,
+  adminRemoveProductImage,
+  adminGetAllProducts,
   getAllProducts,
   getSingleProduct,
   getAllCategories,
@@ -14,15 +16,15 @@ import {
 
 const router = Router();
 
-// Public routes
 router.get('/', getAllProducts);
 router.get('/categories', getAllCategories);
 router.get('/collections', getAllCollections);
+router.get('/admin/all', protect, adminOnly, adminGetAllProducts);
 router.get('/:id', getSingleProduct);
 
-// Admin routes
 router.post('/', protect, adminOnly, upload.array('images', 5), adminCreateProduct);
 router.patch('/:id', protect, adminOnly, upload.array('images', 5), adminUpdateProduct);
 router.delete('/:id', protect, adminOnly, adminDeleteProduct);
+router.delete('/:id/images', protect, adminOnly, adminRemoveProductImage);
 
 export default router;

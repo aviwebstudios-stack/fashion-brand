@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-primary: #3d4636;
+  --color-brand-accent: #c9a227;
+  --color-brand-bg: #faf8f3;
+  --color-brand-text: #2b2b26;
+  --font-heading: "Playfair Display", serif;
+  --font-body: "Inter", system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+}

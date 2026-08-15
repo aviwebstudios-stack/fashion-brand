@@ -5,7 +5,6 @@ export const registerSchema = z.object({
   email: z.string().email('Invalid email address'),
   password: z.string().min(6, 'Password must be at least 6 characters'),
   phone: z.string().optional(),
-  role: z.enum(['CUSTOMER', 'ADMIN']).default('CUSTOMER'),
 });
 
 export const loginSchema = z.object({
@@ -20,6 +19,11 @@ export const verifyEmailSchema = z.object({
 
 export const forgotPasswordSchema = z.object({
   email: z.string().email('Invalid email address'),
+});
+
+export const verifyResetCodeSchema = z.object({
+  email: z.string().email('Invalid email address'),
+  code: z.string().length(6, 'Code must be 6 digits'),
 });
 
 export const resetPasswordSchema = z.object({

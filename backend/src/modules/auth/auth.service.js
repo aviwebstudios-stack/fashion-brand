@@ -4,33 +4,26 @@ import { generateToken } from '../../utils/generateToken.js';
 import { generateVerificationCode, generateCodeExpiry } from '../../utils/generateCode.js';
 import { sendEmail } from '../../utils/sendEmail.js';
 
-// Register
-export const registerUser = async ({ name, email, password, phone, role }) => {
-  // Check if user exists
+export const registerUser = async ({ name, email, password, phone }) => {
   const existingUser = await prisma.user.findUnique({ where: { email } });
   if (existingUser) throw { statusCode: 400, message: 'Email already registered' };
 
-  // Hash password
   const hashedPassword = await bcrypt.hash(password, 12);
-
-  // Generate verification code
   const code = generateVerificationCode();
   const expiry = generateCodeExpiry();
 
-  // Create user
   const user = await prisma.user.create({
     data: {
       name,
       email,
       password: hashedPassword,
       phone,
-      role,
+      role: 'CUSTOMER',
       verificationCode: code,
       verificationExpiry: expiry,
     },
   });
 
-  // Send verification email
   await sendEmail({
     to: email,
     subject: 'Verify Your Email',
@@ -48,7 +41,6 @@ export const registerUser = async ({ name, email, password, phone, role }) => {
   return { message: 'Registration successful. Please verify your email.' };
 };
 
-// Verify Email
 export const verifyEmail = async ({ email, code }) => {
   const user = await prisma.user.findUnique({ where: { email } });
   if (!user) throw { statusCode: 404, message: 'User not found' };
@@ -58,17 +50,12 @@ export const verifyEmail = async ({ email, code }) => {
 
   await prisma.user.update({
     where: { email },
-    data: {
-      isVerified: true,
-      verificationCode: null,
-      verificationExpiry: null,
-    },
+    data: { isVerified: true, verificationCode: null, verificationExpiry: null },
   });
 
   return { message: 'Email verified successfully. You can now login.' };
 };
 
-// Resend verification code
 export const resendVerificationCode = async ({ email }) => {
   const user = await prisma.user.findUnique({ where: { email } });
   if (!user) throw { statusCode: 404, message: 'User not found' };
@@ -98,7 +85,6 @@ export const resendVerificationCode = async ({ email }) => {
   return { message: 'New verification code sent to your email.' };
 };
 
-// Login
 export const loginUser = async ({ email, password }) => {
   const user = await prisma.user.findUnique({ where: { email } });
   if (!user) throw { statusCode: 400, message: 'Invalid email or password' };
@@ -123,7 +109,6 @@ export const loginUser = async ({ email, password }) => {
   };
 };
 
-// Forgot Password
 export const forgotPassword = async ({ email }) => {
   const user = await prisma.user.findUnique({ where: { email } });
   if (!user) throw { statusCode: 404, message: 'No account found with this email' };
@@ -153,7 +138,18 @@ export const forgotPassword = async ({ email }) => {
   return { message: 'Password reset code sent to your email.' };
 };
 
-// Reset Password
+// Verify Reset Code (without resetting password yet)
+export const verifyResetCode = async ({ email, code }) => {
+  const user = await prisma.user.findUnique({ where: { email } });
+  if (!user) throw { statusCode: 404, message: 'User not found' };
+  if (!user.resetCode) throw { statusCode: 400, message: 'No reset request found. Please request a new code.' };
+  if (user.resetCode !== code) throw { statusCode: 400, message: 'Invalid reset code' };
+  if (new Date() > user.resetCodeExpiry) throw { statusCode: 400, message: 'Reset code expired' };
+
+  return { message: 'Code verified successfully' };
+};
+
+
 export const resetPassword = async ({ email, code, newPassword }) => {
   const user = await prisma.user.findUnique({ where: { email } });
   if (!user) throw { statusCode: 404, message: 'User not found' };
@@ -164,11 +160,7 @@ export const resetPassword = async ({ email, code, newPassword }) => {
 
   await prisma.user.update({
     where: { email },
-    data: {
-      password: hashedPassword,
-      resetCode: null,
-      resetCodeExpiry: null,
-    },
+    data: { password: hashedPassword, resetCode: null, resetCodeExpiry: null },
   });
 
   return { message: 'Password reset successful. You can now login.' };

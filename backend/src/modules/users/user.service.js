@@ -2,7 +2,6 @@ import bcrypt from 'bcrypt';
 import prisma from '../../config/db.js';
 import cloudinary from '../../config/cloudinary.js';
 
-// Get profile
 export const getProfile = async (userId) => {
   const user = await prisma.user.findUnique({
     where: { id: userId },
@@ -19,6 +18,7 @@ export const getProfile = async (userId) => {
       hips: true,
       height: true,
       weight: true,
+      measurementsDetail: true,
       createdAt: true,
     },
   });
@@ -27,7 +27,6 @@ export const getProfile = async (userId) => {
   return user;
 };
 
-// Update profile
 export const updateProfile = async (userId, { name, phone }) => {
   const user = await prisma.user.update({
     where: { id: userId },
@@ -44,11 +43,9 @@ export const updateProfile = async (userId, { name, phone }) => {
   return user;
 };
 
-// Upload profile picture
 export const uploadProfilePicture = async (userId, file) => {
   if (!file) throw { statusCode: 400, message: 'No image provided' };
 
-  // Upload to Cloudinary
   const result = await new Promise((resolve, reject) => {
     cloudinary.uploader.upload_stream(
       {
@@ -62,7 +59,6 @@ export const uploadProfilePicture = async (userId, file) => {
     ).end(file.buffer);
   });
 
-  // Update user profile image
   const user = await prisma.user.update({
     where: { id: userId },
     data: { profileImage: result.secure_url },
@@ -76,7 +72,6 @@ export const uploadProfilePicture = async (userId, file) => {
   return user;
 };
 
-// Update measurements
 export const updateMeasurements = async (userId, measurements) => {
   const user = await prisma.user.update({
     where: { id: userId },
@@ -95,7 +90,19 @@ export const updateMeasurements = async (userId, measurements) => {
   return user;
 };
 
-// Change password
+export const updateMeasurementsDetail = async (userId, data) => {
+  const user = await prisma.user.update({
+    where: { id: userId },
+    data: { measurementsDetail: data },
+    select: {
+      id: true,
+      measurementsDetail: true,
+    },
+  });
+
+  return user;
+};
+
 export const changePassword = async (userId, { currentPassword, newPassword }) => {
   const user = await prisma.user.findUnique({ where: { id: userId } });
   if (!user) throw { statusCode: 404, message: 'User not found' };
@@ -112,7 +119,6 @@ export const changePassword = async (userId, { currentPassword, newPassword }) =
   return { message: 'Password changed successfully' };
 };
 
-// Admin - get all users
 export const getAllUsers = async () => {
   const users = await prisma.user.findMany({
     select: {
@@ -131,7 +137,6 @@ export const getAllUsers = async () => {
   return users;
 };
 
-// Admin - suspend user
 export const suspendUser = async (userId) => {
   const user = await prisma.user.findUnique({ where: { id: userId } });
   if (!user) throw { statusCode: 404, message: 'User not found' };
@@ -144,7 +149,19 @@ export const suspendUser = async (userId) => {
   return { message: 'User suspended successfully' };
 };
 
-// Admin - delete user
+// Admin - reactivate user
+export const reactivateUser = async (userId) => {
+  const user = await prisma.user.findUnique({ where: { id: userId } });
+  if (!user) throw { statusCode: 404, message: 'User not found' };
+
+  await prisma.user.update({
+    where: { id: userId },
+    data: { isActive: true },
+  });
+
+  return { message: 'User reactivated successfully' };
+};
+
 export const deleteUser = async (userId) => {
   const user = await prisma.user.findUnique({ where: { id: userId } });
   if (!user) throw { statusCode: 404, message: 'User not found' };

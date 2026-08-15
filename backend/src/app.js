@@ -13,6 +13,12 @@ import bookingRoutes from './modules/bookings/booking.routes.js';
 import paymentRoutes from './modules/payments/payment.routes.js';
 import walletRoutes from './modules/wallet/wallet.routes.js';
 import adminRoutes from './modules/admin/admin.routes.js';
+import telegramRoutes from './modules/settings/telegram.routes.js';
+import inquiriesRoutes from './modules/inquiries/inquiries.routes.js';
+import themeRoutes from './modules/settings/theme.routes.js';
+import contentRoutes from './modules/settings/content.routes.js';
+
+
 
 dotenv.config();
 
@@ -21,7 +27,7 @@ const app = express();
 // Security
 app.use(helmet());
 app.use(cors({
-  origin: process.env.CLIENT_URL,
+  origin: process.env.CLIENT_URL.split(",").map(url => url.trim()),
   credentials: true
 }));
 
@@ -42,6 +48,11 @@ app.use('/api/bookings', bookingRoutes);
 app.use('/api/payments', paymentRoutes);
 app.use('/api/wallet', walletRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/settings/telegram', telegramRoutes);
+app.use('/api/inquiries', inquiriesRoutes);
+app.use('/api/settings/theme', themeRoutes);
+app.use('/api/settings/content', contentRoutes);
+
 
 // Health check
 app.get('/', (req, res) => {

@@ -1,8 +1,8 @@
 import prisma from '../../config/db.js';
 import https from 'https';
 import { sendPaymentConfirmation, sendOrderConfirmation, sendBookingConfirmation } from '../../utils/sendEmail.js';
+import { notifyAdmin } from '../settings/telegram.service.js';
 
-// Initialize payment with Paystack
 const initializePaystackPayment = async ({ email, amount, reference, metadata }) => {
   return new Promise((resolve, reject) => {
     const params = JSON.stringify({
@@ -36,7 +36,6 @@ const initializePaystackPayment = async ({ email, amount, reference, metadata })
   });
 };
 
-// Verify payment with Paystack
 const verifyPaystackPayment = async (reference) => {
   return new Promise((resolve, reject) => {
     const options = {
@@ -60,12 +59,10 @@ const verifyPaystackPayment = async (reference) => {
   });
 };
 
-// Generate unique reference
 const generateReference = () => {
   return `FB-${Date.now()}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
 };
 
-// Pay for order
 export const initializeOrderPayment = async (userId, orderId) => {
   const order = await prisma.order.findFirst({
     where: { id: orderId, userId },
@@ -111,7 +108,6 @@ export const initializeOrderPayment = async (userId, orderId) => {
   };
 };
 
-// Pay for booking
 export const initializeBookingPayment = async (userId, bookingId) => {
   const booking = await prisma.booking.findFirst({
     where: { id: bookingId, userId },
@@ -157,11 +153,17 @@ export const initializeBookingPayment = async (userId, bookingId) => {
   };
 };
 
-// Verify payment
 export const verifyPayment = async (reference) => {
+  const existingPayment = await prisma.payment.findUnique({ where: { reference } });
+  if (!existingPayment) throw { statusCode: 404, message: 'Payment record not found' };
+  if (existingPayment.status === 'PAID') {
+    return { message: 'Payment already verified', data: { reference, alreadyProcessed: true } };
+  }
+
   const response = await verifyPaystackPayment(reference);
 
   if (!response.status || response.data.status !== 'success') {
+    await prisma.payment.update({ where: { reference }, data: { status: 'FAILED' } });
     throw { statusCode: 400, message: 'Payment verification failed' };
   }
 
@@ -187,6 +189,14 @@ export const verifyPayment = async (reference) => {
       },
     });
 
+    await prisma.orderStatusHistory.create({
+      data: {
+        orderId: order.id,
+        status: 'PROCESSING',
+        note: 'Payment confirmed. Your order is being processed.',
+      },
+    });
+
     try {
       await sendPaymentConfirmation({
         name: order.user.name,
@@ -207,6 +217,10 @@ export const verifyPayment = async (reference) => {
       console.error('Email sending failed:', emailError.message);
     }
 
+    await notifyAdmin(
+      `🛍️ <b>New Order</b>\n\nCustomer: ${order.user.name}\nTotal: ₦${order.total.toLocaleString()}\nItems: ${order.items.length}\nOrder ID: ${order.id}`
+    );
+
   } else if (metadata.type === 'booking') {
     const booking = await prisma.booking.update({
       where: { id: metadata.bookingId },
@@ -214,6 +228,14 @@ export const verifyPayment = async (reference) => {
       include: {
         user: true,
         service: true,
+      },
+    });
+
+    await prisma.bookingStatusHistory.create({
+      data: {
+        bookingId: booking.id,
+        status: 'CONFIRMED',
+        note: 'Payment confirmed. Your consultation booking is confirmed.',
       },
     });
 
@@ -238,12 +260,15 @@ export const verifyPayment = async (reference) => {
     } catch (emailError) {
       console.error('Email sending failed:', emailError.message);
     }
+
+    await notifyAdmin(
+      `📅 <b>New Booking</b>\n\nCustomer: ${booking.user.name}\nService: ${booking.service.name}\nDate: ${new Date(booking.date).toLocaleDateString()} at ${booking.startTime}\nBooking ID: ${booking.id}`
+    );
   }
 
   return { message: 'Payment verified successfully', data: response.data };
 };
 
-// Get my payments
 export const getMyPayments = async (userId) => {
   return prisma.payment.findMany({
     where: { userId },
@@ -251,7 +276,6 @@ export const getMyPayments = async (userId) => {
   });
 };
 
-// Admin - get all payments
 export const getAllPayments = async () => {
   return prisma.payment.findMany({
     orderBy: { createdAt: 'desc' },

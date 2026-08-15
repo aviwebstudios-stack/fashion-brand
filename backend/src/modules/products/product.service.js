@@ -1,7 +1,6 @@
 import prisma from '../../config/db.js';
 import cloudinary from '../../config/cloudinary.js';
 
-// Upload images to Cloudinary
 const uploadImages = async (files) => {
   const uploadPromises = files.map((file) => {
     return new Promise((resolve, reject) => {
@@ -21,7 +20,6 @@ const uploadImages = async (files) => {
   return Promise.all(uploadPromises);
 };
 
-// Create product
 export const createProduct = async (data, files) => {
   let images = [];
   if (files && files.length > 0) {
@@ -38,7 +36,6 @@ export const createProduct = async (data, files) => {
   return product;
 };
 
-// Get all products (with search, filter, pagination)
 export const getProducts = async (query) => {
   const {
     search,
@@ -90,7 +87,27 @@ export const getProducts = async (query) => {
   };
 };
 
-// Get single product
+export const getAllProductsAdmin = async (query) => {
+  const { page = 1, limit = 20 } = query;
+
+  const total = await prisma.product.count();
+  const products = await prisma.product.findMany({
+    skip: (page - 1) * limit,
+    take: parseInt(limit),
+    orderBy: { createdAt: 'desc' },
+  });
+
+  return {
+    products,
+    pagination: {
+      total,
+      page: parseInt(page),
+      limit: parseInt(limit),
+      pages: Math.ceil(total / limit),
+    },
+  };
+};
+
 export const getProductById = async (productId) => {
   const product = await prisma.product.findUnique({
     where: { id: productId },
@@ -100,7 +117,6 @@ export const getProductById = async (productId) => {
   return product;
 };
 
-// Update product
 export const updateProduct = async (productId, data, files) => {
   const product = await prisma.product.findUnique({ where: { id: productId } });
   if (!product) throw { statusCode: 404, message: 'Product not found' };
@@ -119,7 +135,6 @@ export const updateProduct = async (productId, data, files) => {
   return updated;
 };
 
-// Delete product
 export const deleteProduct = async (productId) => {
   const product = await prisma.product.findUnique({ where: { id: productId } });
   if (!product) throw { statusCode: 404, message: 'Product not found' };
@@ -128,7 +143,21 @@ export const deleteProduct = async (productId) => {
   return { message: 'Product deleted successfully' };
 };
 
-// Get all categories
+// Admin - remove a single image from a product's gallery
+export const removeProductImage = async (productId, imageUrl) => {
+  const product = await prisma.product.findUnique({ where: { id: productId } });
+  if (!product) throw { statusCode: 404, message: 'Product not found' };
+
+  const updatedImages = product.images.filter((img) => img !== imageUrl);
+
+  const updated = await prisma.product.update({
+    where: { id: productId },
+    data: { images: updatedImages },
+  });
+
+  return updated;
+};
+
 export const getCategories = async () => {
   const products = await prisma.product.findMany({
     select: { category: true },
@@ -139,7 +168,6 @@ export const getCategories = async () => {
   return products.map((p) => p.category);
 };
 
-// Get all collections
 export const getCollections = async () => {
   const products = await prisma.product.findMany({
     select: { collection: true },

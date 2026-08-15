@@ -1,9 +1,17 @@
 import prisma from '../../config/db.js';
 import { clearCart } from '../cart/cart.service.js';
+import { sendEmail } from '../../utils/sendEmail.js';
 
-// Create order from cart
+const STATUS_MESSAGES = {
+  PENDING: 'Your order has been received and is pending payment.',
+  PAID: 'Your payment has been confirmed.',
+  PROCESSING: 'Your order is being processed and prepared for shipment.',
+  SHIPPED: 'Your order has been shipped and is on its way to you.',
+  DELIVERED: 'Your order has been delivered. We hope you love it!',
+  CANCELLED: 'Your order has been cancelled.',
+};
+
 export const createOrder = async (userId, { deliveryAddress }) => {
-  // Get cart
   const cart = await prisma.cart.findUnique({
     where: { userId },
     include: {
@@ -17,7 +25,6 @@ export const createOrder = async (userId, { deliveryAddress }) => {
     throw { statusCode: 400, message: 'Cart is empty' };
   }
 
-  // Validate stock and calculate total
   let total = 0;
   for (const item of cart.items) {
     if (!item.product.isAvailable) {
@@ -29,7 +36,6 @@ export const createOrder = async (userId, { deliveryAddress }) => {
     total += item.product.price * item.quantity;
   }
 
-  // Create order with items
   const order = await prisma.order.create({
     data: {
       userId,
@@ -48,18 +54,21 @@ export const createOrder = async (userId, { deliveryAddress }) => {
       items: {
         include: {
           product: {
-            select: {
-              id: true,
-              name: true,
-              images: true,
-            },
+            select: { id: true, name: true, images: true },
           },
         },
       },
     },
   });
 
-  // Reduce stock
+  await prisma.orderStatusHistory.create({
+    data: {
+      orderId: order.id,
+      status: 'PENDING',
+      note: STATUS_MESSAGES.PENDING,
+    },
+  });
+
   for (const item of cart.items) {
     await prisma.product.update({
       where: { id: item.productId },
@@ -67,26 +76,17 @@ export const createOrder = async (userId, { deliveryAddress }) => {
     });
   }
 
-  // Clear cart
   await clearCart(userId);
-
   return order;
 };
 
-// Get my orders
 export const getMyOrders = async (userId) => {
   const orders = await prisma.order.findMany({
     where: { userId },
     include: {
       items: {
         include: {
-          product: {
-            select: {
-              id: true,
-              name: true,
-              images: true,
-            },
-          },
+          product: { select: { id: true, name: true, images: true } },
         },
       },
     },
@@ -96,21 +96,17 @@ export const getMyOrders = async (userId) => {
   return orders;
 };
 
-// Get single order
 export const getOrderById = async (userId, orderId) => {
   const order = await prisma.order.findFirst({
     where: { id: orderId, userId },
     include: {
       items: {
         include: {
-          product: {
-            select: {
-              id: true,
-              name: true,
-              images: true,
-            },
-          },
+          product: { select: { id: true, name: true, images: true } },
         },
+      },
+      statusHistory: {
+        orderBy: { createdAt: 'asc' },
       },
     },
   });
@@ -119,26 +115,13 @@ export const getOrderById = async (userId, orderId) => {
   return order;
 };
 
-// Admin - get all orders
 export const getAllOrders = async () => {
   const orders = await prisma.order.findMany({
     include: {
-      user: {
-        select: {
-          id: true,
-          name: true,
-          email: true,
-        },
-      },
+      user: { select: { id: true, name: true, email: true } },
       items: {
         include: {
-          product: {
-            select: {
-              id: true,
-              name: true,
-              images: true,
-            },
-          },
+          product: { select: { id: true, name: true, images: true } },
         },
       },
     },
@@ -148,15 +131,40 @@ export const getAllOrders = async () => {
   return orders;
 };
 
-// Admin - update order status
 export const updateOrderStatus = async (orderId, { status }) => {
-  const order = await prisma.order.findUnique({ where: { id: orderId } });
+  const order = await prisma.order.findUnique({
+    where: { id: orderId },
+    include: { user: true },
+  });
   if (!order) throw { statusCode: 404, message: 'Order not found' };
 
   const updated = await prisma.order.update({
     where: { id: orderId },
     data: { status },
   });
+
+  const note = STATUS_MESSAGES[status] || `Your order status has been updated to ${status}.`;
+
+  await prisma.orderStatusHistory.create({
+    data: { orderId, status, note },
+  });
+
+  try {
+    await sendEmail({
+      to: order.user.email,
+      subject: `Order Update: ${status.charAt(0) + status.slice(1).toLowerCase()}`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h2>Hi ${order.user.name},</h2>
+          <p>${note}</p>
+          <p>Order ID: ${order.id}</p>
+          <p>Thank you for shopping with Favy Atelier.</p>
+        </div>
+      `,
+    });
+  } catch (emailError) {
+    console.error('Order status email failed:', emailError.message);
+  }
 
   return updated;
 };
