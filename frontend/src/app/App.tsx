@@ -1,9 +1,18 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ThemeProvider from "../components/theme/ThemeProvider";
+import ContentProvider from "../components/content/ContentProvider";
+import ScrollToTop from "../components/common/ScrollToTop";
 import PublicLayout from "../components/layout/PublicLayout";
 import AdminRoute from "../components/admin/AdminRoute";
 import AdminLayout from "../components/admin/AdminLayout";
 import AdminLogin from "../pages/admin/AdminLogin";
 import AdminDashboard from "../pages/admin/AdminDashboard";
+import AdminProducts from "../pages/admin/AdminProducts";
+import AdminOrders from "../pages/admin/AdminOrders";
+import AdminBookings from "../pages/admin/AdminBookings";
+import AdminUsers from "../pages/admin/AdminUsers";
+import AdminTheme from "../pages/admin/AdminTheme";
+import AdminContent from "../pages/admin/AdminContent";
 import AdminSettings from "../pages/admin/AdminSettings";
 import Home from "../pages/Home";
 import Login from "../pages/auth/Login";
@@ -31,21 +40,12 @@ import CookiePreferences from "../pages/legal/CookiePreferences";
 import SizingGuide from "../pages/legal/SizingGuide";
 import FAQs from "../pages/legal/FAQs";
 import ContactUs from "../pages/legal/ContactUs";
-import AdminProducts from "../pages/admin/AdminProducts";
-import AdminOrders from "../pages/admin/AdminOrders";
-import AdminBookings from "../pages/admin/AdminBookings";
-import AdminUsers from "../pages/admin/AdminUsers";
-import ThemeProvider from "../components/theme/ThemeProvider";
-import AdminTheme from "../pages/admin/AdminTheme";
-import ContentProvider from "../components/content/ContentProvider";
-import AdminContent from "../pages/admin/AdminContent";
+import Unsubscribe from "../pages/legal/Unsubscribe";
 import MyOrders from "../pages/account/MyOrders";
 import OrderTracking from "../pages/account/OrderTracking";
 import MyBookings from "../pages/account/MyBookings";
 import BookingTracking from "../pages/account/BookingTracking";
-import Unsubscribe from "../pages/legal/Unsubscribe";
-import ScrollToTop from "../components/common/ScrollToTop";
-
+import AdminInquiries from "../pages/admin/AdminInquiries";
 
 export default function App() {
   return (
@@ -67,13 +67,14 @@ export default function App() {
               <Route index element={<AdminDashboard />} />
               <Route path="products" element={<AdminProducts />} />
               <Route path="orders" element={<AdminOrders />} />
-              <Route path="settings" element={<AdminSettings />} />
               <Route path="bookings" element={<AdminBookings />} />
               <Route path="users" element={<AdminUsers />} />
               <Route path="theme" element={<AdminTheme />} />
               <Route path="content" element={<AdminContent />} />
+              <Route path="settings" element={<AdminSettings />} />
+                            <Route path="inquiries" element={<AdminInquiries />} />
+
             </Route>
-            
 
             {/* Public storefront — wrapped in Navbar/Footer/panels */}
             <Route element={<PublicLayout />}>
@@ -103,11 +104,11 @@ export default function App() {
               <Route path="/sizing-guide" element={<SizingGuide />} />
               <Route path="/faqs" element={<FAQs />} />
               <Route path="/contact" element={<ContactUs />} />
+              <Route path="/unsubscribe" element={<Unsubscribe />} />
               <Route path="/account/orders" element={<MyOrders />} />
               <Route path="/account/orders/:id" element={<OrderTracking />} />
               <Route path="/account/bookings" element={<MyBookings />} />
               <Route path="/account/bookings/:id" element={<BookingTracking />} />
-              <Route path="/unsubscribe" element={<Unsubscribe />} />
             </Route>
           </Routes>
         </BrowserRouter>
@@ -115,4 +116,3 @@ export default function App() {
     </ThemeProvider>
   );
 }
-// NOTE: manual step needed, see instructions below, this file can't be safely auto-appended

@@ -19,6 +19,9 @@ adminApi.interceptors.response.use(
     if (error.response?.status === 401) {
       localStorage.removeItem("fb_admin_token");
       localStorage.removeItem("fb_admin_user");
+      if (window.location.pathname !== "/admin/login") {
+        window.location.href = "/admin/login";
+      }
     }
     return Promise.reject(error);
   }

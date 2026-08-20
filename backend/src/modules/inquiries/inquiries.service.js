@@ -3,19 +3,13 @@ import { notifyAdmin } from '../settings/telegram.service.js';
 
 export const submitContactMessage = async ({ name, email, message }) => {
   await prisma.contactMessage.create({ data: { name, email, message } });
-
-  await notifyAdmin(
-    `📩 <b>New Contact Message</b>\n\nFrom: ${name} (${email})\n\n${message}`
-  );
+  await notifyAdmin(`📩 <b>New Contact Message</b>\n\nFrom: ${name} (${email})\n\n${message}`);
   return { message: 'Message sent successfully' };
 };
 
 export const submitAcademyInterest = async ({ name, email, phone, program }) => {
   await prisma.academyInquiry.create({ data: { name, email, phone, program } });
-
-  await notifyAdmin(
-    `🎓 <b>New Academy Interest</b>\n\nProgram: ${program}\nName: ${name}\nEmail: ${email}\nPhone: ${phone || 'N/A'}`
-  );
+  await notifyAdmin(`🎓 <b>New Academy Interest</b>\n\nProgram: ${program}\nName: ${name}\nEmail: ${email}\nPhone: ${phone || 'N/A'}`);
   return { message: 'Interest submitted successfully' };
 };
 
@@ -28,20 +22,12 @@ export const submitNewsletterSignup = async ({ email, firstName, lastName, inter
       lastName: lastName || undefined,
       interests: interests || undefined,
     },
-    create: {
-      email,
-      firstName,
-      lastName,
-      interests: interests || [],
-    },
+    create: { email, firstName, lastName, interests: interests || [] },
   });
 
   const nameLine = firstName ? `${firstName} ${lastName || ''}`.trim() : 'N/A';
   const interestsLine = interests?.length ? interests.join(', ') : 'N/A';
-
-  await notifyAdmin(
-    `📧 <b>New Newsletter Signup</b>\n\nName: ${nameLine}\nEmail: ${email}\nInterests: ${interestsLine}`
-  );
+  await notifyAdmin(`📧 <b>New Newsletter Signup</b>\n\nName: ${nameLine}\nEmail: ${email}\nInterests: ${interestsLine}`);
   return { message: 'Subscribed successfully' };
 };
 
@@ -50,11 +36,21 @@ export const unsubscribeNewsletter = async ({ email }) => {
   if (!subscriber) {
     return { message: 'If that email was subscribed, it has now been removed.' };
   }
-
-  await prisma.newsletterSubscriber.update({
-    where: { email },
-    data: { subscribed: false },
-  });
-
+  await prisma.newsletterSubscriber.update({ where: { email }, data: { subscribed: false } });
   return { message: 'You have been unsubscribed successfully.' };
+};
+
+// Admin - list all contact messages
+export const getAllContactMessages = async () => {
+  return prisma.contactMessage.findMany({ orderBy: { createdAt: 'desc' } });
+};
+
+// Admin - list all academy inquiries
+export const getAllAcademyInquiries = async () => {
+  return prisma.academyInquiry.findMany({ orderBy: { createdAt: 'desc' } });
+};
+
+// Admin - list all newsletter subscribers
+export const getAllNewsletterSubscribers = async () => {
+  return prisma.newsletterSubscriber.findMany({ orderBy: { createdAt: 'desc' } });
 };

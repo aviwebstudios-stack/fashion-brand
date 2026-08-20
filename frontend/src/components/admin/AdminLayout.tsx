@@ -8,6 +8,7 @@ import {
   Users,
   Palette,
   FileText,
+  MessageSquare,
   Settings,
   LogOut,
   Menu,
@@ -21,6 +22,7 @@ const NAV_ITEMS = [
   { label: "Orders", to: "/admin/orders", icon: ClipboardList },
   { label: "Bookings", to: "/admin/bookings", icon: CalendarCheck },
   { label: "Users", to: "/admin/users", icon: Users },
+  { label: "Inquiries", to: "/admin/inquiries", icon: MessageSquare },
   { label: "Theme", to: "/admin/theme", icon: Palette },
   { label: "Content", to: "/admin/content", icon: FileText },
   { label: "Settings", to: "/admin/settings", icon: Settings },
@@ -42,11 +44,7 @@ export default function AdminLayout() {
   return (
     <div className="flex min-h-screen bg-[#faf8f3]">
       <div className="fixed inset-x-0 top-0 z-40 flex items-center justify-between border-b border-[#2b2b26]/10 bg-brand-primary px-4 py-3 max-[865px]:flex min-[866px]:hidden">
-        <button
-          onClick={() => setIsMobileSidebarOpen(true)}
-          aria-label="Open menu"
-          className="text-[#f4f1e8]"
-        >
+        <button onClick={() => setIsMobileSidebarOpen(true)} aria-label="Open menu" className="text-[#f4f1e8]">
           <Menu size={22} />
         </button>
         <span className="font-serif text-sm tracking-[0.1em] text-[#f4f1e8]">
@@ -56,10 +54,7 @@ export default function AdminLayout() {
       </div>
 
       {isMobileSidebarOpen && (
-        <div
-          className="fixed inset-0 z-50 bg-black/40 min-[866px]:hidden"
-          onClick={closeMobileSidebar}
-        />
+        <div className="fixed inset-0 z-50 bg-black/40 min-[866px]:hidden" onClick={closeMobileSidebar} />
       )}
 
       <aside
@@ -72,11 +67,7 @@ export default function AdminLayout() {
             <span className="font-serif text-lg tracking-[0.1em] text-[#f4f1e8]">FAVY</span>
             <span className="ml-1 text-xs tracking-[0.2em] text-[#c9a227]">ADMIN</span>
           </div>
-          <button
-            onClick={closeMobileSidebar}
-            aria-label="Close menu"
-            className="text-[#f4f1e8] min-[866px]:hidden"
-          >
+          <button onClick={closeMobileSidebar} aria-label="Close menu" className="text-[#f4f1e8] min-[866px]:hidden">
             <X size={20} />
           </button>
         </div>
@@ -90,9 +81,7 @@ export default function AdminLayout() {
               onClick={closeMobileSidebar}
               className={({ isActive }) =>
                 `mb-1 flex items-center gap-3 rounded px-3 py-2.5 text-sm transition ${
-                  isActive
-                    ? "bg-[#f4f1e8]/10 text-[#f4f1e8]"
-                    : "text-[#f4f1e8]/70 hover:bg-[#f4f1e8]/5 hover:text-[#f4f1e8]"
+                  isActive ? "bg-[#f4f1e8]/10 text-[#f4f1e8]" : "text-[#f4f1e8]/70 hover:bg-[#f4f1e8]/5 hover:text-[#f4f1e8]"
                 }`
               }
             >
@@ -103,9 +92,7 @@ export default function AdminLayout() {
         </nav>
 
         <div className="border-t border-[#f4f1e8]/10 px-3 py-4">
-          {adminUser && (
-            <p className="mb-2 truncate px-3 text-xs text-[#f4f1e8]/50">{adminUser.email}</p>
-          )}
+          {adminUser && <p className="mb-2 truncate px-3 text-xs text-[#f4f1e8]/50">{adminUser.email}</p>}
           <button
             onClick={handleLogout}
             className="flex w-full items-center gap-3 rounded px-3 py-2.5 text-sm text-[#f4f1e8]/70 transition hover:bg-[#f4f1e8]/5 hover:text-[#f4f1e8]"

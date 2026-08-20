@@ -18,27 +18,21 @@ import inquiriesRoutes from './modules/inquiries/inquiries.routes.js';
 import themeRoutes from './modules/settings/theme.routes.js';
 import contentRoutes from './modules/settings/content.routes.js';
 
-
-
 dotenv.config();
 
 const app = express();
 
-// Security
 app.use(helmet());
 app.use(cors({
   origin: process.env.CLIENT_URL.split(",").map(url => url.trim()),
   credentials: true
 }));
 
-// Logging
 app.use(morgan('dev'));
 
-// Body parsing
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
@@ -53,8 +47,6 @@ app.use('/api/inquiries', inquiriesRoutes);
 app.use('/api/settings/theme', themeRoutes);
 app.use('/api/settings/content', contentRoutes);
 
-
-// Health check
 app.get('/', (req, res) => {
   res.json({
     message: '👗 Fashion Brand API is running',
@@ -62,7 +54,6 @@ app.get('/', (req, res) => {
   });
 });
 
-// Error handler (must be last)
 app.use(errorHandler);
 
 export default app;
