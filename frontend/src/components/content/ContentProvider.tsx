@@ -8,7 +8,7 @@ export default function ContentProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     api
       .get("/settings/content")
-      .then((res) => setContent(res.data.data))
+      .then((res) => setContent(res.data.data || {}))
       .catch(() => setContent({}));
   }, []);
 
