@@ -30,9 +30,19 @@ export default function AdminLogin() {
       setAdminAuth(user, token);
       navigate("/admin");
     } catch (err: any) {
-      setError(
-        err.response?.data?.message || "Invalid credentials. Please try again.",
-      );
+      if (err.response) {
+        // Server responded with an actual error (e.g. wrong password, 401, 500)
+        setError(
+          `${err.response.data?.message || "Login failed"} (status ${err.response.status})`
+        );
+      } else if (err.request) {
+        // Request was sent but no response came back at all — network/CORS/server-down issue
+        setError(
+          "Could not reach the server. It may be waking up (free tier) — wait 20 seconds and try again."
+        );
+      } else {
+        setError(`Unexpected error: ${err.message}`);
+      }
     } finally {
       setLoading(false);
     }
@@ -42,12 +52,8 @@ export default function AdminLogin() {
     <div className="flex min-h-screen items-center justify-center bg-[#2b2b26] px-4">
       <div className="w-full max-w-sm">
         <div className="text-center">
-          <span className="font-serif text-2xl tracking-[0.1em] text-[#f4f1e8]">
-            FAVY
-          </span>
-          <span className="ml-1 text-sm tracking-[0.3em] text-[#c9a227]">
-            ADMIN
-          </span>
+          <span className="font-serif text-2xl tracking-[0.1em] text-[#f4f1e8]">FAVY</span>
+          <span className="ml-1 text-sm tracking-[0.3em] text-[#c9a227]">ADMIN</span>
         </div>
 
         <form onSubmit={handleSubmit} className="mt-8 space-y-4">
