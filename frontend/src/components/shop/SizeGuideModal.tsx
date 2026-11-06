@@ -100,13 +100,13 @@ export default function SizeGuideModal({ onClose }: SizeGuideModalProps) {
   return (
     <div className="fixed inset-0 z-[110] flex items-center justify-center bg-black/50 p-4" onClick={onClose}>
       <div
-        className="relative max-h-[85vh] w-full max-w-2xl overflow-y-auto bg-brand-bg p-8"
+        className="relative max-h-[85vh] w-full max-w-2xl overflow-y-auto bg-brand-bg dark:ring-1 dark:ring-brand-line p-8"
         onClick={(e) => e.stopPropagation()}
       >
         <button
           onClick={onClose}
           aria-label="Close"
-          className="sticky left-full top-0 -mt-2 -mr-2 rounded-full p-1.5 text-brand-text/60 transition hover:bg-black/5 hover:text-brand-text"
+          className="sticky left-full top-0 -mt-2 -mr-2 rounded-full p-1.5 text-brand-text/70 transition hover:bg-black/5 dark:hover:bg-white/10 hover:text-brand-text"
         >
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M18 6L6 18M6 6l12 12" />

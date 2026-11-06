@@ -50,11 +50,11 @@ export default function CookiePreferencesPage() {
         <div className="border border-brand-text/10 p-5">
           <div className="flex items-start justify-between">
             <div className="flex items-start gap-3">
-              <Shield size={18} className="mt-0.5 text-brand-accent" />
+              <Shield size={18} className="mt-0.5 text-brand-gold" />
               <div>
                 <p className="flex items-center gap-2 text-sm font-medium text-brand-text">
                   Essential Cookies
-                  <span className="rounded-full bg-brand-accent/15 px-2 py-0.5 text-[10px] uppercase tracking-[0.05em] text-[#8a6d1a]">
+                  <span className="rounded-full bg-brand-accent/15 px-2 py-0.5 text-[10px] uppercase tracking-[0.05em] text-brand-gold">
                     Always Active
                   </span>
                 </p>
@@ -71,7 +71,7 @@ export default function CookiePreferencesPage() {
         <div className="border border-brand-text/10 p-5">
           <div className="flex items-start justify-between">
             <div className="flex items-start gap-3">
-              <Settings size={18} className="mt-0.5 text-brand-accent" />
+              <Settings size={18} className="mt-0.5 text-brand-gold" />
               <div>
                 <p className="text-sm font-medium text-brand-text">Functional Cookies</p>
                 <p className="mt-1 text-sm text-brand-text/70">
@@ -100,7 +100,7 @@ export default function CookiePreferencesPage() {
         <div className="border border-brand-text/10 p-5">
           <div className="flex items-start justify-between">
             <div className="flex items-start gap-3">
-              <BarChart3 size={18} className="mt-0.5 text-brand-accent" />
+              <BarChart3 size={18} className="mt-0.5 text-brand-gold" />
               <div>
                 <p className="text-sm font-medium text-brand-text">Analytics Cookies</p>
                 <p className="mt-1 text-sm text-brand-text/70">
@@ -130,7 +130,7 @@ export default function CookiePreferencesPage() {
         <div className="border border-brand-text/10 p-5">
           <div className="flex items-start justify-between">
             <div className="flex items-start gap-3">
-              <Megaphone size={18} className="mt-0.5 text-brand-accent" />
+              <Megaphone size={18} className="mt-0.5 text-brand-gold" />
               <div>
                 <p className="text-sm font-medium text-brand-text">Marketing Cookies</p>
                 <p className="mt-1 text-sm text-brand-text/70">
@@ -166,14 +166,14 @@ export default function CookiePreferencesPage() {
 
       <button
         onClick={handleSave}
-        className="mt-6 w-full bg-brand-accent py-3 text-xs font-medium uppercase tracking-[0.15em] text-brand-text transition hover:opacity-90"
+        className="mt-6 w-full bg-brand-accent py-3 text-xs font-medium uppercase tracking-[0.15em] text-brand-ink transition hover:opacity-90"
       >
         Save Preferences
       </button>
 
-      <p className="mt-6 text-center text-sm text-brand-text/60">
+      <p className="mt-6 text-center text-sm text-brand-text/70">
         For more information about how we use your data, please read our{" "}
-        <Link to="/privacy-policy" className="text-brand-accent underline">
+        <Link to="/privacy-policy" className="text-brand-gold underline">
           Privacy Policy
         </Link>
         .

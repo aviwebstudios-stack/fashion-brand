@@ -24,7 +24,7 @@ export default function ShippingReturns() {
       <h2 className={legalStyles.heading}>How to Start a Return</h2>
       <p className={legalStyles.paragraph}>
         Email{" "}
-        <a href="mailto:orders@favyatelier.com" className="text-brand-accent underline">
+        <a href="mailto:orders@favyatelier.com" className="text-brand-gold underline">
           orders@favyatelier.com
         </a>{" "}
         with your order number and we'll take you through it.

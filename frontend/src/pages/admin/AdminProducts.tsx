@@ -164,25 +164,25 @@ export default function AdminProducts() {
   return (
     <div className="px-8 py-8">
       <div className="flex items-center justify-between">
-        <h1 className="font-serif text-2xl text-[#2b2b26]">Products</h1>
+        <h1 className="font-serif text-2xl text-brand-text">Products</h1>
         <button
           onClick={openCreateModal}
-          className="bg-[#3d4636] px-5 py-2.5 text-xs font-medium uppercase tracking-[0.15em] text-[#f4f1e8] transition hover:bg-[#3d4636]/90"
+          className="bg-brand-primary px-5 py-2.5 text-xs font-medium uppercase tracking-[0.15em] text-brand-cream transition hover:bg-brand-primary/90"
         >
           Add Product
         </button>
       </div>
 
       {loading ? (
-        <p className="mt-8 text-sm text-[#2b2b26]/60">Loading products...</p>
+        <p className="mt-8 text-sm text-brand-text/70">Loading products...</p>
       ) : !data || data.products.length === 0 ? (
-        <p className="mt-8 text-sm text-[#2b2b26]/60">No products yet.</p>
+        <p className="mt-8 text-sm text-brand-text/70">No products yet.</p>
       ) : (
         <>
-          <div className="mt-6 overflow-x-auto border border-[#2b2b26]/10 bg-white">
+          <div className="mt-6 overflow-x-auto border border-brand-text/10 bg-brand-surface">
             <table className="w-full min-w-[800px] text-sm">
               <thead>
-                <tr className="border-b border-[#2b2b26]/10 text-left text-xs uppercase tracking-[0.05em] text-[#2b2b26]/60">
+                <tr className="border-b border-brand-text/10 text-left text-xs uppercase tracking-[0.05em] text-brand-text/70">
                   <th className="px-4 py-3">Image</th>
                   <th className="px-4 py-3">Name</th>
                   <th className="px-4 py-3">Category</th>
@@ -194,9 +194,9 @@ export default function AdminProducts() {
               </thead>
               <tbody>
                 {data.products.map((product) => (
-                  <tr key={product.id} className="border-b border-[#2b2b26]/10">
+                  <tr key={product.id} className="border-b border-brand-text/10">
                     <td className="px-4 py-3">
-                      <div className="h-12 w-10 overflow-hidden bg-[#e5e1d8]">
+                      <div className="h-12 w-10 overflow-hidden bg-brand-muted">
                         {product.images?.[0] && (
                           <img
                             src={product.images[0]}
@@ -206,17 +206,17 @@ export default function AdminProducts() {
                         )}
                       </div>
                     </td>
-                    <td className="px-4 py-3 text-[#2b2b26]">{product.name}</td>
-                    <td className="px-4 py-3 text-[#2b2b26]/70">{product.category}</td>
-                    <td className="px-4 py-3 text-[#2b2b26]/70">{formatNaira(product.price)}</td>
-                    <td className="px-4 py-3 text-[#2b2b26]/70">{product.stock}</td>
+                    <td className="px-4 py-3 text-brand-text">{product.name}</td>
+                    <td className="px-4 py-3 text-brand-text/70">{product.category}</td>
+                    <td className="px-4 py-3 text-brand-text/70">{formatNaira(product.price)}</td>
+                    <td className="px-4 py-3 text-brand-text/70">{product.stock}</td>
                     <td className="px-4 py-3">
                       <button
                         onClick={() => handleToggleAvailable(product)}
                         className={`rounded-full px-2.5 py-1 text-xs ${
                           product.isAvailable
-                            ? "bg-[#c9a227]/15 text-[#8a6d1a]"
-                            : "bg-red-100 text-red-700"
+                            ? "bg-brand-accent/15 text-brand-gold"
+                            : "bg-red-100 dark:bg-red-950/60 text-red-700 dark:text-red-300"
                         }`}
                       >
                         {product.isAvailable ? "Active" : "Hidden"}
@@ -225,13 +225,13 @@ export default function AdminProducts() {
                     <td className="px-4 py-3">
                       <button
                         onClick={() => openEditModal(product)}
-                        className="mr-3 text-xs text-[#c9a227] underline"
+                        className="mr-3 text-xs text-brand-gold underline"
                       >
                         Edit
                       </button>
                       <button
                         onClick={() => handleDelete(product)}
-                        className="text-xs text-red-600 underline"
+                        className="text-xs text-red-600 dark:text-red-400 underline"
                       >
                         Delete
                       </button>
@@ -247,17 +247,17 @@ export default function AdminProducts() {
               <button
                 onClick={() => setPage((p) => Math.max(1, p - 1))}
                 disabled={page <= 1}
-                className="text-sm text-[#2b2b26] underline disabled:opacity-40"
+                className="text-sm text-brand-text underline disabled:opacity-40"
               >
                 Previous
               </button>
-              <span className="text-sm text-[#2b2b26]/60">
+              <span className="text-sm text-brand-text/70">
                 Page {data.pagination.page} of {data.pagination.pages}
               </span>
               <button
                 onClick={() => setPage((p) => Math.min(data.pagination.pages, p + 1))}
                 disabled={page >= data.pagination.pages}
-                className="text-sm text-[#2b2b26] underline disabled:opacity-40"
+                className="text-sm text-brand-text underline disabled:opacity-40"
               >
                 Next
               </button>
@@ -272,15 +272,15 @@ export default function AdminProducts() {
           onClick={() => setShowModal(false)}
         >
           <div
-            className="max-h-[90vh] w-full max-w-lg overflow-y-auto bg-white p-6"
+            className="max-h-[90vh] w-full max-w-lg overflow-y-auto bg-brand-surface p-6 dark:ring-1 dark:ring-brand-line"
             onClick={(e) => e.stopPropagation()}
           >
-            <h2 className="font-serif text-xl text-[#2b2b26]">
+            <h2 className="font-serif text-xl text-brand-text">
               {editingProduct ? "Edit Product" : "Add Product"}
             </h2>
 
             <form onSubmit={handleSubmit} className="mt-5 space-y-3">
-              {error && <p className="text-sm text-red-600">{error}</p>}
+              {error && <p className="text-sm text-red-600 dark:text-red-400">{error}</p>}
 
               <input
                 type="text"
@@ -288,7 +288,7 @@ export default function AdminProducts() {
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
                 placeholder="Product name"
-                className="w-full border border-[#2b2b26]/20 px-3 py-2.5 text-sm focus:border-[#c9a227] focus:outline-none"
+                className="w-full border border-brand-text/20 px-3 py-2.5 text-sm focus:border-brand-accent focus:outline-none"
               />
 
               <textarea
@@ -297,7 +297,7 @@ export default function AdminProducts() {
                 onChange={(e) => setForm({ ...form, description: e.target.value })}
                 placeholder="Description"
                 rows={3}
-                className="w-full border border-[#2b2b26]/20 px-3 py-2.5 text-sm focus:border-[#c9a227] focus:outline-none"
+                className="w-full border border-brand-text/20 px-3 py-2.5 text-sm focus:border-brand-accent focus:outline-none"
               />
 
               <div className="grid grid-cols-2 gap-3">
@@ -308,7 +308,7 @@ export default function AdminProducts() {
                   value={form.price}
                   onChange={(e) => setForm({ ...form, price: e.target.value })}
                   placeholder="Price (₦)"
-                  className="w-full border border-[#2b2b26]/20 px-3 py-2.5 text-sm focus:border-[#c9a227] focus:outline-none"
+                  className="w-full border border-brand-text/20 px-3 py-2.5 text-sm focus:border-brand-accent focus:outline-none"
                 />
                 <input
                   type="number"
@@ -317,7 +317,7 @@ export default function AdminProducts() {
                   value={form.stock}
                   onChange={(e) => setForm({ ...form, stock: e.target.value })}
                   placeholder="Stock quantity"
-                  className="w-full border border-[#2b2b26]/20 px-3 py-2.5 text-sm focus:border-[#c9a227] focus:outline-none"
+                  className="w-full border border-brand-text/20 px-3 py-2.5 text-sm focus:border-brand-accent focus:outline-none"
                 />
               </div>
 
@@ -325,7 +325,7 @@ export default function AdminProducts() {
                 <select
                   value={form.category}
                   onChange={(e) => setForm({ ...form, category: e.target.value })}
-                  className="w-full border border-[#2b2b26]/20 px-3 py-2.5 text-sm focus:border-[#c9a227] focus:outline-none"
+                  className="w-full border border-brand-text/20 px-3 py-2.5 text-sm focus:border-brand-accent focus:outline-none"
                 >
                   {CATEGORY_OPTIONS.map((c) => (
                     <option key={c} value={c}>
@@ -338,7 +338,7 @@ export default function AdminProducts() {
                   value={form.collection}
                   onChange={(e) => setForm({ ...form, collection: e.target.value })}
                   placeholder="Collection (optional)"
-                  className="w-full border border-[#2b2b26]/20 px-3 py-2.5 text-sm focus:border-[#c9a227] focus:outline-none"
+                  className="w-full border border-brand-text/20 px-3 py-2.5 text-sm focus:border-brand-accent focus:outline-none"
                 />
               </div>
 
@@ -347,10 +347,10 @@ export default function AdminProducts() {
                 value={form.sizes}
                 onChange={(e) => setForm({ ...form, sizes: e.target.value })}
                 placeholder="Sizes, comma separated (e.g. S, M, L, XL)"
-                className="w-full border border-[#2b2b26]/20 px-3 py-2.5 text-sm focus:border-[#c9a227] focus:outline-none"
+                className="w-full border border-brand-text/20 px-3 py-2.5 text-sm focus:border-brand-accent focus:outline-none"
               />
 
-              <label className="flex items-center gap-2 text-sm text-[#2b2b26]">
+              <label className="flex items-center gap-2 text-sm text-brand-text">
                 <input
                   type="checkbox"
                   checked={form.isAvailable}
@@ -362,7 +362,7 @@ export default function AdminProducts() {
 
               {editingProduct && editingProduct.images.length > 0 && (
                 <div>
-                  <p className="text-xs text-[#2b2b26]/60">Current images (click × to remove):</p>
+                  <p className="text-xs text-brand-text/70">Current images (click × to remove):</p>
                   <div className="mt-1 flex flex-wrap gap-2">
                     {editingProduct.images.map((img) => (
                       <div key={img} className="relative">
@@ -383,7 +383,7 @@ export default function AdminProducts() {
               )}
 
               <div>
-                <label className="text-xs text-[#2b2b26]/60">
+                <label className="text-xs text-brand-text/70">
                   {editingProduct ? "Add more images (optional)" : "Product images"}
                 </label>
                 <input
@@ -399,14 +399,14 @@ export default function AdminProducts() {
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
-                  className="flex-1 border border-[#2b2b26]/20 py-2.5 text-xs font-medium uppercase tracking-[0.1em] text-[#2b2b26]"
+                  className="flex-1 border border-brand-text/20 py-2.5 text-xs font-medium uppercase tracking-[0.1em] text-brand-text"
                 >
                   {editingProduct ? "Close" : "Cancel"}
                 </button>
                 <button
                   type="submit"
                   disabled={saving}
-                  className="flex-1 bg-[#3d4636] py-2.5 text-xs font-medium uppercase tracking-[0.1em] text-[#f4f1e8] disabled:opacity-60"
+                  className="flex-1 bg-brand-primary py-2.5 text-xs font-medium uppercase tracking-[0.1em] text-brand-cream disabled:opacity-60"
                 >
                   {saving ? "Saving..." : editingProduct ? "Save Changes" : "Create Product"}
                 </button>

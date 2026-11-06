@@ -39,23 +39,23 @@ export default function BookingTracking() {
   }, [id]);
 
   if (loading) {
-    return <p className="px-6 py-20 text-center text-sm text-brand-text/60">Loading your booking...</p>;
+    return <p className="px-6 py-20 text-center text-sm text-brand-text/70">Loading your booking...</p>;
   }
 
   if (!booking) {
-    return <p className="px-6 py-20 text-center text-sm text-brand-text/60">We couldn't find this booking. Check My Bookings for your consultations.</p>;
+    return <p className="px-6 py-20 text-center text-sm text-brand-text/70">We couldn't find this booking. Check My Bookings for your consultations.</p>;
   }
 
   const timeline = [...booking.statusHistory].reverse();
 
   return (
     <div className="mx-auto max-w-2xl px-6 py-14">
-      <Link to="/account/bookings" className="text-sm text-brand-accent hover:underline">
+      <Link to="/account/bookings" className="text-sm text-brand-gold hover:underline">
         ← Back to my bookings
       </Link>
 
       <h1 className="mt-4 font-heading text-2xl text-brand-text">{booking.service.name}</h1>
-      <p className="mt-1 text-sm text-brand-text/60">
+      <p className="mt-1 text-sm text-brand-text/70">
         Booked on {new Date(booking.createdAt).toLocaleDateString()}
       </p>
 
@@ -75,7 +75,7 @@ export default function BookingTracking() {
         </div>
       </div>
 
-      <h2 className="mt-10 text-xs uppercase tracking-[0.1em] text-brand-accent">
+      <h2 className="mt-10 text-xs uppercase tracking-[0.1em] text-brand-gold">
         Booking Status
       </h2>
       <div className="mt-4 space-y-0">
@@ -87,7 +87,7 @@ export default function BookingTracking() {
             <div className="relative z-10 mt-1.5 h-3 w-3 shrink-0 rounded-full bg-brand-primary" />
             <div>
               <p className="text-sm font-medium text-brand-text">{entry.note || entry.status}</p>
-              <p className="mt-1 text-xs text-brand-text/50">
+              <p className="mt-1 text-xs text-brand-text/70">
                 {new Date(entry.createdAt).toLocaleString()}
               </p>
             </div>

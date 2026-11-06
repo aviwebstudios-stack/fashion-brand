@@ -19,12 +19,12 @@ function statusColor(status: string) {
   switch (status) {
     case "CONFIRMED":
     case "COMPLETED":
-      return "bg-brand-accent/15 text-[#8a6d1a]";
+      return "bg-brand-accent/15 text-brand-gold";
     case "CANCELLED":
     case "NO_SHOW":
-      return "bg-red-100 text-red-700";
+      return "bg-red-100 dark:bg-red-950/60 text-red-700 dark:text-red-300";
     default:
-      return "bg-gray-100 text-gray-700";
+      return "bg-gray-100 dark:bg-white/10 text-gray-700 dark:text-gray-200";
   }
 }
 
@@ -46,13 +46,13 @@ export default function MyBookings() {
       <h1 className="text-center font-heading text-3xl text-brand-text">My Bookings</h1>
 
       {loading ? (
-        <p className="mt-10 text-center text-sm text-brand-text/60">Loading your bookings...</p>
+        <p className="mt-10 text-center text-sm text-brand-text/70">Loading your bookings...</p>
       ) : bookings.length === 0 ? (
         <div className="mt-10 text-center">
           <p className="text-sm text-brand-text/70">You haven't booked a consultation yet.</p>
           <Link
             to="/consultations"
-            className="mt-4 inline-block py-2 text-sm text-brand-accent hover:underline"
+            className="mt-4 inline-block py-2 text-sm text-brand-gold hover:underline"
           >
             Book a consultation
           </Link>
@@ -67,7 +67,7 @@ export default function MyBookings() {
               >
                 <div>
                   <p className="text-sm font-medium text-brand-text">{booking.service.name}</p>
-                  <p className="mt-1 text-xs text-brand-text/60">
+                  <p className="mt-1 text-xs text-brand-text/70">
                     {new Date(booking.date).toLocaleDateString()} at {booking.startTime}
                   </p>
                 </div>

@@ -24,7 +24,7 @@ export default function DashboardPanel() {
       <div className="absolute inset-0 bg-black/40" onClick={handleClose} />
 
       <div
-        className={`absolute right-0 top-0 h-full w-full overflow-y-auto bg-brand-bg shadow-xl transition-transform duration-300 sm:w-[40%] sm:min-w-[420px] ${
+        className={`absolute right-0 top-0 h-full w-full overflow-y-auto bg-brand-bg shadow-xl dark:border-l dark:border-brand-line transition-transform duration-300 sm:w-[40%] sm:min-w-[420px] ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >

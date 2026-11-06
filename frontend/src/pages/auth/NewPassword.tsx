@@ -18,7 +18,7 @@ export default function NewPassword() {
     return (
       <AuthLayout title="Session Expired" subtitle="Please start the password reset process again">
         <p className="text-center">
-          <Link to="/forgot-password" className="text-brand-accent hover:underline">
+          <Link to="/forgot-password" className="text-brand-gold hover:underline">
             Start over
           </Link>
         </p>
@@ -55,7 +55,7 @@ export default function NewPassword() {
     <AuthLayout title="Set New Password" subtitle="Choose a new password for your account">
       <form onSubmit={handleSubmit} className="space-y-4">
         {error && (
-          <p className="border border-red-300 bg-red-50 px-4 py-2.5 text-sm text-red-700">
+          <p className="border border-red-300 dark:border-red-800 bg-red-50 dark:bg-red-950/40 px-4 py-2.5 text-sm text-red-700 dark:text-red-300">
             {error}
           </p>
         )}
@@ -66,7 +66,7 @@ export default function NewPassword() {
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
           placeholder="New password (min. 6 characters)"
-          className="w-full border border-brand-text/20 bg-white px-4 py-3 text-sm text-brand-text placeholder:text-brand-text/50 focus:border-brand-accent focus:outline-none"
+          className="w-full border border-brand-text/20 bg-brand-surface px-4 py-3 text-sm text-brand-text placeholder:text-brand-text/70 focus:border-brand-accent focus:outline-none"
         />
 
         <PasswordInput
@@ -74,13 +74,13 @@ export default function NewPassword() {
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
           placeholder="Confirm new password"
-          className="w-full border border-brand-text/20 bg-white px-4 py-3 text-sm text-brand-text placeholder:text-brand-text/50 focus:border-brand-accent focus:outline-none"
+          className="w-full border border-brand-text/20 bg-brand-surface px-4 py-3 text-sm text-brand-text placeholder:text-brand-text/70 focus:border-brand-accent focus:outline-none"
         />
 
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-brand-primary py-3 text-xs font-medium uppercase tracking-[0.15em] text-[#f4f1e8] transition hover:opacity-90 disabled:opacity-60"
+          className="w-full bg-brand-primary py-3 text-xs font-medium uppercase tracking-[0.15em] text-brand-cream transition hover:opacity-90 disabled:opacity-60"
         >
           {loading ? "Resetting..." : "Reset Password"}
         </button>

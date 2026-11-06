@@ -35,7 +35,7 @@ export default function PrivacyPolicy() {
         Questions about this policy can be directed to{" "}
         <a
           href="mailto:privacy@favyatelier.com"
-          className="text-brand-accent underline"
+          className="text-brand-gold underline"
         >
           privacy@favyatelier.com
         </a>

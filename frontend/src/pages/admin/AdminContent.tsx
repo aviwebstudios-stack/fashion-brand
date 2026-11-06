@@ -278,35 +278,35 @@ export default function AdminContent() {
   };
 
   if (loading) {
-    return <p className="px-8 py-10 text-sm text-[#2b2b26]/60">Loading content...</p>;
+    return <p className="px-8 py-10 text-sm text-brand-text/70">Loading content...</p>;
   }
 
   return (
     <div className="px-8 py-8">
-      <h1 className="font-serif text-2xl text-[#2b2b26]">Site Content</h1>
-      <p className="mt-1 text-sm text-[#2b2b26]/60">Edit the text and media shown across the site.</p>
+      <h1 className="font-serif text-2xl text-brand-text">Site Content</h1>
+      <p className="mt-1 text-sm text-brand-text/70">Edit the text and media shown across the site.</p>
 
       <div className="mt-8 max-w-2xl space-y-10">
         {FIELD_GROUPS.map((group) => (
           <div key={group.group}>
-            <h2 className="text-xs uppercase tracking-[0.1em] text-[#c9a227]">{group.group}</h2>
+            <h2 className="text-xs uppercase tracking-[0.1em] text-brand-gold">{group.group}</h2>
             <div className="mt-4 space-y-4">
               {group.fields.map((field) => (
                 <div key={field.key}>
-                  <label className="text-sm text-[#2b2b26]">{field.label}</label>
+                  <label className="text-sm text-brand-text">{field.label}</label>
                   {field.multiline ? (
                     <textarea
                       value={values[field.key] || ""}
                       onChange={(e) => handleChange(field.key, e.target.value)}
                       rows={3}
-                      className="mt-1 w-full border border-[#2b2b26]/20 px-3 py-2 text-sm focus:border-[#c9a227] focus:outline-none"
+                      className="mt-1 w-full border border-brand-text/20 px-3 py-2 text-sm focus:border-brand-accent focus:outline-none"
                     />
                   ) : (
                     <input
                       type="text"
                       value={values[field.key] || ""}
                       onChange={(e) => handleChange(field.key, e.target.value)}
-                      className="mt-1 w-full border border-[#2b2b26]/20 px-3 py-2 text-sm focus:border-[#c9a227] focus:outline-none"
+                      className="mt-1 w-full border border-brand-text/20 px-3 py-2 text-sm focus:border-brand-accent focus:outline-none"
                     />
                   )}
                 </div>
@@ -316,7 +316,7 @@ export default function AdminContent() {
         ))}
 
         {saved && (
-          <p className="border border-[#c9a227]/40 bg-[#c9a227]/10 px-4 py-2.5 text-sm text-[#2b2b26]">
+          <p className="border border-brand-accent/40 bg-brand-accent/10 px-4 py-2.5 text-sm text-brand-text">
             Content saved and applied.
           </p>
         )}
@@ -324,23 +324,23 @@ export default function AdminContent() {
         <button
           onClick={handleSave}
           disabled={saving}
-          className="w-full bg-[#3d4636] py-3 text-xs font-medium uppercase tracking-[0.15em] text-[#f4f1e8] transition hover:bg-[#3d4636]/90 disabled:opacity-60"
+          className="w-full bg-brand-primary py-3 text-xs font-medium uppercase tracking-[0.15em] text-brand-cream transition hover:bg-brand-primary/90 disabled:opacity-60"
         >
           {saving ? "Saving..." : "Save Text Content"}
         </button>
 
-        <div className="border-t border-[#2b2b26]/10 pt-10">
-          <h2 className="text-xs uppercase tracking-[0.1em] text-[#c9a227]">Images & Video</h2>
-          <p className="mt-2 text-xs text-[#2b2b26]/60">
+        <div className="border-t border-brand-text/10 pt-10">
+          <h2 className="text-xs uppercase tracking-[0.1em] text-brand-gold">Images & Video</h2>
+          <p className="mt-2 text-xs text-brand-text/70">
             Uploading replaces the current file straight away. You don't need to save.
           </p>
 
-          {uploadError && <p className="mt-3 text-sm text-red-600">{uploadError}</p>}
+          {uploadError && <p className="mt-3 text-sm text-red-600 dark:text-red-400">{uploadError}</p>}
 
           <div className="mt-5 space-y-6">
             {MEDIA_FIELDS.map((field) => (
-              <div key={field.key} className="flex items-center gap-4 border border-[#2b2b26]/10 p-4">
-                <div className="h-20 w-16 shrink-0 overflow-hidden bg-[#e5e1d8]">
+              <div key={field.key} className="flex items-center gap-4 border border-brand-text/10 p-4">
+                <div className="h-20 w-16 shrink-0 overflow-hidden bg-brand-muted">
                   {field.type === "video" ? (
                     <video src={values[field.key]} className="h-full w-full object-cover" muted />
                   ) : (
@@ -349,12 +349,12 @@ export default function AdminContent() {
                 </div>
                 <div className="flex-1">
                   <div className="flex items-baseline justify-between gap-3">
-                    <p className="text-sm text-[#2b2b26]">{field.label}</p>
+                    <p className="text-sm text-brand-text">{field.label}</p>
                     <button
                       type="button"
                       onClick={() => handleMediaDownload(field)}
                       disabled={!values[field.key] || downloadingKey === field.key}
-                      className="shrink-0 text-xs text-[#c9a227] underline underline-offset-2 hover:text-[#2b2b26] disabled:opacity-60"
+                      className="shrink-0 text-xs text-brand-gold underline underline-offset-2 hover:text-brand-text disabled:opacity-60"
                     >
                       {downloadingKey === field.key ? "Downloading..." : "Download"}
                     </button>
@@ -370,7 +370,7 @@ export default function AdminContent() {
                     className="mt-2 w-full text-xs"
                   />
                   {uploadingKey === field.key && (
-                    <p className="mt-1 text-xs text-[#c9a227]">Uploading...</p>
+                    <p className="mt-1 text-xs text-brand-gold">Uploading...</p>
                   )}
                 </div>
               </div>

@@ -20,16 +20,16 @@ export default function Careers() {
         {ROLES.map((role) => (
           <div
             key={role.title}
-            className="flex items-center justify-between gap-4 border border-[#2b2b26]/10 px-5 py-4"
+            className="flex items-center justify-between gap-4 border border-brand-text/10 px-5 py-4"
           >
             <div>
-              <p className="text-sm font-medium text-[#2b2b26]">{role.title}</p>
-              <p className="mt-1 text-xs text-[#2b2b26]/60">{role.type}</p>
+              <p className="text-sm font-medium text-brand-text">{role.title}</p>
+              <p className="mt-1 text-xs text-brand-text/70">{role.type}</p>
             </div>
 
             <a
               href={`mailto:careers@favyatelier.com?subject=${encodeURIComponent(`Application: ${role.title}`)}`}
-              className="inline-flex min-h-11 shrink-0 items-center px-2 text-xs text-[#c9a227] underline"
+              className="inline-flex min-h-11 shrink-0 items-center px-2 text-xs text-brand-gold underline"
             >
               Apply by Email
             </a>
@@ -40,7 +40,7 @@ export default function Careers() {
         If none of these fit, send your portfolio and CV to{" "}
         <a
           href="mailto:careers@favyatelier.com"
-          className="text-brand-accent underline"
+          className="text-brand-gold underline"
         >
           careers@favyatelier.com
         </a>

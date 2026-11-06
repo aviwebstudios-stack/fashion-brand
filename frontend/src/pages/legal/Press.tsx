@@ -25,7 +25,7 @@ export default function Press() {
         Some of the places Favy Atelier has been featured. For press enquiries, email{" "}
         <a
           href="mailto:press@favyatelier.com"
-          className="text-brand-accent underline"
+          className="text-brand-gold underline"
         >
           press@favyatelier.com
         </a>
@@ -33,11 +33,11 @@ export default function Press() {
       </p>
       <div className="mt-8 space-y-6">
         {PRESS_ITEMS.map((item) => (
-          <div key={item.title} className="border-b border-[#2b2b26]/10 pb-6">
-            <p className="text-xs uppercase tracking-[0.1em] text-[#c9a227]">
+          <div key={item.title} className="border-b border-brand-text/10 pb-6">
+            <p className="text-xs uppercase tracking-[0.1em] text-brand-gold">
               {item.outlet}
             </p>
-            <p className="mt-1 text-sm text-[#2b2b26]">{item.title}</p>
+            <p className="mt-1 text-sm text-brand-text">{item.title}</p>
           </div>
         ))}
       </div>

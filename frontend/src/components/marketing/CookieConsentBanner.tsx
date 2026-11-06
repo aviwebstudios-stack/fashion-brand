@@ -56,7 +56,7 @@ export default function CookieConsentBanner() {
             <p className="text-sm font-medium text-brand-text">We use cookies</p>
             <p className="mt-1 text-sm text-brand-text/70">
               We use cookies to keep the site working and to remember your choices.{" "}
-              <Link to="/privacy-policy" className="text-brand-accent underline">
+              <Link to="/privacy-policy" className="text-brand-gold underline">
                 Read our Privacy Policy
               </Link>
             </p>
@@ -77,7 +77,7 @@ export default function CookieConsentBanner() {
           </button>
           <button
             onClick={acceptAll}
-            className="bg-brand-accent min-h-11 px-4 py-2 text-xs font-medium uppercase tracking-[0.1em] text-brand-text"
+            className="bg-brand-accent min-h-11 px-4 py-2 text-xs font-medium uppercase tracking-[0.1em] text-brand-ink"
           >
             Accept All
           </button>

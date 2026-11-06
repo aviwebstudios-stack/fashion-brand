@@ -123,9 +123,9 @@ export default function Consultations() {
                   file={item.file}
                   alt={item.label}
                   eager
-                  className="aspect-[3/4] rounded-t-full bg-[#e5e1d8]"
+                  className="aspect-[3/4] rounded-t-full bg-brand-muted"
                 />
-                <p className="mt-3 bg-brand-primary py-2.5 text-center text-xs uppercase tracking-[0.15em] text-[#f4f1e8]">{item.label}</p>
+                <p className="mt-3 bg-brand-primary py-2.5 text-center text-xs uppercase tracking-[0.15em] text-brand-cream">{item.label}</p>
               </div>
             ))}
           </div>
@@ -138,16 +138,16 @@ export default function Consultations() {
             contentKey="consultations.bride.tallImage"
             file="consultations-bride-definition.webp"
             alt="A Favy Atelier bride"
-            className="reveal-item aspect-[3/5] rounded-t-full bg-[#e5e1d8]"
+            className="reveal-item aspect-[3/5] rounded-t-full bg-brand-muted"
           />
 
           <div>
             <h2 className="reveal-item font-heading text-2xl text-brand-text">{brideTitle}</h2>
-            <p className="reveal-item mt-2 text-sm italic text-brand-text/60">{bridePronunciation}</p>
+            <p className="reveal-item mt-2 text-sm italic text-brand-text/70">{bridePronunciation}</p>
             <p className="reveal-item mt-4 max-w-md text-sm leading-relaxed text-brand-text/70">{brideBody}</p>
             <Link
               to="/shop/bridals"
-              className="reveal-item mt-6 inline-block bg-brand-primary px-6 py-3 text-xs font-medium uppercase tracking-[0.15em] text-[#f4f1e8] transition hover:opacity-90"
+              className="reveal-item mt-6 inline-block bg-brand-primary px-6 py-3 text-xs font-medium uppercase tracking-[0.15em] text-brand-cream transition hover:opacity-90"
             >
               Shop Bridals
             </Link>
@@ -167,7 +167,7 @@ export default function Consultations() {
                 contentKey={img.key}
                 file={img.file}
                 alt={`Favy Atelier bride, photo ${i + 1}`}
-                className="reveal-item aspect-[3/4] bg-[#e5e1d8]"
+                className="reveal-item aspect-[3/4] bg-brand-muted"
               />
             ))}
           </div>
@@ -181,7 +181,7 @@ export default function Consultations() {
         </Reveal>
 
         {loadingServices ? (
-          <p className="mt-8 text-sm text-brand-text/60">Loading consultation services...</p>
+          <p className="mt-8 text-sm text-brand-text/70">Loading consultation services...</p>
         ) : services.length === 0 ? (
           <p className="mt-8 text-sm text-brand-text/70">
             No consultation services are open for booking right now. <Link to="/contact" className="underline underline-offset-2">Contact us</Link> and we'll find a time.
@@ -200,7 +200,7 @@ export default function Consultations() {
                     }`}
                   >
                     <p className="text-sm font-medium text-brand-text">{service.name}</p>
-                    <p className="mt-1 text-xs text-brand-text/60">{service.duration} min · {formatNaira(service.price)}</p>
+                    <p className="mt-1 text-xs text-brand-text/70">{service.duration} min · {formatNaira(service.price)}</p>
                     <p className="mt-2 text-xs leading-relaxed text-brand-text/70">{service.description}</p>
                   </button>
                 ))}
@@ -215,7 +215,7 @@ export default function Consultations() {
                   min={todayISO()}
                   value={date}
                   onChange={(e) => setDate(e.target.value)}
-                  className="mt-3 w-full border border-brand-text/20 bg-white px-4 py-3 text-sm text-brand-text focus:border-brand-accent focus:outline-none"
+                  className="mt-3 w-full border border-brand-text/20 bg-brand-surface px-4 py-3 text-sm text-brand-text focus:border-brand-accent focus:outline-none"
                 />
               </div>
             )}
@@ -224,9 +224,9 @@ export default function Consultations() {
               <div>
                 <p className="text-xs uppercase tracking-[0.1em] text-brand-text">Available Time Slots</p>
                 {loadingSlots ? (
-                  <p className="mt-3 text-sm text-brand-text/60">Checking available times...</p>
+                  <p className="mt-3 text-sm text-brand-text/70">Checking available times...</p>
                 ) : slots.length === 0 ? (
-                  <p className="mt-3 text-sm text-brand-text/60">No slots available on this date. Please choose another date.</p>
+                  <p className="mt-3 text-sm text-brand-text/70">No slots available on this date. Please choose another date.</p>
                 ) : (
                   <div className="mt-3 flex flex-wrap gap-2">
                     {slots.map((slot) => (
@@ -234,7 +234,7 @@ export default function Consultations() {
                         key={slot}
                         onClick={() => setSelectedTime(slot)}
                         className={`border px-4 py-2 text-sm transition ${
-                          selectedTime === slot ? "border-brand-primary bg-brand-primary text-[#f4f1e8]" : "border-brand-text/25 text-brand-text hover:border-brand-text"
+                          selectedTime === slot ? "border-brand-primary bg-brand-primary text-brand-cream" : "border-brand-text/25 text-brand-text hover:border-brand-text"
                         }`}
                       >
                         {slot}
@@ -253,20 +253,20 @@ export default function Consultations() {
                   onChange={(e) => setNotes(e.target.value)}
                   rows={3}
                   placeholder="Tell us about the occasion or style you have in mind"
-                  className="mt-3 w-full border border-brand-text/20 bg-white px-4 py-3 text-sm text-brand-text placeholder:text-brand-text/50 focus:border-brand-accent focus:outline-none"
+                  className="mt-3 w-full border border-brand-text/20 bg-brand-surface px-4 py-3 text-sm text-brand-text placeholder:text-brand-text/70 focus:border-brand-accent focus:outline-none"
                 />
               </div>
             )}
 
             {error && (
-              <p className="border border-red-300 bg-red-50 px-4 py-2.5 text-sm text-red-700">{error}</p>
+              <p className="border border-red-300 dark:border-red-800 bg-red-50 dark:bg-red-950/40 px-4 py-2.5 text-sm text-red-700 dark:text-red-300">{error}</p>
             )}
 
             {selectedTime && (
               <button
                 onClick={handleSubmit}
                 disabled={submitting}
-                className="w-full bg-brand-primary py-3.5 text-xs font-medium uppercase tracking-[0.15em] text-[#f4f1e8] transition hover:opacity-90 disabled:opacity-60"
+                className="w-full bg-brand-primary py-3.5 text-xs font-medium uppercase tracking-[0.15em] text-brand-cream transition hover:opacity-90 disabled:opacity-60"
               >
                 {submitting ? "Redirecting to payment..." : `Confirm & Pay ${selectedService ? formatNaira(selectedService.price) : ""}`}
               </button>

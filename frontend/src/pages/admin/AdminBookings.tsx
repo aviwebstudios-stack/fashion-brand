@@ -22,12 +22,12 @@ function statusColor(status: string) {
   switch (status) {
     case "CONFIRMED":
     case "COMPLETED":
-      return "bg-[#c9a227]/15 text-[#8a6d1a]";
+      return "bg-brand-accent/15 text-brand-gold";
     case "CANCELLED":
     case "NO_SHOW":
-      return "bg-red-100 text-red-700";
+      return "bg-red-100 dark:bg-red-950/60 text-red-700 dark:text-red-300";
     default:
-      return "bg-gray-100 text-gray-700";
+      return "bg-gray-100 dark:bg-white/10 text-gray-700 dark:text-gray-200";
   }
 }
 
@@ -103,17 +103,17 @@ export default function AdminBookings() {
 
   return (
     <div className="px-8 py-8">
-      <h1 className="font-serif text-2xl text-[#2b2b26]">Bookings</h1>
+      <h1 className="font-serif text-2xl text-brand-text">Bookings</h1>
 
       {loading ? (
-        <p className="mt-8 text-sm text-[#2b2b26]/60">Loading bookings...</p>
+        <p className="mt-8 text-sm text-brand-text/70">Loading bookings...</p>
       ) : bookings.length === 0 ? (
-        <p className="mt-8 text-sm text-[#2b2b26]/60">No bookings yet.</p>
+        <p className="mt-8 text-sm text-brand-text/70">No bookings yet.</p>
       ) : (
-        <div className="mt-6 overflow-x-auto border border-[#2b2b26]/10 bg-white">
+        <div className="mt-6 overflow-x-auto border border-brand-text/10 bg-brand-surface">
           <table className="w-full min-w-[950px] text-sm">
             <thead>
-              <tr className="border-b border-[#2b2b26]/10 text-left text-xs uppercase tracking-[0.05em] text-[#2b2b26]/60">
+              <tr className="border-b border-brand-text/10 text-left text-xs uppercase tracking-[0.05em] text-brand-text/70">
                 <th className="px-4 py-3">Customer</th>
                 <th className="px-4 py-3">Service</th>
                 <th className="px-4 py-3">Date & Time</th>
@@ -125,16 +125,16 @@ export default function AdminBookings() {
             </thead>
             <tbody>
               {bookings.map((booking) => (
-                <tr key={booking.id} className="border-b border-[#2b2b26]/10">
+                <tr key={booking.id} className="border-b border-brand-text/10">
                   <td className="px-4 py-3">
-                    <p className="text-[#2b2b26]">{booking.user.name}</p>
-                    <p className="text-xs text-[#2b2b26]/50">{booking.user.email}</p>
+                    <p className="text-brand-text">{booking.user.name}</p>
+                    <p className="text-xs text-brand-text/70">{booking.user.email}</p>
                   </td>
-                  <td className="px-4 py-3 text-[#2b2b26]/70">{booking.service.name}</td>
-                  <td className="px-4 py-3 text-[#2b2b26]/70">
+                  <td className="px-4 py-3 text-brand-text/70">{booking.service.name}</td>
+                  <td className="px-4 py-3 text-brand-text/70">
                     {new Date(booking.date).toLocaleDateString()} · {booking.startTime}
                   </td>
-                  <td className="px-4 py-3 text-[#2b2b26]/70">{formatNaira(booking.total)}</td>
+                  <td className="px-4 py-3 text-brand-text/70">{formatNaira(booking.total)}</td>
                   <td className="px-4 py-3">
                     <span className={`rounded-full px-2.5 py-1 text-xs ${statusColor(booking.paymentStatus)}`}>
                       {booking.paymentStatus}
@@ -145,7 +145,7 @@ export default function AdminBookings() {
                       value={booking.status}
                       onChange={(e) => handleStatusChange(booking.id, e.target.value)}
                       disabled={updatingId === booking.id}
-                      className="border border-[#2b2b26]/20 px-2 py-1.5 text-xs focus:border-[#c9a227] focus:outline-none"
+                      className="border border-brand-text/20 px-2 py-1.5 text-xs focus:border-brand-accent focus:outline-none"
                     >
                       {BOOKING_STATUSES.map((s) => (
                         <option key={s} value={s}>
@@ -157,14 +157,14 @@ export default function AdminBookings() {
                   <td className="px-4 py-3 whitespace-nowrap">
                     <button
                       onClick={() => setViewingBooking(booking)}
-                      className="mr-3 text-xs text-[#c9a227] underline"
+                      className="mr-3 text-xs text-brand-gold underline"
                     >
                       View
                     </button>
                     {booking.paymentStatus === "PAID" && (
                       <button
                         onClick={() => openRefundModal(booking)}
-                        className="text-xs text-red-600 underline"
+                        className="text-xs text-red-600 dark:text-red-400 underline"
                       >
                         Issue Refund
                       </button>
@@ -183,38 +183,38 @@ export default function AdminBookings() {
           onClick={() => setViewingBooking(null)}
         >
           <div
-            className="max-h-[85vh] w-full max-w-md overflow-y-auto bg-white p-6"
+            className="max-h-[85vh] w-full max-w-md overflow-y-auto bg-brand-surface p-6 dark:ring-1 dark:ring-brand-line"
             onClick={(e) => e.stopPropagation()}
           >
-            <h2 className="font-serif text-xl text-[#2b2b26]">Booking Details</h2>
-            <p className="mt-1 text-xs text-[#2b2b26]/50">{viewingBooking.id}</p>
+            <h2 className="font-serif text-xl text-brand-text">Booking Details</h2>
+            <p className="mt-1 text-xs text-brand-text/70">{viewingBooking.id}</p>
 
-            <div className="mt-4 space-y-3 border-t border-[#2b2b26]/10 pt-4 text-sm">
+            <div className="mt-4 space-y-3 border-t border-brand-text/10 pt-4 text-sm">
               <div>
-                <p className="text-xs uppercase tracking-[0.1em] text-[#2b2b26]/60">Customer</p>
-                <p className="mt-1 text-[#2b2b26]">{viewingBooking.user.name}</p>
-                <p className="text-[#2b2b26]/70">{viewingBooking.user.email}</p>
+                <p className="text-xs uppercase tracking-[0.1em] text-brand-text/70">Customer</p>
+                <p className="mt-1 text-brand-text">{viewingBooking.user.name}</p>
+                <p className="text-brand-text/70">{viewingBooking.user.email}</p>
               </div>
               <div>
-                <p className="text-xs uppercase tracking-[0.1em] text-[#2b2b26]/60">Service</p>
-                <p className="mt-1 text-[#2b2b26]">{viewingBooking.service.name}</p>
+                <p className="text-xs uppercase tracking-[0.1em] text-brand-text/70">Service</p>
+                <p className="mt-1 text-brand-text">{viewingBooking.service.name}</p>
               </div>
               <div>
-                <p className="text-xs uppercase tracking-[0.1em] text-[#2b2b26]/60">
+                <p className="text-xs uppercase tracking-[0.1em] text-brand-text/70">
                   Date & Time
                 </p>
-                <p className="mt-1 text-[#2b2b26]">
+                <p className="mt-1 text-brand-text">
                   {new Date(viewingBooking.date).toLocaleDateString()} · {viewingBooking.startTime}{" "}
                   to {viewingBooking.endTime}
                 </p>
               </div>
               {viewingBooking.notes && (
                 <div>
-                  <p className="text-xs uppercase tracking-[0.1em] text-[#2b2b26]/60">Notes</p>
-                  <p className="mt-1 text-[#2b2b26]/80">{viewingBooking.notes}</p>
+                  <p className="text-xs uppercase tracking-[0.1em] text-brand-text/70">Notes</p>
+                  <p className="mt-1 text-brand-text/80">{viewingBooking.notes}</p>
                 </div>
               )}
-              <div className="flex items-center justify-between border-t border-[#2b2b26]/10 pt-3 font-medium">
+              <div className="flex items-center justify-between border-t border-brand-text/10 pt-3 font-medium">
                 <span>Total</span>
                 <span>{formatNaira(viewingBooking.total)}</span>
               </div>
@@ -222,7 +222,7 @@ export default function AdminBookings() {
 
             <button
               onClick={() => setViewingBooking(null)}
-              className="mt-5 w-full border border-[#2b2b26]/20 py-2.5 text-xs font-medium uppercase tracking-[0.1em] text-[#2b2b26]"
+              className="mt-5 w-full border border-brand-text/20 py-2.5 text-xs font-medium uppercase tracking-[0.1em] text-brand-text"
             >
               Close
             </button>
@@ -236,62 +236,62 @@ export default function AdminBookings() {
           onClick={() => setRefundingBooking(null)}
         >
           <div
-            className="w-full max-w-sm bg-white p-6"
+            className="w-full max-w-sm bg-brand-surface p-6 dark:ring-1 dark:ring-brand-line"
             onClick={(e) => e.stopPropagation()}
           >
-            <h2 className="font-serif text-xl text-[#2b2b26]">Issue Refund</h2>
-            <p className="mt-1 text-xs text-[#2b2b26]/60">
+            <h2 className="font-serif text-xl text-brand-text">Issue Refund</h2>
+            <p className="mt-1 text-xs text-brand-text/70">
               Refunding to {refundingBooking.user.name}'s wallet
             </p>
 
             {refundSuccess ? (
               <div className="mt-6">
-                <p className="border border-[#c9a227]/40 bg-[#c9a227]/10 px-4 py-3 text-sm text-[#2b2b26]">
+                <p className="border border-brand-accent/40 bg-brand-accent/10 px-4 py-3 text-sm text-brand-text">
                   Refund issued successfully.
                 </p>
                 <button
                   onClick={() => setRefundingBooking(null)}
-                  className="mt-4 w-full border border-[#2b2b26]/20 py-2.5 text-xs font-medium uppercase tracking-[0.1em] text-[#2b2b26]"
+                  className="mt-4 w-full border border-brand-text/20 py-2.5 text-xs font-medium uppercase tracking-[0.1em] text-brand-text"
                 >
                   Close
                 </button>
               </div>
             ) : (
               <div className="mt-5 space-y-3">
-                {refundError && <p className="text-sm text-red-600">{refundError}</p>}
+                {refundError && <p className="text-sm text-red-600 dark:text-red-400">{refundError}</p>}
 
                 <div>
-                  <label className="text-xs text-[#2b2b26]/60">Amount (₦)</label>
+                  <label className="text-xs text-brand-text/70">Amount (₦)</label>
                   <input
                     type="number"
                     min="0"
                     value={refundAmount}
                     onChange={(e) => setRefundAmount(e.target.value)}
-                    className="mt-1 w-full border border-[#2b2b26]/20 px-3 py-2 text-sm focus:border-[#c9a227] focus:outline-none"
+                    className="mt-1 w-full border border-brand-text/20 px-3 py-2 text-sm focus:border-brand-accent focus:outline-none"
                   />
                 </div>
 
                 <div>
-                  <label className="text-xs text-[#2b2b26]/60">Note</label>
+                  <label className="text-xs text-brand-text/70">Note</label>
                   <textarea
                     value={refundNote}
                     onChange={(e) => setRefundNote(e.target.value)}
                     rows={2}
-                    className="mt-1 w-full border border-[#2b2b26]/20 px-3 py-2 text-sm focus:border-[#c9a227] focus:outline-none"
+                    className="mt-1 w-full border border-brand-text/20 px-3 py-2 text-sm focus:border-brand-accent focus:outline-none"
                   />
                 </div>
 
                 <div className="flex gap-3 pt-2">
                   <button
                     onClick={() => setRefundingBooking(null)}
-                    className="flex-1 border border-[#2b2b26]/20 py-2.5 text-xs font-medium uppercase tracking-[0.1em] text-[#2b2b26]"
+                    className="flex-1 border border-brand-text/20 py-2.5 text-xs font-medium uppercase tracking-[0.1em] text-brand-text"
                   >
                     Cancel
                   </button>
                   <button
                     onClick={handleIssueRefund}
                     disabled={refunding}
-                    className="flex-1 bg-[#3d4636] py-2.5 text-xs font-medium uppercase tracking-[0.1em] text-[#f4f1e8] disabled:opacity-60"
+                    className="flex-1 bg-brand-primary py-2.5 text-xs font-medium uppercase tracking-[0.1em] text-brand-cream disabled:opacity-60"
                   >
                     {refunding ? "Issuing..." : "Issue Refund"}
                   </button>

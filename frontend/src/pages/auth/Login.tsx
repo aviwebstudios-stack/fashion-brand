@@ -35,7 +35,7 @@ export default function Login() {
     <AuthLayout title="Welcome Back" subtitle="Sign in to continue to Favy Atelier">
       <form onSubmit={handleSubmit} className="space-y-4">
         {error && (
-          <p className="border border-red-300 bg-red-50 px-4 py-2.5 text-sm text-red-700">
+          <p className="border border-red-300 dark:border-red-800 bg-red-50 dark:bg-red-950/40 px-4 py-2.5 text-sm text-red-700 dark:text-red-300">
             {error}
           </p>
         )}
@@ -46,7 +46,7 @@ export default function Login() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Email address"
-          className="w-full border border-brand-text/20 bg-white px-4 py-3 text-sm text-brand-text placeholder:text-brand-text/50 focus:border-brand-accent focus:outline-none"
+          className="w-full border border-brand-text/20 bg-brand-surface px-4 py-3 text-sm text-brand-text placeholder:text-brand-text/70 focus:border-brand-accent focus:outline-none"
         />
 
         <PasswordInput
@@ -54,11 +54,11 @@ export default function Login() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
-          className="w-full border border-brand-text/20 bg-white px-4 py-3 text-sm text-brand-text placeholder:text-brand-text/50 focus:border-brand-accent focus:outline-none"
+          className="w-full border border-brand-text/20 bg-brand-surface px-4 py-3 text-sm text-brand-text placeholder:text-brand-text/70 focus:border-brand-accent focus:outline-none"
         />
 
         <div className="text-right">
-          <Link to="/forgot-password" className="inline-block py-2 text-sm text-brand-accent hover:underline">
+          <Link to="/forgot-password" className="inline-block py-2 text-sm text-brand-gold hover:underline">
             Forgot password?
           </Link>
         </div>
@@ -66,7 +66,7 @@ export default function Login() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-brand-primary py-3 text-xs font-medium uppercase tracking-[0.15em] text-[#f4f1e8] transition hover:opacity-90 disabled:opacity-60"
+          className="w-full bg-brand-primary py-3 text-xs font-medium uppercase tracking-[0.15em] text-brand-cream transition hover:opacity-90 disabled:opacity-60"
         >
           {loading ? "Signing in..." : "Sign In"}
         </button>
@@ -74,7 +74,7 @@ export default function Login() {
 
       <p className="mt-6 text-center text-sm text-brand-text/70">
         Don't have an account?{" "}
-        <Link to="/register" className="inline-block py-2 text-brand-accent hover:underline">
+        <Link to="/register" className="inline-block py-2 text-brand-gold hover:underline">
           Create one
         </Link>
       </p>

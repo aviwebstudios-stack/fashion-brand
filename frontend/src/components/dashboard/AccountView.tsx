@@ -69,7 +69,7 @@ export default function AccountView({ onOpenMeasurements, onClose }: AccountView
 
       <div className="mt-10 px-6">
         {loading ? (
-          <p className="text-sm text-brand-text/60">Loading your account...</p>
+          <p className="text-sm text-brand-text/70">Loading your account...</p>
         ) : profile ? (
           <>
             <p className="font-heading text-lg uppercase tracking-wide text-brand-text">
@@ -84,7 +84,7 @@ export default function AccountView({ onOpenMeasurements, onClose }: AccountView
               ) : (
                 <button
                   onClick={handleViewOrders}
-                  className="block text-sm text-brand-accent hover:underline"
+                  className="block text-sm text-brand-gold hover:underline"
                 >
                   View my orders ({orderCount})
                 </button>
@@ -97,7 +97,7 @@ export default function AccountView({ onOpenMeasurements, onClose }: AccountView
               ) : (
                 <button
                   onClick={handleViewBookings}
-                  className="block text-sm text-brand-accent hover:underline"
+                  className="block text-sm text-brand-gold hover:underline"
                 >
                   View my bookings ({bookingCount})
                 </button>
@@ -106,13 +106,13 @@ export default function AccountView({ onOpenMeasurements, onClose }: AccountView
 
             <button
               onClick={onOpenMeasurements}
-              className="mt-8 w-full bg-brand-primary py-3 text-xs font-medium uppercase tracking-[0.15em] text-[#f4f1e8] transition hover:opacity-90"
+              className="mt-8 w-full bg-brand-primary py-3 text-xs font-medium uppercase tracking-[0.15em] text-brand-cream transition hover:opacity-90"
             >
               My Measurements
             </button>
           </>
         ) : (
-          <p className="text-sm text-red-600">Could not load your account. Please try again.</p>
+          <p className="text-sm text-red-600 dark:text-red-400">Could not load your account. Please try again.</p>
         )}
       </div>
     </div>

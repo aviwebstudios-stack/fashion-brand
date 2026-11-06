@@ -44,11 +44,11 @@ interface RevenuePoint {
 
 function StatCard({ label, value }: { label: string; value: string | number }) {
   return (
-    <div className="border border-[#2b2b26]/10 bg-white p-5">
-      <p className="text-xs uppercase tracking-[0.1em] text-[#2b2b26]/60">
+    <div className="border border-brand-text/10 bg-brand-surface p-5">
+      <p className="text-xs uppercase tracking-[0.1em] text-brand-text/70">
         {label}
       </p>
-      <p className="mt-2 font-serif text-2xl text-[#2b2b26]">{value}</p>
+      <p className="mt-2 font-serif text-2xl text-brand-text">{value}</p>
     </div>
   );
 }
@@ -70,7 +70,7 @@ export default function AdminDashboard() {
 
   if (loading) {
     return (
-      <p className="px-8 py-10 text-sm text-[#2b2b26]/60">
+      <p className="px-8 py-10 text-sm text-brand-text/70">
         Loading dashboard...
       </p>
     );
@@ -78,7 +78,7 @@ export default function AdminDashboard() {
 
   if (!data) {
     return (
-      <p className="px-8 py-10 text-sm text-red-600">
+      <p className="px-8 py-10 text-sm text-red-600 dark:text-red-400">
         Could not load dashboard data.
       </p>
     );
@@ -86,7 +86,7 @@ export default function AdminDashboard() {
 
   return (
     <div className="px-8 py-8">
-      <h1 className="font-serif text-2xl text-[#2b2b26]">Dashboard</h1>
+      <h1 className="font-serif text-2xl text-brand-text">Dashboard</h1>
 
       <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
         <StatCard
@@ -106,8 +106,8 @@ export default function AdminDashboard() {
       </div>
 
       {revenue.length > 0 && (
-        <div className="mt-8 border border-[#2b2b26]/10 bg-white p-5">
-          <h2 className="text-xs uppercase tracking-[0.1em] text-[#2b2b26]/60">
+        <div className="mt-8 border border-brand-text/10 bg-brand-surface p-5">
+          <h2 className="text-xs uppercase tracking-[0.1em] text-brand-text/70">
             Revenue by Month
           </h2>
           <div className="mt-4 h-64">
@@ -115,13 +115,13 @@ export default function AdminDashboard() {
               <BarChart data={revenue}>
                 <XAxis
                   dataKey="month"
-                  tick={{ fontSize: 12, fill: "#2b2b26" }}
+                  tick={{ fontSize: 12, fill: "var(--color-brand-text)" }}
                 />
-                <YAxis tick={{ fontSize: 12, fill: "#2b2b26" }} />
+                <YAxis tick={{ fontSize: 12, fill: "var(--color-brand-text)" }} />
                 <Tooltip
                   formatter={(value: any) => formatNaira(Number(value))}
                 />{" "}
-                <Bar dataKey="revenue" fill="#3d4636" />
+                <Bar dataKey="revenue" fill="var(--chart-bar)" />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -130,11 +130,11 @@ export default function AdminDashboard() {
 
       <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-2">
         {data.lowStockProducts.length > 0 && (
-          <div className="border border-[#2b2b26]/10 bg-white p-5">
-            <h2 className="text-xs uppercase tracking-[0.1em] text-[#2b2b26]/60">
+          <div className="border border-brand-text/10 bg-brand-surface p-5">
+            <h2 className="text-xs uppercase tracking-[0.1em] text-brand-text/70">
               Low Stock Alert
             </h2>
-            <ul className="mt-3 divide-y divide-[#2b2b26]/10">
+            <ul className="mt-3 divide-y divide-brand-text/10">
               {data.lowStockProducts.map((p) => (
                 <li
                   key={p.id}
@@ -142,69 +142,69 @@ export default function AdminDashboard() {
                 >
                   <Link
                     to="/admin/products"
-                    className="text-[#2b2b26] hover:underline"
+                    className="text-brand-text hover:underline"
                   >
                     {p.name}
                   </Link>
-                  <span className="text-red-600">{p.stock} left</span>
+                  <span className="text-red-600 dark:text-red-400">{p.stock} left</span>
                 </li>
               ))}
             </ul>
           </div>
         )}
 
-        <div className="border border-[#2b2b26]/10 bg-white p-5">
-          <h2 className="text-xs uppercase tracking-[0.1em] text-[#2b2b26]/60">
+        <div className="border border-brand-text/10 bg-brand-surface p-5">
+          <h2 className="text-xs uppercase tracking-[0.1em] text-brand-text/70">
             Recent Orders
           </h2>
-          <ul className="mt-3 divide-y divide-[#2b2b26]/10">
+          <ul className="mt-3 divide-y divide-brand-text/10">
             {data.recentOrders.map((o) => (
               <li key={o.id} className="py-2 text-sm">
                 <div className="flex items-center justify-between">
-                  <span className="text-[#2b2b26]">{o.user.name}</span>
-                  <span className="text-[#2b2b26]/70">
+                  <span className="text-brand-text">{o.user.name}</span>
+                  <span className="text-brand-text/70">
                     {formatNaira(o.total)}
                   </span>
                 </div>
-                <span className="text-xs uppercase tracking-[0.05em] text-[#c9a227]">
+                <span className="text-xs uppercase tracking-[0.05em] text-brand-gold">
                   {o.status}
                 </span>
               </li>
             ))}
             {data.recentOrders.length === 0 && (
-              <p className="py-2 text-sm text-[#2b2b26]/60">No orders yet.</p>
+              <p className="py-2 text-sm text-brand-text/70">No orders yet.</p>
             )}
           </ul>
         </div>
 
-        <div className="border border-[#2b2b26]/10 bg-white p-5 lg:col-span-2">
-          <h2 className="text-xs uppercase tracking-[0.1em] text-[#2b2b26]/60">
+        <div className="border border-brand-text/10 bg-brand-surface p-5 lg:col-span-2">
+          <h2 className="text-xs uppercase tracking-[0.1em] text-brand-text/70">
             Recent Bookings
           </h2>
-          <ul className="mt-3 divide-y divide-[#2b2b26]/10">
+          <ul className="mt-3 divide-y divide-brand-text/10">
             {data.recentBookings.map((b) => (
               <li
                 key={b.id}
                 className="flex items-center justify-between py-2 text-sm"
               >
                 <div>
-                  <span className="text-[#2b2b26]">{b.user.name}</span>
-                  <span className="ml-2 text-[#2b2b26]/60">
+                  <span className="text-brand-text">{b.user.name}</span>
+                  <span className="ml-2 text-brand-text/70">
                     {b.service.name}
                   </span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <span className="text-[#2b2b26]/70">
+                  <span className="text-brand-text/70">
                     {formatNaira(b.total)}
                   </span>
-                  <span className="text-xs uppercase tracking-[0.05em] text-[#c9a227]">
+                  <span className="text-xs uppercase tracking-[0.05em] text-brand-gold">
                     {b.status}
                   </span>
                 </div>
               </li>
             ))}
             {data.recentBookings.length === 0 && (
-              <p className="py-2 text-sm text-[#2b2b26]/60">No bookings yet.</p>
+              <p className="py-2 text-sm text-brand-text/70">No bookings yet.</p>
             )}
           </ul>
         </div>

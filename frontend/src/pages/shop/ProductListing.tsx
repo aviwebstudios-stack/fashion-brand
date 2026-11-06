@@ -57,9 +57,9 @@ export default function ProductListing() {
       <h1 className="font-heading text-3xl text-brand-text">{title}</h1>
 
       {loading ? (
-        <p className="mt-12 text-sm text-brand-text/60">Loading {title.toLowerCase()} pieces...</p>
+        <p className="mt-12 text-sm text-brand-text/70">Loading {title.toLowerCase()} pieces...</p>
       ) : !data || data.products.length === 0 ? (
-        <p className="mt-12 text-sm text-brand-text/60">
+        <p className="mt-12 text-sm text-brand-text/70">
           There's nothing in {title} right now. New pieces are added often, so check back soon.
         </p>
       ) : (
@@ -67,7 +67,7 @@ export default function ProductListing() {
           <div className="mt-10 grid grid-cols-2 gap-x-4 gap-y-10 sm:grid-cols-3 sm:gap-x-6 sm:gap-y-12 lg:grid-cols-4">
             {data.products.map((product) => (
               <div key={product.id}>
-                <div className="group relative aspect-[3/4] overflow-hidden bg-[#e5e1d8]">
+                <div className="group relative aspect-[3/4] overflow-hidden bg-brand-muted">
                   {product.images?.[0] ? (
                     <img
                       src={product.images[0]}
@@ -82,7 +82,7 @@ export default function ProductListing() {
 
                   <button
                     onClick={() => setQuickViewId(product.id)}
-                    className="absolute inset-x-2 bottom-2 min-h-11 bg-brand-primary py-2.5 text-xs font-medium uppercase tracking-[0.15em] text-[#f4f1e8] transition hover:opacity-90 sm:inset-x-3 sm:bottom-3 md:opacity-0 md:group-hover:opacity-100 md:focus-visible:opacity-100"
+                    className="absolute inset-x-2 bottom-2 min-h-11 bg-brand-primary py-2.5 text-xs font-medium uppercase tracking-[0.15em] text-brand-cream transition hover:opacity-90 sm:inset-x-3 sm:bottom-3 md:opacity-0 md:group-hover:opacity-100 md:focus-visible:opacity-100"
                   >
                     Quick View
                   </button>
@@ -105,7 +105,7 @@ export default function ProductListing() {
               >
                 Previous
               </button>
-              <span className="text-sm text-brand-text/60">
+              <span className="text-sm text-brand-text/70">
                 Page {data.pagination.page} of {data.pagination.pages}
               </span>
               <button

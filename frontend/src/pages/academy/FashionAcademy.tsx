@@ -130,10 +130,10 @@ export default function FashionAcademy() {
           <h1 className="reveal-item font-heading text-3xl text-white sm:text-5xl">{heroTitle}</h1>
           <p className="reveal-item mt-4 text-sm text-white/85 sm:text-base">{heroSubtitle}</p>
           <div className="reveal-item mt-8 flex flex-wrap items-center justify-center gap-4">
-            <a href="#programs" className="bg-brand-accent px-6 py-3 text-xs font-medium uppercase tracking-[0.15em] text-brand-text transition hover:opacity-90">
+            <a href="#programs" className="bg-brand-accent px-6 py-3 text-xs font-medium uppercase tracking-[0.15em] text-brand-ink transition hover:opacity-90">
               {heroCta1}
             </a>
-            <Link to="/contact" className="border border-white px-6 py-3 text-xs font-medium uppercase tracking-[0.15em] text-white transition hover:bg-white hover:text-brand-text">
+            <Link to="/contact" className="border border-white px-6 py-3 text-xs font-medium uppercase tracking-[0.15em] text-white transition hover:bg-white hover:text-brand-ink">
               {heroCta2}
             </Link>
           </div>
@@ -144,8 +144,8 @@ export default function FashionAcademy() {
         <div className="mx-auto grid max-w-4xl grid-cols-3 gap-6 px-6 text-center">
           {[{ n: stat1Number, l: stat1Label }, { n: stat2Number, l: stat2Label }, { n: stat3Number, l: stat3Label }].map((s) => (
             <div key={s.l}>
-              <p className="font-heading text-2xl text-[#f4f1e8] sm:text-3xl">{s.n}</p>
-              <p className="mt-1 text-xs uppercase tracking-[0.1em] text-brand-accent">{s.l}</p>
+              <p className="font-heading text-2xl text-brand-cream sm:text-3xl">{s.n}</p>
+              <p className="mt-1 text-xs uppercase tracking-[0.1em] text-brand-gold">{s.l}</p>
             </div>
           ))}
         </div>
@@ -160,7 +160,7 @@ export default function FashionAcademy() {
                   key={cat}
                   onClick={() => setCategoryFilter(cat)}
                   className={`min-h-11 border px-4 py-2 text-xs uppercase tracking-[0.08em] transition ${
-                    categoryFilter === cat ? "border-brand-primary bg-brand-primary text-[#f4f1e8]" : "border-brand-text/20 text-brand-text"
+                    categoryFilter === cat ? "border-brand-primary bg-brand-primary text-brand-cream" : "border-brand-text/20 text-brand-text"
                   }`}
                 >
                   {cat === "all" ? "All Programs" : cat === "degree" ? "Degrees" : "Short Courses"}
@@ -172,14 +172,14 @@ export default function FashionAcademy() {
         <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {filteredPrograms.map((program) => (
               <div key={program.name} className="reveal-item border border-brand-text/10">
-                <ContentImage contentKey={program.imageKey} file={program.file} alt={program.name} className="aspect-[4/3] bg-[#e5e1d8]" />
+                <ContentImage contentKey={program.imageKey} file={program.file} alt={program.name} className="aspect-[4/3] bg-brand-muted" />
                 <div className="p-5">
                   <h3 className="font-heading text-lg text-brand-text">{program.name}</h3>
-                  <p className="mt-1 text-xs text-brand-text/60">{program.duration}</p>
+                  <p className="mt-1 text-xs text-brand-text/70">{program.duration}</p>
                   <p className="mt-3 text-sm leading-relaxed text-brand-text/70">{program.description}</p>
                   <button
                     onClick={() => { setSelectedProgram(program.name); setSubmitted(false); }}
-                    className="mt-4 min-h-11 w-full bg-brand-primary py-3 text-xs font-medium uppercase tracking-[0.15em] text-[#f4f1e8] transition hover:opacity-90"
+                    className="mt-4 min-h-11 w-full bg-brand-primary py-3 text-xs font-medium uppercase tracking-[0.15em] text-brand-cream transition hover:opacity-90"
                   >
                     Ask About This Program
                   </button>
@@ -203,7 +203,7 @@ export default function FashionAcademy() {
                   contentKey={item.key}
                   file={item.file}
                   alt={item.cap}
-                  className="aspect-[4/5] bg-[#e5e1d8]"
+                  className="aspect-[4/5] bg-brand-muted"
                   imgClassName="transition duration-500 hover:scale-105"
                 />
                 <p className="mt-3 text-sm text-brand-text">{item.cap}</p>
@@ -216,7 +216,7 @@ export default function FashionAcademy() {
       <Reveal className="mx-auto max-w-6xl px-6 py-16">
         <h2 className="reveal-item font-heading text-2xl text-brand-text">{facilitiesTitle}</h2>
         <div className="mt-10 grid grid-cols-1 gap-10 md:grid-cols-2 md:items-center">
-          <ContentImage contentKey="academy.facilities.image" file="academy-facilities.webp" alt="Academy studio" className="reveal-item aspect-[7/6] bg-[#e5e1d8]" />
+          <ContentImage contentKey="academy.facilities.image" file="academy-facilities.webp" alt="Academy studio" className="reveal-item aspect-[7/6] bg-brand-muted" />
           <div>
             <p className="reveal-item text-sm font-medium text-brand-text">{facilitiesIntro}</p>
             <ul className="reveal-item mt-4 space-y-3 text-sm text-brand-text/70">
@@ -238,23 +238,23 @@ export default function FashionAcademy() {
       </Reveal>
 
       <Reveal className="bg-brand-primary py-16 text-center">
-        <h2 className="reveal-item font-heading text-2xl text-[#f4f1e8]">{admissionsTitle}</h2>
+        <h2 className="reveal-item font-heading text-2xl text-brand-cream">{admissionsTitle}</h2>
         <div className="reveal-item mx-auto mt-10 flex max-w-2xl flex-col items-center justify-center gap-4 px-6 sm:flex-row">
           {[admissionsStep1, admissionsStep2, admissionsStep3].map((step, i) => (
             <div key={step} className="flex items-center gap-4">
               <div className="flex flex-col items-center">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-accent text-sm font-medium text-brand-text">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-accent text-sm font-medium text-brand-ink">
                   {i + 1}
                 </div>
-                <p className="mt-2 text-xs uppercase tracking-[0.08em] text-[#f4f1e8]">{step}</p>
+                <p className="mt-2 text-xs uppercase tracking-[0.08em] text-brand-cream">{step}</p>
               </div>
-              {i < 2 && <span className="hidden text-[#f4f1e8]/50 sm:block">→</span>}
+              {i < 2 && <span className="hidden text-brand-cream/75 sm:block">→</span>}
             </div>
           ))}
         </div>
                 <Link
           to="/contact"
-          className="reveal-item mt-10 inline-block bg-brand-accent px-7 py-3 text-xs font-medium uppercase tracking-[0.15em] text-brand-text transition hover:opacity-90"
+          className="reveal-item mt-10 inline-block bg-brand-accent px-7 py-3 text-xs font-medium uppercase tracking-[0.15em] text-brand-ink transition hover:opacity-90"
         >
           {admissionsCta}
         </Link>
@@ -263,11 +263,11 @@ export default function FashionAcademy() {
       <Reveal className="mx-auto max-w-3xl px-6 py-16 text-center">
         <div className="reveal-item">
           <p className="font-heading text-xl italic text-brand-text sm:text-2xl">"{testimonialQuote}"</p>
-          <p className="mt-3 text-sm text-brand-text/60">{testimonialAuthor}</p>
+          <p className="mt-3 text-sm text-brand-text/70">{testimonialAuthor}</p>
         </div>
 
         <div className="reveal-item">
-          <p className="mt-14 text-xs uppercase tracking-[0.15em] text-brand-text/50">As Seen In</p>
+          <p className="mt-14 text-xs uppercase tracking-[0.15em] text-brand-text/70">As Seen In</p>
           <div className="mt-4 flex flex-wrap items-center justify-center gap-8">
             <span className="font-heading text-lg text-brand-text/70">{pressLabel1}</span>
             <span className="font-heading text-lg text-brand-text/70">{pressLabel2}</span>
@@ -278,11 +278,11 @@ export default function FashionAcademy() {
 
       {selectedProgram && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto bg-black/50 p-4" onClick={() => setSelectedProgram(null)}>
-          <div className="relative my-auto w-full max-w-md bg-brand-bg p-6 sm:p-8" onClick={(e) => e.stopPropagation()}>
+          <div className="relative my-auto w-full max-w-md bg-brand-bg dark:ring-1 dark:ring-brand-line p-6 sm:p-8" onClick={(e) => e.stopPropagation()}>
             <button
               onClick={() => setSelectedProgram(null)}
               aria-label="Close"
-              className="absolute right-2 top-2 flex h-11 w-11 items-center justify-center rounded-full text-brand-text/60 transition hover:bg-black/5 hover:text-brand-text"
+              className="absolute right-2 top-2 flex h-11 w-11 items-center justify-center rounded-full text-brand-text/70 transition hover:bg-black/5 dark:hover:bg-white/10 hover:text-brand-text"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M18 6L6 18M6 6l12 12" />
@@ -307,7 +307,7 @@ export default function FashionAcademy() {
                 <a href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Hi Favy Atelier, I'm interested in the "${selectedProgram}" program.`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-5 flex w-full items-center justify-center gap-2 border border-[#25D366] py-3 text-xs font-medium uppercase tracking-[0.15em] text-[#128C7E] transition hover:bg-[#25D366]/10"
+                  className="mt-5 flex w-full items-center justify-center gap-2 border border-[#25D366] py-3 text-xs font-medium uppercase tracking-[0.15em] text-[#075E54] dark:text-[#25D366] transition hover:bg-[#25D366]/10"
                 >
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 004.74 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0012.05 2h-.01zm0 18.13h-.01a8.2 8.2 0 01-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.22 8.22 0 01-1.26-4.37c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.18 8.18 0 012.41 5.83c0 4.55-3.7 8.24-8.24 8.24zm4.52-6.17c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.13-.17.24-.64.81-.78.97-.15.17-.29.19-.53.06-.25-.12-1.05-.39-1.99-1.24-.74-.66-1.23-1.47-1.38-1.72-.14-.24-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.16.04-.31-.02-.43-.06-.12-.56-1.36-.77-1.86-.2-.48-.41-.42-.56-.43-.14 0-.31-.01-.47-.01-.17 0-.43.06-.66.31-.23.24-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.68 4.25 3.75.59.26 1.06.41 1.42.52.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.14-1.18-.06-.1-.23-.16-.48-.28z" />
@@ -317,17 +317,17 @@ export default function FashionAcademy() {
 
                 <div className="my-5 flex items-center gap-3">
                   <span className="h-px flex-1 bg-brand-text/10" />
-                  <span className="text-xs text-brand-text/50">or</span>
+                  <span className="text-xs text-brand-text/70">or</span>
                   <span className="h-px flex-1 bg-brand-text/10" />
                 </div>
 
-                {error && <p className="mb-3 text-sm text-red-600">{error}</p>}
+                {error && <p className="mb-3 text-sm text-red-600 dark:text-red-400">{error}</p>}
 
                 <form onSubmit={handleSubmit} className="space-y-3">
-                  <input type="text" required value={name} onChange={(e) => setName(e.target.value)} placeholder="Full name" className="w-full border border-brand-text/20 bg-transparent px-4 py-2.5 text-sm text-brand-text placeholder:text-brand-text/50 focus:border-brand-accent focus:outline-none" />
-                  <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email address" className="w-full border border-brand-text/20 bg-transparent px-4 py-2.5 text-sm text-brand-text placeholder:text-brand-text/50 focus:border-brand-accent focus:outline-none" />
-                  <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone number" className="w-full border border-brand-text/20 bg-transparent px-4 py-2.5 text-sm text-brand-text placeholder:text-brand-text/50 focus:border-brand-accent focus:outline-none" />
-                  <button type="submit" disabled={sending} className="w-full bg-brand-primary py-3 text-xs font-medium uppercase tracking-[0.15em] text-[#f4f1e8] transition hover:opacity-90 disabled:opacity-60">
+                  <input type="text" required value={name} onChange={(e) => setName(e.target.value)} placeholder="Full name" className="w-full border border-brand-text/20 bg-transparent px-4 py-2.5 text-sm text-brand-text placeholder:text-brand-text/70 focus:border-brand-accent focus:outline-none" />
+                  <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email address" className="w-full border border-brand-text/20 bg-transparent px-4 py-2.5 text-sm text-brand-text placeholder:text-brand-text/70 focus:border-brand-accent focus:outline-none" />
+                  <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone number" className="w-full border border-brand-text/20 bg-transparent px-4 py-2.5 text-sm text-brand-text placeholder:text-brand-text/70 focus:border-brand-accent focus:outline-none" />
+                  <button type="submit" disabled={sending} className="w-full bg-brand-primary py-3 text-xs font-medium uppercase tracking-[0.15em] text-brand-cream transition hover:opacity-90 disabled:opacity-60">
                     {sending ? "Sending..." : "Send My Details"}
                   </button>
                 </form>

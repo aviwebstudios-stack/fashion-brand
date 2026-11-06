@@ -70,17 +70,17 @@ export default function AdminUsers() {
 
   return (
     <div className="px-8 py-8">
-      <h1 className="font-serif text-2xl text-[#2b2b26]">Users</h1>
+      <h1 className="font-serif text-2xl text-brand-text">Users</h1>
 
       {loading ? (
-        <p className="mt-8 text-sm text-[#2b2b26]/60">Loading users...</p>
+        <p className="mt-8 text-sm text-brand-text/70">Loading users...</p>
       ) : users.length === 0 ? (
-        <p className="mt-8 text-sm text-[#2b2b26]/60">No users found.</p>
+        <p className="mt-8 text-sm text-brand-text/70">No users found.</p>
       ) : (
-        <div className="mt-6 overflow-x-auto border border-[#2b2b26]/10 bg-white">
+        <div className="mt-6 overflow-x-auto border border-brand-text/10 bg-brand-surface">
           <table className="w-full min-w-[800px] text-sm">
             <thead>
-              <tr className="border-b border-[#2b2b26]/10 text-left text-xs uppercase tracking-[0.05em] text-[#2b2b26]/60">
+              <tr className="border-b border-brand-text/10 text-left text-xs uppercase tracking-[0.05em] text-brand-text/70">
                 <th className="px-4 py-3">Name</th>
                 <th className="px-4 py-3">Email</th>
                 <th className="px-4 py-3">Phone</th>
@@ -92,28 +92,28 @@ export default function AdminUsers() {
             </thead>
             <tbody>
               {users.map((user) => (
-                <tr key={user.id} className="border-b border-[#2b2b26]/10">
-                  <td className="px-4 py-3 text-[#2b2b26]">{user.name}</td>
-                  <td className="px-4 py-3 text-[#2b2b26]/70">{user.email}</td>
-                  <td className="px-4 py-3 text-[#2b2b26]/70">{user.phone || "Not given"}</td>
-                  <td className="px-4 py-3 text-[#2b2b26]/70">{user.role}</td>
+                <tr key={user.id} className="border-b border-brand-text/10">
+                  <td className="px-4 py-3 text-brand-text">{user.name}</td>
+                  <td className="px-4 py-3 text-brand-text/70">{user.email}</td>
+                  <td className="px-4 py-3 text-brand-text/70">{user.phone || "Not given"}</td>
+                  <td className="px-4 py-3 text-brand-text/70">{user.role}</td>
                   <td className="px-4 py-3">
                     <span
                       className={`rounded-full px-2.5 py-1 text-xs ${
                         user.isActive
-                          ? "bg-[#c9a227]/15 text-[#8a6d1a]"
-                          : "bg-red-100 text-red-700"
+                          ? "bg-brand-accent/15 text-brand-gold"
+                          : "bg-red-100 dark:bg-red-950/60 text-red-700 dark:text-red-300"
                       }`}
                     >
                       {user.isActive ? "Active" : "Suspended"}
                     </span>
                     {!user.isVerified && (
-                      <span className="ml-2 rounded-full bg-gray-100 px-2.5 py-1 text-xs text-gray-600">
+                      <span className="ml-2 rounded-full bg-gray-100 dark:bg-white/10 px-2.5 py-1 text-xs text-gray-600 dark:text-gray-300">
                         Unverified
                       </span>
                     )}
                   </td>
-                  <td className="px-4 py-3 text-xs text-[#2b2b26]/60">
+                  <td className="px-4 py-3 text-xs text-brand-text/70">
                     {new Date(user.createdAt).toLocaleDateString()}
                   </td>
                   <td className="px-4 py-3">
@@ -121,7 +121,7 @@ export default function AdminUsers() {
                       <button
                         onClick={() => handleSuspend(user)}
                         disabled={busyId === user.id}
-                        className="mr-3 text-xs text-[#c9a227] underline disabled:opacity-50"
+                        className="mr-3 text-xs text-brand-gold underline disabled:opacity-50"
                       >
                         Suspend
                       </button>
@@ -129,7 +129,7 @@ export default function AdminUsers() {
                       <button
                         onClick={() => handleReactivate(user)}
                         disabled={busyId === user.id}
-                        className="mr-3 text-xs text-[#c9a227] underline disabled:opacity-50"
+                        className="mr-3 text-xs text-brand-gold underline disabled:opacity-50"
                       >
                         Reactivate
                       </button>
@@ -137,7 +137,7 @@ export default function AdminUsers() {
                     <button
                       onClick={() => handleDelete(user)}
                       disabled={busyId === user.id}
-                      className="text-xs text-red-600 underline disabled:opacity-50"
+                      className="text-xs text-red-600 dark:text-red-400 underline disabled:opacity-50"
                     >
                       Delete
                     </button>

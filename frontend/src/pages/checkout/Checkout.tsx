@@ -61,14 +61,14 @@ export default function Checkout() {
   };
 
   if (loading) {
-    return <p className="px-6 py-20 text-center text-sm text-brand-text/60">Loading your bag...</p>;
+    return <p className="px-6 py-20 text-center text-sm text-brand-text/70">Loading your bag...</p>;
   }
 
   if (!cart || cart.items.length === 0) {
     return (
       <div className="px-6 py-20 text-center">
         <p className="text-sm text-brand-text/70">Your bag is empty.</p>
-        <Link to="/shop/rtw" className="mt-4 inline-block py-2 text-sm text-brand-accent hover:underline">
+        <Link to="/shop/rtw" className="mt-4 inline-block py-2 text-sm text-brand-gold hover:underline">
           Shop Ready-to-Wear
         </Link>
       </div>
@@ -81,11 +81,11 @@ export default function Checkout() {
 
       <div className="mt-10 grid grid-cols-1 gap-10 md:grid-cols-2">
         <div>
-          <h2 className="text-xs uppercase tracking-[0.15em] text-brand-accent">Order Summary</h2>
+          <h2 className="text-xs uppercase tracking-[0.15em] text-brand-gold">Order Summary</h2>
           <ul className="mt-4 space-y-4">
             {cart.items.map((item) => (
               <li key={item.id} className="flex gap-3">
-                <div className="h-16 w-14 shrink-0 overflow-hidden bg-[#e5e1d8]">
+                <div className="h-16 w-14 shrink-0 overflow-hidden bg-brand-muted">
                   {item.product.images?.[0] && (
                     <img
                       src={item.product.images[0]}
@@ -96,7 +96,7 @@ export default function Checkout() {
                 </div>
                 <div className="flex-1">
                   <p className="text-sm text-brand-text">{item.product.name}</p>
-                  <p className="text-xs text-brand-text/60">
+                  <p className="text-xs text-brand-text/70">
                     Qty {item.quantity}
                     {item.size && ` · Size ${item.size}`}
                   </p>
@@ -115,10 +115,10 @@ export default function Checkout() {
         </div>
 
         <div>
-          <h2 className="text-xs uppercase tracking-[0.15em] text-brand-accent">Delivery Address</h2>
+          <h2 className="text-xs uppercase tracking-[0.15em] text-brand-gold">Delivery Address</h2>
           <form onSubmit={handleSubmit} className="mt-4 space-y-4">
             {error && (
-              <p className="border border-red-300 bg-red-50 px-4 py-2.5 text-sm text-red-700">
+              <p className="border border-red-300 dark:border-red-800 bg-red-50 dark:bg-red-950/40 px-4 py-2.5 text-sm text-red-700 dark:text-red-300">
                 {error}
               </p>
             )}
@@ -129,13 +129,13 @@ export default function Checkout() {
               onChange={(e) => setDeliveryAddress(e.target.value)}
               rows={4}
               placeholder="Street address, city, state"
-              className="w-full border border-brand-text/20 bg-white px-4 py-3 text-sm text-brand-text placeholder:text-brand-text/50 focus:border-brand-accent focus:outline-none"
+              className="w-full border border-brand-text/20 bg-brand-surface px-4 py-3 text-sm text-brand-text placeholder:text-brand-text/70 focus:border-brand-accent focus:outline-none"
             />
 
             <button
               type="submit"
               disabled={placing}
-              className="w-full bg-brand-primary py-3.5 text-xs font-medium uppercase tracking-[0.15em] text-[#f4f1e8] transition hover:opacity-90 disabled:opacity-60"
+              className="w-full bg-brand-primary py-3.5 text-xs font-medium uppercase tracking-[0.15em] text-brand-cream transition hover:opacity-90 disabled:opacity-60"
             >
               {placing ? "Redirecting to payment..." : "Proceed to Payment"}
             </button>

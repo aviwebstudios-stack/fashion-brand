@@ -93,13 +93,13 @@ export default function QuickViewModal({ productId, onClose }: QuickViewModalPro
     <>
       <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 p-4" onClick={onClose}>
         <div
-          className="relative grid max-h-[90vh] w-full max-w-3xl grid-cols-1 overflow-y-auto bg-brand-bg md:grid-cols-2"
+          className="relative grid max-h-[90vh] w-full max-w-3xl grid-cols-1 overflow-y-auto bg-brand-bg dark:ring-1 dark:ring-brand-line md:grid-cols-2"
           onClick={(e) => e.stopPropagation()}
         >
           <button
             onClick={onClose}
             aria-label="Close"
-            className="absolute right-4 top-4 z-10 rounded-full bg-white/70 p-1.5 text-brand-text/70 transition hover:bg-white hover:text-brand-text"
+            className="absolute right-4 top-4 z-10 rounded-full bg-brand-surface/70 p-1.5 text-brand-text/70 transition hover:bg-brand-surface hover:text-brand-text"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M18 6L6 18M6 6l12 12" />
@@ -108,13 +108,13 @@ export default function QuickViewModal({ productId, onClose }: QuickViewModalPro
 
           {loading || !product ? (
             <div className="col-span-2 flex items-center justify-center py-24">
-              <p className="text-sm text-brand-text/60">
+              <p className="text-sm text-brand-text/70">
                 {loading ? "Loading this piece..." : "We couldn't find this piece. It may have sold out or been removed."}
               </p>
             </div>
           ) : (
             <>
-              <div className="aspect-[3/4] bg-[#e5e1d8] md:aspect-auto">
+              <div className="aspect-[3/4] bg-brand-muted md:aspect-auto">
                 {product.images?.[0] ? (
                   <img src={product.images[0]} alt={product.name} className="h-full w-full object-cover" />
                 ) : (
@@ -129,7 +129,7 @@ export default function QuickViewModal({ productId, onClose }: QuickViewModalPro
                 <p className="mt-2 text-brand-text/80">{formatNaira(product.price)}</p>
 
                 {!product.isAvailable || product.stock === 0 ? (
-                  <p className="mt-6 text-sm text-red-600">Currently out of stock.</p>
+                  <p className="mt-6 text-sm text-red-600 dark:text-red-400">Currently out of stock.</p>
                 ) : (
                   <>
                     {product.sizes?.length > 0 && (
@@ -138,7 +138,7 @@ export default function QuickViewModal({ productId, onClose }: QuickViewModalPro
                           <p className="text-sm font-medium text-brand-text">Size</p>
                           <button
                             onClick={() => setShowSizeGuide(true)}
-                            className="text-xs text-brand-accent underline hover:no-underline"
+                            className="text-xs text-brand-gold underline hover:no-underline"
                           >
                             Size Guide
                           </button>
@@ -180,12 +180,12 @@ export default function QuickViewModal({ productId, onClose }: QuickViewModalPro
                       </div>
                     </div>
 
-                    {error && <p className="mt-4 text-sm text-red-600">{error}</p>}
+                    {error && <p className="mt-4 text-sm text-red-600 dark:text-red-400">{error}</p>}
 
                     <button
                       onClick={handleAddToCart}
                       disabled={adding}
-                      className="mt-6 w-full bg-brand-primary py-3 text-xs font-medium uppercase tracking-[0.15em] text-[#f4f1e8] transition hover:opacity-90 disabled:opacity-60"
+                      className="mt-6 w-full bg-brand-primary py-3 text-xs font-medium uppercase tracking-[0.15em] text-brand-cream transition hover:opacity-90 disabled:opacity-60"
                     >
                       {adding ? "Adding..." : "Add to Bag"}
                     </button>

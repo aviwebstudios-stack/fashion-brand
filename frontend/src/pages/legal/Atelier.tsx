@@ -16,7 +16,7 @@ export default function Atelier() {
       <p className={legalStyles.paragraph}>
         Bespoke and bridal clients can visit the atelier by appointment for fittings and
         consultations. To arrange a visit, book a session on our{" "}
-        <Link to="/consultations" className="text-brand-accent underline">
+        <Link to="/consultations" className="text-brand-gold underline">
           consultations page
         </Link>
         .

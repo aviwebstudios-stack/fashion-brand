@@ -53,7 +53,7 @@ export default function FAQs() {
               <span className="text-sm font-medium text-brand-text">
                 {item.q}
               </span>
-              <span className="ml-4 shrink-0 text-brand-text/50" aria-hidden="true">
+              <span className="ml-4 shrink-0 text-brand-text/70" aria-hidden="true">
                 {openIndex === i ? <Minus size={16} /> : <Plus size={16} />}
               </span>
             </button>

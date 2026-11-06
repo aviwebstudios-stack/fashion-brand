@@ -14,8 +14,8 @@ export default function PasswordInput({
 
   const iconColor =
     variant === "dark"
-      ? "text-[#f4f1e8]/50 hover:text-[#f4f1e8]"
-      : "text-[#2b2b26]/50 hover:text-[#2b2b26]";
+      ? "text-brand-cream/75 hover:text-brand-cream"
+      : "text-brand-text/70 hover:text-brand-text";
 
   return (
     <div className="relative">

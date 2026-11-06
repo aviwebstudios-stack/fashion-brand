@@ -77,14 +77,14 @@ function Field({
     <div>
       <label className="text-xs font-medium text-brand-text">
         {field.label}
-        {field.required && <span className="text-red-500"> *</span>}
+        {field.required && <span className="text-red-500 dark:text-red-400"> *</span>}
       </label>
       <input
         type={field.type === "date" ? "date" : "text"}
         required={field.required}
         value={value || ""}
         onChange={(e) => onChange(field.key, e.target.value)}
-        className="mt-1 w-full border border-brand-text/20 bg-white px-3 py-2 text-sm text-brand-text focus:border-brand-accent focus:outline-none"
+        className="mt-1 w-full border border-brand-text/20 bg-brand-surface px-3 py-2 text-sm text-brand-text focus:border-brand-accent focus:outline-none"
       />
     </div>
   );
@@ -135,7 +135,7 @@ export default function MeasurementsForm({ onBack }: MeasurementsFormProps) {
       <div className="flex items-center justify-between px-6 py-5">
         <button
           onClick={onBack}
-          className="text-sm text-brand-accent hover:underline"
+          className="text-sm text-brand-gold hover:underline"
         >
           Return to Account Details
         </button>
@@ -146,11 +146,11 @@ export default function MeasurementsForm({ onBack }: MeasurementsFormProps) {
       </h1>
 
       {loading ? (
-        <p className="mt-10 px-6 text-sm text-brand-text/60">Loading your measurements...</p>
+        <p className="mt-10 px-6 text-sm text-brand-text/70">Loading your measurements...</p>
       ) : (
         <div className="mt-8 space-y-8 px-6 pb-10">
           <section>
-            <h2 className="border-b border-brand-text/15 pb-2 text-xs uppercase tracking-[0.15em] text-brand-accent">
+            <h2 className="border-b border-brand-text/15 pb-2 text-xs uppercase tracking-[0.15em] text-brand-gold">
               {" "}
               General Information
             </h2>
@@ -173,13 +173,13 @@ export default function MeasurementsForm({ onBack }: MeasurementsFormProps) {
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
                 rows={3}
-                className="mt-1 w-full border border-brand-text/20 bg-white px-3 py-2 text-sm text-brand-text focus:border-brand-accent focus:outline-none"
+                className="mt-1 w-full border border-brand-text/20 bg-brand-surface px-3 py-2 text-sm text-brand-text focus:border-brand-accent focus:outline-none"
               />
             </div>
           </section>
 
           <section>
-            <h2 className="border-b border-[#2b2b26]/15 pb-2 text-xs uppercase tracking-[0.15em] text-[#c9a227]">
+            <h2 className="border-b border-brand-text/15 pb-2 text-xs uppercase tracking-[0.15em] text-brand-gold">
               Detailed Measurements
             </h2>
             <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -203,7 +203,7 @@ export default function MeasurementsForm({ onBack }: MeasurementsFormProps) {
           <button
             onClick={handleSave}
             disabled={saving}
-            className="w-full bg-brand-primary py-3 text-xs font-medium uppercase tracking-[0.15em] text-[#f4f1e8] transition hover:opacity-90 disabled:opacity-60"
+            className="w-full bg-brand-primary py-3 text-xs font-medium uppercase tracking-[0.15em] text-brand-cream transition hover:opacity-90 disabled:opacity-60"
           >
             {saving ? "Saving..." : "Save Measurements"}
           </button>

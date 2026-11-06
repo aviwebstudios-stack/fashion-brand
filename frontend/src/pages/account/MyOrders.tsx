@@ -16,14 +16,14 @@ interface Order {
 function statusColor(status: string) {
   switch (status) {
     case "DELIVERED":
-      return "bg-brand-accent/15 text-[#8a6d1a]";
+      return "bg-brand-accent/15 text-brand-gold";
     case "CANCELLED":
-      return "bg-red-100 text-red-700";
+      return "bg-red-100 dark:bg-red-950/60 text-red-700 dark:text-red-300";
     case "SHIPPED":
     case "PROCESSING":
-      return "bg-blue-100 text-blue-700";
+      return "bg-blue-100 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300";
     default:
-      return "bg-gray-100 text-gray-700";
+      return "bg-gray-100 dark:bg-white/10 text-gray-700 dark:text-gray-200";
   }
 }
 
@@ -45,11 +45,11 @@ export default function MyOrders() {
       <h1 className="text-center font-heading text-3xl text-brand-text">My Orders</h1>
 
       {loading ? (
-        <p className="mt-10 text-center text-sm text-brand-text/60">Loading your orders...</p>
+        <p className="mt-10 text-center text-sm text-brand-text/70">Loading your orders...</p>
       ) : orders.length === 0 ? (
         <div className="mt-10 text-center">
           <p className="text-sm text-brand-text/70">You haven't placed any orders yet.</p>
-          <Link to="/shop/rtw" className="mt-4 inline-block py-2 text-sm text-brand-accent hover:underline">
+          <Link to="/shop/rtw" className="mt-4 inline-block py-2 text-sm text-brand-gold hover:underline">
             Shop Ready-to-Wear
           </Link>
         </div>
@@ -65,7 +65,7 @@ export default function MyOrders() {
                   <p className="text-sm font-medium text-brand-text">
                     Order #{order.id.slice(0, 8).toUpperCase()}
                   </p>
-                  <p className="mt-1 text-xs text-brand-text/60">
+                  <p className="mt-1 text-xs text-brand-text/70">
                     {new Date(order.createdAt).toLocaleDateString()} · {order.items.length} item
                     {order.items.length !== 1 ? "s" : ""}
                   </p>

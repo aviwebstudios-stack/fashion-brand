@@ -44,25 +44,25 @@ export default function OrderTracking() {
   }, [id]);
 
   if (loading) {
-    return <p className="px-6 py-20 text-center text-sm text-brand-text/60">Loading your order...</p>;
+    return <p className="px-6 py-20 text-center text-sm text-brand-text/70">Loading your order...</p>;
   }
 
   if (!order) {
-    return <p className="px-6 py-20 text-center text-sm text-brand-text/60">We couldn't find this order. Check My Orders for your past orders.</p>;
+    return <p className="px-6 py-20 text-center text-sm text-brand-text/70">We couldn't find this order. Check My Orders for your past orders.</p>;
   }
 
   const timeline = [...order.statusHistory].reverse();
 
   return (
     <div className="mx-auto max-w-2xl px-6 py-14">
-      <Link to="/account/orders" className="text-sm text-brand-accent hover:underline">
+      <Link to="/account/orders" className="text-sm text-brand-gold hover:underline">
         ← Back to my orders
       </Link>
 
       <h1 className="mt-4 font-heading text-2xl text-brand-text">
         Order #{order.id.slice(0, 8).toUpperCase()}
       </h1>
-      <p className="mt-1 text-sm text-brand-text/60">
+      <p className="mt-1 text-sm text-brand-text/70">
         Placed on {new Date(order.createdAt).toLocaleDateString()}
       </p>
 
@@ -70,7 +70,7 @@ export default function OrderTracking() {
         <ul className="space-y-3">
           {order.items.map((item) => (
             <li key={item.id} className="flex items-center gap-3">
-              <div className="h-14 w-12 shrink-0 overflow-hidden bg-[#e5e1d8]">
+              <div className="h-14 w-12 shrink-0 overflow-hidden bg-brand-muted">
                 {item.product.images?.[0] && (
                   <img
                     src={item.product.images[0]}
@@ -81,7 +81,7 @@ export default function OrderTracking() {
               </div>
               <div className="flex-1">
                 <p className="text-sm text-brand-text">{item.product.name}</p>
-                <p className="text-xs text-brand-text/60">
+                <p className="text-xs text-brand-text/70">
                   Qty {item.quantity}
                   {item.size && ` · Size ${item.size}`}
                 </p>
@@ -94,12 +94,12 @@ export default function OrderTracking() {
           <span>Total</span>
           <span>{formatNaira(order.total)}</span>
         </div>
-        <p className="mt-3 text-xs text-brand-text/60">
+        <p className="mt-3 text-xs text-brand-text/70">
           Delivering to: {order.deliveryAddress}
         </p>
       </div>
 
-      <h2 className="mt-10 text-xs uppercase tracking-[0.1em] text-brand-accent">
+      <h2 className="mt-10 text-xs uppercase tracking-[0.1em] text-brand-gold">
         Tracking Status
       </h2>
       <div className="mt-4 space-y-0">
@@ -113,7 +113,7 @@ export default function OrderTracking() {
               <p className="text-sm font-medium text-brand-text">
                 {entry.note || entry.status}
               </p>
-              <p className="mt-1 text-xs text-brand-text/50">
+              <p className="mt-1 text-xs text-brand-text/70">
                 {new Date(entry.createdAt).toLocaleString()}
               </p>
             </div>

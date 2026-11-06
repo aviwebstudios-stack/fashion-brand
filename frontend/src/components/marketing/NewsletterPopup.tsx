@@ -47,11 +47,11 @@ export default function NewsletterPopup() {
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 px-4" onClick={close}>
-      <div className="relative w-full max-w-md bg-brand-bg p-8" onClick={(e) => e.stopPropagation()}>
+      <div className="relative w-full max-w-md bg-brand-bg dark:ring-1 dark:ring-brand-line p-8" onClick={(e) => e.stopPropagation()}>
         <button
           onClick={close}
           aria-label="Close"
-          className="absolute right-4 top-4 rounded-full p-1 text-brand-text/60 transition hover:bg-black/5 hover:text-brand-text"
+          className="absolute right-4 top-4 rounded-full p-1 text-brand-text/70 transition hover:bg-black/5 dark:hover:bg-white/10 hover:text-brand-text"
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M18 6L6 18M6 6l12 12" />
@@ -77,7 +77,7 @@ export default function NewsletterPopup() {
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
                 placeholder="First name"
-                className="w-full border border-brand-text/20 bg-transparent px-4 py-2.5 text-sm text-brand-text placeholder:text-brand-text/50 focus:border-brand-accent focus:outline-none"
+                className="w-full border border-brand-text/20 bg-transparent px-4 py-2.5 text-sm text-brand-text placeholder:text-brand-text/70 focus:border-brand-accent focus:outline-none"
               />
               <input
                 type="text"
@@ -85,7 +85,7 @@ export default function NewsletterPopup() {
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
                 placeholder="Last name"
-                className="w-full border border-brand-text/20 bg-transparent px-4 py-2.5 text-sm text-brand-text placeholder:text-brand-text/50 focus:border-brand-accent focus:outline-none"
+                className="w-full border border-brand-text/20 bg-transparent px-4 py-2.5 text-sm text-brand-text placeholder:text-brand-text/70 focus:border-brand-accent focus:outline-none"
               />
               <input
                 type="email"
@@ -93,7 +93,7 @@ export default function NewsletterPopup() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Email address"
-                className="w-full border border-brand-text/20 bg-transparent px-4 py-2.5 text-sm text-brand-text placeholder:text-brand-text/50 focus:border-brand-accent focus:outline-none"
+                className="w-full border border-brand-text/20 bg-transparent px-4 py-2.5 text-sm text-brand-text placeholder:text-brand-text/70 focus:border-brand-accent focus:outline-none"
               />
 
               <div className="pt-1">
@@ -117,7 +117,7 @@ export default function NewsletterPopup() {
 
               <button
                 type="submit"
-                className="w-full bg-brand-primary py-3 text-xs font-medium uppercase tracking-[0.15em] text-[#f4f1e8] transition hover:opacity-90"
+                className="w-full bg-brand-primary py-3 text-xs font-medium uppercase tracking-[0.15em] text-brand-cream transition hover:opacity-90"
               >
                 Subscribe
               </button>

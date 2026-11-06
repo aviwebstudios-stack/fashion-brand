@@ -48,7 +48,7 @@ export default function PaymentVerify() {
           </p>
           <Link
             to="/"
-            className="mt-8 inline-block bg-brand-primary px-6 py-3 text-xs font-medium uppercase tracking-[0.15em] text-[#f4f1e8] transition hover:opacity-90"
+            className="mt-8 inline-block bg-brand-primary px-6 py-3 text-xs font-medium uppercase tracking-[0.15em] text-brand-cream transition hover:opacity-90"
           >
             Continue Shopping
           </Link>
@@ -58,8 +58,8 @@ export default function PaymentVerify() {
       {status === "failed" && (
         <>
           <h1 className="font-heading text-2xl text-brand-text">Payment Verification Failed</h1>
-          <p className="mt-3 text-sm text-red-600">{message}</p>
-          <Link to="/" className="mt-8 inline-block text-sm text-brand-accent hover:underline">
+          <p className="mt-3 text-sm text-red-600 dark:text-red-400">{message}</p>
+          <Link to="/" className="mt-8 inline-block text-sm text-brand-gold hover:underline">
             Return to homepage
           </Link>
         </>

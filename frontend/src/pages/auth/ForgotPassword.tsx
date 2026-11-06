@@ -32,7 +32,7 @@ export default function ForgotPassword() {
     >
       <form onSubmit={handleSubmit} className="space-y-4">
         {error && (
-          <p className="border border-red-300 bg-red-50 px-4 py-2.5 text-sm text-red-700">
+          <p className="border border-red-300 dark:border-red-800 bg-red-50 dark:bg-red-950/40 px-4 py-2.5 text-sm text-red-700 dark:text-red-300">
             {error}
           </p>
         )}
@@ -43,20 +43,20 @@ export default function ForgotPassword() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Email address"
-          className="w-full border border-brand-text/20 bg-white px-4 py-3 text-sm text-brand-text placeholder:text-brand-text/50 focus:border-brand-accent focus:outline-none"
+          className="w-full border border-brand-text/20 bg-brand-surface px-4 py-3 text-sm text-brand-text placeholder:text-brand-text/70 focus:border-brand-accent focus:outline-none"
         />
 
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-brand-primary py-3 text-xs font-medium uppercase tracking-[0.15em] text-[#f4f1e8] transition hover:opacity-90 disabled:opacity-60"
+          className="w-full bg-brand-primary py-3 text-xs font-medium uppercase tracking-[0.15em] text-brand-cream transition hover:opacity-90 disabled:opacity-60"
         >
           {loading ? "Sending..." : "Send Reset Code"}
         </button>
       </form>
 
       <p className="mt-6 text-center text-sm text-brand-text/70">
-        <Link to="/login" className="inline-block py-2 text-brand-accent hover:underline">
+        <Link to="/login" className="inline-block py-2 text-brand-gold hover:underline">
           Back to sign in
         </Link>
       </p>

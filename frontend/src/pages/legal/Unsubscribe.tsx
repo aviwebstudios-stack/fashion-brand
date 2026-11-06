@@ -36,12 +36,12 @@ export default function Unsubscribe() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Your email address"
-            className="w-full border border-brand-text/20 bg-white px-4 py-3 text-sm text-brand-text placeholder:text-brand-text/50 focus:border-brand-accent focus:outline-none"
+            className="w-full border border-brand-text/20 bg-brand-surface px-4 py-3 text-sm text-brand-text placeholder:text-brand-text/70 focus:border-brand-accent focus:outline-none"
           />
           <button
             type="submit"
             disabled={sending}
-            className="w-full bg-brand-primary py-3 text-xs font-medium uppercase tracking-[0.15em] text-[#f4f1e8] transition hover:opacity-90 disabled:opacity-60"
+            className="w-full bg-brand-primary py-3 text-xs font-medium uppercase tracking-[0.15em] text-brand-cream transition hover:opacity-90 disabled:opacity-60"
           >
             {sending ? "Unsubscribing..." : "Unsubscribe"}
           </button>

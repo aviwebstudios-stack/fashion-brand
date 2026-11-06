@@ -90,12 +90,12 @@ export default function ProductDetail() {
   };
 
   if (loading) {
-    return <p className="px-6 py-20 text-center text-sm text-brand-text/60">Loading this piece...</p>;
+    return <p className="px-6 py-20 text-center text-sm text-brand-text/70">Loading this piece...</p>;
   }
 
   if (!product) {
     return (
-      <p className="px-6 py-20 text-center text-sm text-brand-text/60">We couldn't find this piece. It may have sold out or been removed.</p>
+      <p className="px-6 py-20 text-center text-sm text-brand-text/70">We couldn't find this piece. It may have sold out or been removed.</p>
     );
   }
 
@@ -103,7 +103,7 @@ export default function ProductDetail() {
     <div>
       <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-6 py-14 md:grid-cols-2">
         <div>
-          <div className="aspect-[3/4] overflow-hidden bg-[#e5e1d8]">
+          <div className="aspect-[3/4] overflow-hidden bg-brand-muted">
             {product.images?.[activeImage] ? (
               <img
                 src={product.images[activeImage]}
@@ -138,7 +138,7 @@ export default function ProductDetail() {
           <p className="mt-6 text-sm leading-relaxed text-brand-text/70">{product.description}</p>
 
           {!product.isAvailable || product.stock === 0 ? (
-            <p className="mt-8 text-sm text-red-600">Currently out of stock.</p>
+            <p className="mt-8 text-sm text-red-600 dark:text-red-400">Currently out of stock.</p>
           ) : (
             <div className="mt-8 space-y-6">
               {product.sizes?.length > 0 && (
@@ -147,7 +147,7 @@ export default function ProductDetail() {
                     <p className="text-xs uppercase tracking-[0.1em] text-brand-text">Size</p>
                     <button
                       onClick={() => setShowSizeGuide(true)}
-                      className="text-xs text-brand-accent underline hover:no-underline"
+                      className="text-xs text-brand-gold underline hover:no-underline"
                     >
                       Size Guide
                     </button>
@@ -159,7 +159,7 @@ export default function ProductDetail() {
                         onClick={() => setSelectedSize(size)}
                         className={`border px-4 py-2 text-sm transition ${
                           selectedSize === size
-                            ? "border-brand-primary bg-brand-primary text-[#f4f1e8]"
+                            ? "border-brand-primary bg-brand-primary text-brand-cream"
                             : "border-brand-text/25 text-brand-text hover:border-brand-text"
                         }`}
                       >
@@ -189,12 +189,12 @@ export default function ProductDetail() {
                 </div>
               </div>
 
-              {error && <p className="text-sm text-red-600">{error}</p>}
+              {error && <p className="text-sm text-red-600 dark:text-red-400">{error}</p>}
 
               <button
                 onClick={handleAddToBag}
                 disabled={adding}
-                className="w-full bg-brand-primary py-3.5 text-xs font-medium uppercase tracking-[0.15em] text-[#f4f1e8] transition hover:opacity-90 disabled:opacity-60"
+                className="w-full bg-brand-primary py-3.5 text-xs font-medium uppercase tracking-[0.15em] text-brand-cream transition hover:opacity-90 disabled:opacity-60"
               >
                 {adding ? "Adding..." : "Add to Bag"}
               </button>
@@ -209,7 +209,7 @@ export default function ProductDetail() {
           <div className="mt-10 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-4">
             {related.map((p) => (
               <Link key={p.id} to={`/product/${p.id}`} className="group block">
-                <div className="aspect-[3/4] overflow-hidden bg-[#e5e1d8]">
+                <div className="aspect-[3/4] overflow-hidden bg-brand-muted">
                   {p.images?.[0] ? (
                     <img
                       src={p.images[0]}

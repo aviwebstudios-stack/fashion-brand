@@ -51,11 +51,11 @@ export default function AdminLogin() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[#2b2b26] px-4">
+    <div className="flex min-h-screen items-center justify-center bg-brand-ink px-4">
       <div className="w-full max-w-sm">
         <div className="text-center">
-          <span className="font-serif text-2xl tracking-[0.1em] text-[#f4f1e8]">FAVY</span>
-          <span className="ml-1 text-sm tracking-[0.3em] text-[#c9a227]">ADMIN</span>
+          <span className="font-serif text-2xl tracking-[0.1em] text-brand-cream">FAVY</span>
+          <span className="ml-1 text-sm tracking-[0.3em] text-brand-gold">ADMIN</span>
         </div>
 
         <form onSubmit={handleSubmit} className="mt-8 space-y-4">
@@ -71,7 +71,7 @@ export default function AdminLogin() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email address"
-            className="w-full border border-[#f4f1e8]/20 bg-transparent px-4 py-3 text-sm text-[#f4f1e8] placeholder:text-[#f4f1e8]/40 focus:border-[#c9a227] focus:outline-none"
+            className="w-full border border-brand-cream/20 bg-transparent px-4 py-3 text-sm text-brand-cream placeholder:text-brand-cream/75 focus:border-brand-accent focus:outline-none"
           />
 
           <PasswordInput
@@ -80,13 +80,13 @@ export default function AdminLogin() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
-            className="w-full border border-[#f4f1e8]/20 bg-transparent px-4 py-3 text-sm text-[#f4f1e8] placeholder:text-[#f4f1e8]/40 focus:border-[#c9a227] focus:outline-none"
+            className="w-full border border-brand-cream/20 bg-transparent px-4 py-3 text-sm text-brand-cream placeholder:text-brand-cream/75 focus:border-brand-accent focus:outline-none"
           />
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-[#c9a227] py-3 text-xs font-medium uppercase tracking-[0.15em] text-[#2b2b26] transition hover:bg-[#c9a227]/90 disabled:opacity-60"
+            className="w-full bg-brand-accent py-3 text-xs font-medium uppercase tracking-[0.15em] text-brand-ink transition hover:bg-brand-accent/90 disabled:opacity-60"
           >
             {loading ? "Signing in..." : "Sign In"}
           </button>
