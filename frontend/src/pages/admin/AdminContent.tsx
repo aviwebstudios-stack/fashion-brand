@@ -15,6 +15,7 @@ interface FieldGroup {
 
 interface MediaFieldConfig {
   key: string;
+  file: string;
   label: string;
   type: "image" | "video";
   fallback: string;
@@ -164,29 +165,29 @@ const FIELD_GROUPS: FieldGroup[] = [
 ];
 
 const MEDIA_FIELDS: MediaFieldConfig[] = [
-  { key: "home.hero.video", label: "Home hero background video", type: "video", fallback: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" },
-  { key: "home.banner.rtw.image", label: "Home — Ready-to-Wear banner image", type: "image", fallback: "https://picsum.photos/seed/home-rtw/1200/1200" },
-  { key: "home.banner.bridals.image", label: "Home — Bridals banner image", type: "image", fallback: "https://picsum.photos/seed/home-bridals/1200/1200" },
-  { key: "home.banner.bespoke.image", label: "Home — Bespoke banner image", type: "image", fallback: "https://picsum.photos/seed/home-bespoke/1200/1200" },
-  { key: "home.banner.sales.image", label: "Home — Sales banner image", type: "image", fallback: "https://picsum.photos/seed/home-sales/1200/1200" },
-  { key: "consultations.hero.womanImage", label: "Consultations — Favy Woman photo", type: "image", fallback: "https://picsum.photos/seed/favy-woman/600/800" },
-  { key: "consultations.hero.brideImage", label: "Consultations — Favy Bride photo", type: "image", fallback: "https://picsum.photos/seed/favy-bride/600/800" },
-  { key: "consultations.bride.tallImage", label: "Consultations — Bride definition photo", type: "image", fallback: "https://picsum.photos/seed/favy-bride-tall/700/1100" },
-  { key: "consultations.bridal.video", label: "Consultations — Bridal video", type: "video", fallback: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" },
-  { key: "consultations.gallery.image1", label: "Consultations — Real Brides gallery photo 1", type: "image", fallback: "https://picsum.photos/seed/real-bride-1/500/600" },
-  { key: "consultations.gallery.image2", label: "Consultations — Real Brides gallery photo 2", type: "image", fallback: "https://picsum.photos/seed/real-bride-2/500/600" },
-  { key: "consultations.gallery.image3", label: "Consultations — Real Brides gallery photo 3", type: "image", fallback: "https://picsum.photos/seed/real-bride-3/500/600" },
-  { key: "consultations.gallery.image4", label: "Consultations — Real Brides gallery photo 4", type: "image", fallback: "https://picsum.photos/seed/real-bride-4/500/600" },
-  { key: "academy.hero.video", label: "Academy — Hero background video", type: "video", fallback: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4" },
-  { key: "academy.program1.image", label: "Academy — Program 1 photo", type: "image", fallback: "https://picsum.photos/seed/academy-degree-1/500/400" },
-  { key: "academy.program2.image", label: "Academy — Program 2 photo", type: "image", fallback: "https://picsum.photos/seed/academy-degree-2/500/400" },
-  { key: "academy.program3.image", label: "Academy — Program 3 photo", type: "image", fallback: "https://picsum.photos/seed/academy-pattern/500/400" },
-  { key: "academy.program4.image", label: "Academy — Program 4 photo", type: "image", fallback: "https://picsum.photos/seed/academy-bridal/500/400" },
-  { key: "academy.program5.image", label: "Academy — Program 5 photo", type: "image", fallback: "https://picsum.photos/seed/academy-business/500/400" },
-  { key: "academy.showcase.image1", label: "Academy — Showcase photo 1 (lookbook)", type: "image", fallback: "https://picsum.photos/seed/academy-show-1/500/650" },
-  { key: "academy.showcase.image2", label: "Academy — Showcase photo 2 (sketch/concept)", type: "image", fallback: "https://picsum.photos/seed/academy-show-2/500/650" },
-  { key: "academy.showcase.image3", label: "Academy — Showcase photo 3 (final look)", type: "image", fallback: "https://picsum.photos/seed/academy-show-3/500/650" },
-  { key: "academy.facilities.image", label: "Academy — Facilities/lab photo", type: "image", fallback: "https://picsum.photos/seed/academy-lab/700/600" },
+  { key: "home.hero.video", file: "home-hero", label: "Home hero background video", type: "video", fallback: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" },
+  { key: "home.banner.rtw.image", file: "home-ready-to-wear", label: "Home — Ready-to-Wear banner image", type: "image", fallback: "https://picsum.photos/seed/home-rtw/1200/1200" },
+  { key: "home.banner.bridals.image", file: "home-bridals", label: "Home — Bridals banner image", type: "image", fallback: "https://picsum.photos/seed/home-bridals/1200/1200" },
+  { key: "home.banner.bespoke.image", file: "home-bespoke", label: "Home — Bespoke banner image", type: "image", fallback: "https://picsum.photos/seed/home-bespoke/1200/1200" },
+  { key: "home.banner.sales.image", file: "home-sales", label: "Home — Sales banner image", type: "image", fallback: "https://picsum.photos/seed/home-sales/1200/1200" },
+  { key: "consultations.hero.womanImage", file: "consultations-favy-woman", label: "Consultations — Favy Woman photo", type: "image", fallback: "https://picsum.photos/seed/favy-woman/600/800" },
+  { key: "consultations.hero.brideImage", file: "consultations-favy-bride", label: "Consultations — Favy Bride photo", type: "image", fallback: "https://picsum.photos/seed/favy-bride/600/800" },
+  { key: "consultations.bride.tallImage", file: "consultations-bride-definition", label: "Consultations — Bride definition photo", type: "image", fallback: "https://picsum.photos/seed/favy-bride-tall/700/1100" },
+  { key: "consultations.bridal.video", file: "consultations-bridal-video", label: "Consultations — Bridal video", type: "video", fallback: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" },
+  { key: "consultations.gallery.image1", file: "consultations-real-brides-1", label: "Consultations — Real Brides gallery photo 1", type: "image", fallback: "https://picsum.photos/seed/real-bride-1/500/600" },
+  { key: "consultations.gallery.image2", file: "consultations-real-brides-2", label: "Consultations — Real Brides gallery photo 2", type: "image", fallback: "https://picsum.photos/seed/real-bride-2/500/600" },
+  { key: "consultations.gallery.image3", file: "consultations-real-brides-3", label: "Consultations — Real Brides gallery photo 3", type: "image", fallback: "https://picsum.photos/seed/real-bride-3/500/600" },
+  { key: "consultations.gallery.image4", file: "consultations-real-brides-4", label: "Consultations — Real Brides gallery photo 4", type: "image", fallback: "https://picsum.photos/seed/real-bride-4/500/600" },
+  { key: "academy.hero.video", file: "academy-hero", label: "Academy — Hero background video", type: "video", fallback: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4" },
+  { key: "academy.program1.image", file: "academy-program-1", label: "Academy — Program 1 photo", type: "image", fallback: "https://picsum.photos/seed/academy-degree-1/500/400" },
+  { key: "academy.program2.image", file: "academy-program-2", label: "Academy — Program 2 photo", type: "image", fallback: "https://picsum.photos/seed/academy-degree-2/500/400" },
+  { key: "academy.program3.image", file: "academy-program-3", label: "Academy — Program 3 photo", type: "image", fallback: "https://picsum.photos/seed/academy-pattern/500/400" },
+  { key: "academy.program4.image", file: "academy-program-4", label: "Academy — Program 4 photo", type: "image", fallback: "https://picsum.photos/seed/academy-bridal/500/400" },
+  { key: "academy.program5.image", file: "academy-program-5", label: "Academy — Program 5 photo", type: "image", fallback: "https://picsum.photos/seed/academy-business/500/400" },
+  { key: "academy.showcase.image1", file: "academy-showcase-1-lookbook", label: "Academy — Showcase photo 1 (lookbook)", type: "image", fallback: "https://picsum.photos/seed/academy-show-1/500/650" },
+  { key: "academy.showcase.image2", file: "academy-showcase-2-concept", label: "Academy — Showcase photo 2 (sketch/concept)", type: "image", fallback: "https://picsum.photos/seed/academy-show-2/500/650" },
+  { key: "academy.showcase.image3", file: "academy-showcase-3-final-look", label: "Academy — Showcase photo 3 (final look)", type: "image", fallback: "https://picsum.photos/seed/academy-show-3/500/650" },
+  { key: "academy.facilities.image", file: "academy-facilities", label: "Academy — Facilities/lab photo", type: "image", fallback: "https://picsum.photos/seed/academy-lab/700/600" },
 ];
 
 export default function AdminContent() {
@@ -196,6 +197,7 @@ export default function AdminContent() {
   const [saved, setSaved] = useState(false);
   const [uploadingKey, setUploadingKey] = useState<string | null>(null);
   const [uploadError, setUploadError] = useState("");
+  const [downloadingKey, setDownloadingKey] = useState<string | null>(null);
 
   useEffect(() => {
     adminApi
@@ -251,6 +253,27 @@ export default function AdminContent() {
       setUploadError(err.response?.data?.message || "Could not upload media. Please try again.");
     } finally {
       setUploadingKey(null);
+    }
+  };
+
+  const handleMediaDownload = async (field: MediaFieldConfig) => {
+    const url = values[field.key];
+    if (!url) return;
+    const ext = url.split("?")[0].match(/\.([a-z0-9]+)$/i)?.[1] ?? (field.type === "video" ? "mp4" : "jpg");
+    setDownloadingKey(field.key);
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error();
+      const blobUrl = URL.createObjectURL(await res.blob());
+      const a = document.createElement("a");
+      a.href = blobUrl;
+      a.download = `${field.file}.${ext}`;
+      a.click();
+      URL.revokeObjectURL(blobUrl);
+    } catch {
+      window.open(url, "_blank", "noopener");
+    } finally {
+      setDownloadingKey(null);
     }
   };
 
@@ -325,7 +348,17 @@ export default function AdminContent() {
                   )}
                 </div>
                 <div className="flex-1">
-                  <p className="text-sm text-[#2b2b26]">{field.label}</p>
+                  <div className="flex items-baseline justify-between gap-3">
+                    <p className="text-sm text-[#2b2b26]">{field.label}</p>
+                    <button
+                      type="button"
+                      onClick={() => handleMediaDownload(field)}
+                      disabled={!values[field.key] || downloadingKey === field.key}
+                      className="shrink-0 text-xs text-[#c9a227] underline underline-offset-2 hover:text-[#2b2b26] disabled:opacity-60"
+                    >
+                      {downloadingKey === field.key ? "Downloading..." : "Download"}
+                    </button>
+                  </div>
                   <input
                     type="file"
                     accept={field.type === "video" ? "video/*" : "image/*"}
