@@ -22,10 +22,18 @@ dotenv.config();
 
 const app = express();
 
-app.use(helmet());
+const allowedOrigins = (process.env.CLIENT_URL || 'http://localhost:5173')
+  .split(',')
+  .map((url) => url.trim().replace(/\/$/, ''))
+  .filter(Boolean);
+
+app.use(helmet({
+  crossOriginResourcePolicy: { policy: 'cross-origin' },
+}));
+
 app.use(cors({
-  origin: process.env.CLIENT_URL.split(",").map(url => url.trim()),
-  credentials: true
+  origin: allowedOrigins,
+  credentials: true,
 }));
 
 app.use(morgan('dev'));
