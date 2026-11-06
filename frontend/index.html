@@ -3,6 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      // Set the colour theme before the app renders, so there's no flash.
+      (function () {
+        var mode;
+        try { mode = localStorage.getItem("fb_theme"); } catch (e) {}
+        if (mode !== "light" && mode !== "dark") {
+          mode = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        }
+        document.documentElement.dataset.theme = mode;
+      })();
+    </script>
     <title>Favy Atelier | Bridal, bespoke and ready-to-wear in Nigeria</title>
     <meta name="description" content="Favy Atelier makes bridal gowns, bespoke pieces and ready-to-wear in Nigeria. Shop online or book a consultation." />
     <meta name="theme-color" content="#3d4636" />
@@ -25,7 +36,7 @@
     <meta name="twitter:image" content="https://fashion-brand-liard.vercel.app/og-image.jpg" />
 
     <link rel="preload" as="image" href="/media-originals/posters/home-hero.jpg" />
-    <style>html, body { height: 100%; margin: 0; } #root { height: 100%; }</style>
+    <style>html, body { height: 100%; margin: 0; } #root { height: 100%; } html { background: #faf8f3; color-scheme: light; } html[data-theme="dark"] { background: #1a1814; color-scheme: dark; }</style>
   </head>
   <body>
     <div id="root"></div>

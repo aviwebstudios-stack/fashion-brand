@@ -4,6 +4,7 @@ import { Search, ShoppingBag, User, Menu, X } from "lucide-react";
 import { useAuthStore } from "../../store/authStore";
 import { usePanelStore } from "../../store/panelStore";
 import AnnouncementBar from "./AnnouncementBar";
+import ThemeToggle from "../theme/ThemeToggle";
 
 const NAV_LINKS = [
   { label: "Ready-to-Wear", to: "/shop/rtw" },
@@ -41,7 +42,7 @@ export default function Navbar() {
     <header ref={headerRef} className="fixed inset-x-0 top-0 z-50">
       <AnnouncementBar />
 
-      <div className="border-b border-[#e5e1d8] bg-brand-bg">
+      <div className="border-b border-brand-line bg-brand-bg">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2">
           <button
             onClick={() => setIsMobileMenuOpen((v) => !v)}
@@ -56,20 +57,21 @@ export default function Navbar() {
             <span className="block font-heading text-lg tracking-[0.15em] text-brand-text">
               FAVY
             </span>
-            <span className="block font-heading text-[11px] tracking-[0.3em] text-brand-accent">
+            <span className="block font-heading text-[11px] tracking-[0.3em] text-brand-gold">
               ATELIER
             </span>
           </Link>
 
           <div className="-mr-3 flex items-center">
-            <button onClick={toggleSearch} aria-label="Search" className="flex h-11 w-11 items-center justify-center text-brand-text transition hover:text-brand-accent">
+            <ThemeToggle className="hidden h-11 w-11 items-center justify-center text-brand-text transition hover:text-brand-gold md:flex" />
+            <button onClick={toggleSearch} aria-label="Search" className="flex h-11 w-11 items-center justify-center text-brand-text transition hover:text-brand-gold">
               <Search size={18} />
             </button>
 
             <button
               onClick={toggleCart}
               aria-label="Open bag"
-              className="relative flex h-11 w-11 items-center justify-center text-brand-text transition hover:text-brand-accent"
+              className="relative flex h-11 w-11 items-center justify-center text-brand-text transition hover:text-brand-gold"
             >
               <ShoppingBag size={18} />
               {cartCount > 0 && (
@@ -83,19 +85,19 @@ export default function Navbar() {
               <button
                 onClick={toggleDashboard}
                 aria-label="Account"
-                className="flex h-11 w-11 items-center justify-center text-brand-text transition hover:text-brand-accent"
+                className="flex h-11 w-11 items-center justify-center text-brand-text transition hover:text-brand-gold"
               >
                 <User size={18} />
               </button>
             ) : (
-              <Link to="/login" aria-label="Sign in" className="flex h-11 w-11 items-center justify-center text-brand-text transition hover:text-brand-accent">
+              <Link to="/login" aria-label="Sign in" className="flex h-11 w-11 items-center justify-center text-brand-text transition hover:text-brand-gold">
                 <User size={18} />
               </Link>
             )}
           </div>
         </div>
 
-        <nav className="hidden justify-center border-t border-[#e5e1d8] md:flex">
+        <nav className="hidden justify-center border-t border-brand-line md:flex">
           <ul className="flex items-center gap-12 py-2.5">
             {NAV_LINKS.map((link) => (
               <li key={link.to}>
@@ -124,7 +126,7 @@ export default function Navbar() {
         </nav>
 
         {isMobileMenuOpen && (
-          <nav className="border-t border-[#e5e1d8] md:hidden">
+          <nav className="border-t border-brand-line md:hidden">
             <ul className="flex flex-col px-6 py-2">
               {NAV_LINKS.map((link) => (
                 <li key={link.to}>
@@ -141,6 +143,12 @@ export default function Navbar() {
                   </NavLink>
                 </li>
               ))}
+              <li className="border-t border-brand-line pt-1">
+                <ThemeToggle
+                  withLabel
+                  className="flex w-full items-center gap-3 py-3 text-sm uppercase tracking-[0.08em] text-brand-text/80"
+                />
+              </li>
             </ul>
           </nav>
         )}

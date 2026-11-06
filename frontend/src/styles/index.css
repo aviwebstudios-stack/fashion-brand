@@ -1,22 +1,99 @@
 @import "tailwindcss";
 
+/* `dark:` utilities follow the data-theme attribute set in index.html. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/*
+  Colour tokens.
+  The admin Theme page sets --theme-primary, --theme-accent, --theme-bg and
+  --theme-text (see lib/applyTheme.ts). Primary and accent are used in both
+  modes. Background and text are the light-mode values; dark mode has its own.
+*/
 @theme {
-  --color-brand-primary: #3d4636;
-  --color-brand-accent: #c9a227;
-  --color-brand-bg: #faf8f3;
-  --color-brand-text: #2b2b26;
+  --color-brand-primary: var(--theme-primary, #3d4636);
+  --color-brand-accent: var(--theme-accent, #c9a227);
+  --color-brand-bg: var(--theme-bg, #faf8f3);
+  --color-brand-text: var(--theme-text, #2b2b26);
+  /* Cards, inputs, modals, panels. */
+  --color-brand-surface: #ffffff;
+  /* Empty image frames and quiet fills. */
+  --color-brand-muted: #e5e1d8;
+  --color-brand-line: #e5e1d8;
+  /* Fixed colours that never flip: text on gold, overlays, cream on olive. */
+  --color-brand-ink: #2b2b26;
+  --color-brand-cream: #f4f1e8;
+
   --font-heading: "Playfair Display", serif;
   --font-body: "Inter", system-ui, sans-serif;
 }
 
+/* Gold for text. `inline` makes the utility read --gold-ink on the element
+   itself, so the surface overrides below take effect. */
+@theme inline {
+  --color-brand-gold: var(--gold-ink);
+}
+
+:root {
+  color-scheme: light;
+  --gold-ink: color-mix(in srgb, var(--color-brand-accent) 62%, #000);
+  --chart-bar: var(--color-brand-primary);
+}
+
+/* Dark palette: warm charcoal, off-white text, the same gold. */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-brand-bg: #1a1814;
+  --color-brand-surface: #24211c;
+  --color-brand-muted: #2f2b25;
+  --color-brand-line: #38332c;
+  --color-brand-text: #efe9de;
+  --gold-ink: var(--color-brand-accent);
+  --chart-bar: var(--color-brand-accent);
+}
+
+/* On olive, charcoal and black surfaces, gold text lifts slightly toward
+   cream so small labels stay above 4.5:1 in both modes. */
+.bg-brand-primary,
+.bg-brand-ink,
+.bg-black,
+.surface-dark {
+  --gold-ink: color-mix(in srgb, var(--color-brand-accent) 80%, var(--color-brand-cream));
+}
+
+/* Light surfaces nested inside dark ones go back to the page value. */
+.bg-brand-bg,
+.bg-brand-surface {
+  --gold-ink: color-mix(in srgb, var(--color-brand-accent) 62%, #000);
+}
+
+:root[data-theme="dark"] .bg-brand-bg,
+:root[data-theme="dark"] .bg-brand-surface {
+  --gold-ink: var(--color-brand-accent);
+}
+
 html {
   overflow-x: clip;
+  background-color: var(--color-brand-bg);
 }
 
 body {
   margin: 0;
   font-family: var(--font-body);
   overflow-x: clip;
+  background-color: var(--color-brand-bg);
+  color: var(--color-brand-text);
+}
+
+/* Short colour fade while the theme is switched. Added and removed by
+   lib/themeMode.ts, and never added for prefers-reduced-motion. */
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition-property: background-color, border-color, color, fill, stroke !important;
+  transition-duration: 200ms !important;
+  transition-timing-function: ease !important;
+  transition-delay: 0ms !important;
 }
 
 /* On-scroll reveal: sections stay put, their content fades up once.

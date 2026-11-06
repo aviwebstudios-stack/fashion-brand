@@ -18,14 +18,19 @@ export interface ThemeData {
   fonts?: { heading?: string; body?: string };
 }
 
+/**
+ * Admin colours go into --theme-* variables. index.css maps them onto the
+ * --color-brand-* tokens: primary and accent in both modes, background and
+ * text in light mode only (dark mode uses its own palette).
+ */
 export function applyTheme(theme: ThemeData) {
   const root = document.documentElement;
 
   if (theme.colors) {
-    if (theme.colors.primary) root.style.setProperty("--color-brand-primary", theme.colors.primary);
-    if (theme.colors.accent) root.style.setProperty("--color-brand-accent", theme.colors.accent);
-    if (theme.colors.background) root.style.setProperty("--color-brand-bg", theme.colors.background);
-    if (theme.colors.text) root.style.setProperty("--color-brand-text", theme.colors.text);
+    if (theme.colors.primary) root.style.setProperty("--theme-primary", theme.colors.primary);
+    if (theme.colors.accent) root.style.setProperty("--theme-accent", theme.colors.accent);
+    if (theme.colors.background) root.style.setProperty("--theme-bg", theme.colors.background);
+    if (theme.colors.text) root.style.setProperty("--theme-text", theme.colors.text);
   }
 
   if (theme.fonts) {
