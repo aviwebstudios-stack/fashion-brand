@@ -9,7 +9,46 @@
   --font-body: "Inter", system-ui, sans-serif;
 }
 
+html {
+  overflow-x: clip;
+}
+
 body {
   margin: 0;
   font-family: var(--font-body);
+  overflow-x: clip;
+}
+
+/* On-scroll reveal: sections stay put, their content fades up once.
+   Uses an animation with backwards fill (not a transition) so hover
+   transitions on the same elements keep their own timing afterwards. */
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+  }
+}
+
+@keyframes reveal-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal]:not([data-revealed]) :is(.reveal-item, .reveal-fade) {
+    opacity: 0;
+  }
+
+  [data-reveal][data-revealed] .reveal-item {
+    animation: reveal-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms) backwards;
+  }
+
+  [data-reveal][data-revealed] .reveal-fade {
+    animation: reveal-fade 0.7s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  }
+
+  .media-swap {
+    transition: opacity 0.6s ease;
+  }
 }

@@ -1,14 +1,21 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 
 interface RevealProps {
   children: ReactNode;
-  delay?: number;
   className?: string;
+  as?: "div" | "section";
 }
 
-export default function Reveal({ children, delay = 0, className = "" }: RevealProps) {
+const STAGGER_MS = 70;
+const MAX_STAGGER_STEPS = 6;
+
+/**
+ * The wrapper itself never moves. When it scrolls into view, every
+ * `.reveal-item` inside it fades up once, staggered in document order.
+ * Motion is defined in index.css and is skipped for prefers-reduced-motion.
+ */
+export default function Reveal({ children, className = "", as: Tag = "div" }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
@@ -16,12 +23,14 @@ export default function Reveal({ children, delay = 0, className = "" }: RevealPr
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
+        if (!entry.isIntersecting) return;
+        el.querySelectorAll<HTMLElement>(".reveal-item").forEach((item, i) => {
+          item.style.setProperty("--reveal-delay", `${Math.min(i, MAX_STAGGER_STEPS) * STAGGER_MS}ms`);
+        });
+        el.dataset.revealed = "true";
+        observer.disconnect();
       },
-      { threshold: 0.15 }
+      { threshold: 0.15, rootMargin: "0px 0px -8% 0px" }
     );
 
     observer.observe(el);
@@ -29,14 +38,8 @@ export default function Reveal({ children, delay = 0, className = "" }: RevealPr
   }, []);
 
   return (
-    <div
-      ref={ref}
-      className={`transition-all duration-700 ease-out ${
-        visible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-      } ${className}`}
-      style={{ transitionDelay: `${delay}ms` }}
-    >
+    <Tag ref={ref} data-reveal="" className={className}>
       {children}
-    </div>
+    </Tag>
   );
 }

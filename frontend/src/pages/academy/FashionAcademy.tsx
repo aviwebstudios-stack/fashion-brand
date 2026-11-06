@@ -1,16 +1,23 @@
 import { useState, type FormEvent } from "react";
+import { Link } from "react-router-dom";
 import api from "../../lib/api";
 import { useContent } from "../../lib/useContent";
 import Reveal from "../../components/common/Reveal";
+import { ContentImage, ContentVideo } from "../../components/content/ContentMedia";
+import { usePageMeta } from "../../lib/usePageMeta";
 
 const WHATSAPP_NUMBER = "2348000000000";
 
 export default function FashionAcademy() {
+  usePageMeta({
+    title: "Fashion Academy",
+    description: "Fashion design degrees and short courses at the Favy Atelier academy: pattern cutting, bridal couture and fashion business. See programs and fees.",
+  });
+
   const heroTitle = useContent("academy.hero.title", "Design Your Future in Fashion");
   const heroSubtitle = useContent("academy.hero.subtitle", "Learn from industry masters. Build your collection.");
-  const heroCta1 = useContent("academy.hero.cta1", "Explore Programs");
+  const heroCta1 = useContent("academy.hero.cta1", "View Programs");
   const heroCta2 = useContent("academy.hero.cta2", "Book a Tour");
-  const heroVideo = useContent("academy.hero.video", "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4");
 
   const stat1Number = useContent("academy.stats.stat1.number", "94%");
   const stat1Label = useContent("academy.stats.stat1.label", "Employment Rate");
@@ -25,7 +32,8 @@ export default function FashionAcademy() {
     price: useContent("academy.program1.price", "₦2,800,000"),
     description: useContent("academy.program1.description", "A comprehensive degree covering design theory, garment construction, and portfolio development."),
     category: useContent("academy.program1.category", "degree"),
-    image: useContent("academy.program1.image", "https://picsum.photos/seed/academy-degree-1/500/400"),
+    imageKey: "academy.program1.image",
+    file: "academy-program-1.webp",
   };
   const program2 = {
     name: useContent("academy.program2.name", "Fashion Marketing & Brand"),
@@ -33,7 +41,8 @@ export default function FashionAcademy() {
     price: useContent("academy.program2.price", "₦1,900,000"),
     description: useContent("academy.program2.description", "Learn branding, retail strategy, and the business of building a fashion label."),
     category: useContent("academy.program2.category", "degree"),
-    image: useContent("academy.program2.image", "https://picsum.photos/seed/academy-degree-2/500/400"),
+    imageKey: "academy.program2.image",
+    file: "academy-program-2.webp",
   };
   const program3 = {
     name: useContent("academy.program3.name", "Pattern Cutting & Garment Construction"),
@@ -41,7 +50,8 @@ export default function FashionAcademy() {
     price: useContent("academy.program3.price", "₦280,000"),
     description: useContent("academy.program3.description", "Master pattern drafting, fabric behavior, and precision construction from sketch to finished piece."),
     category: useContent("academy.program3.category", "short"),
-    image: useContent("academy.program3.image", "https://picsum.photos/seed/academy-pattern/500/400"),
+    imageKey: "academy.program3.image",
+    file: "academy-program-3.webp",
   };
   const program4 = {
     name: useContent("academy.program4.name", "Bridal Couture Techniques"),
@@ -49,29 +59,27 @@ export default function FashionAcademy() {
     price: useContent("academy.program4.price", "₦350,000"),
     description: useContent("academy.program4.description", "A hands-on deep dive into corsetry, beading, and structured bridal silhouettes."),
     category: useContent("academy.program4.category", "short"),
-    image: useContent("academy.program4.image", "https://picsum.photos/seed/academy-bridal/500/400"),
+    imageKey: "academy.program4.image",
+    file: "academy-program-4.webp",
   };
   const program5 = {
     name: useContent("academy.program5.name", "Fashion Business & Entrepreneurship"),
     duration: useContent("academy.program5.duration", "4 weeks"),
     price: useContent("academy.program5.price", "₦150,000"),
-    description: useContent("academy.program5.description", "Build the business behind the brand — pricing, sourcing, and scaling a label in Nigeria."),
+    description: useContent("academy.program5.description", "Build the business behind the brand: pricing, sourcing and growing a label in Nigeria."),
     category: useContent("academy.program5.category", "short"),
-    image: useContent("academy.program5.image", "https://picsum.photos/seed/academy-business/500/400"),
+    imageKey: "academy.program5.image",
+    file: "academy-program-5.webp",
   };
   const PROGRAMS = [program1, program2, program3, program4, program5];
 
   const showcaseTitle = useContent("academy.showcase.title", "Student Showcase");
-  const showcaseImage1 = useContent("academy.showcase.image1", "https://picsum.photos/seed/academy-show-1/500/650");
   const showcaseCaption1 = useContent("academy.showcase.caption1", "Collection 2026");
-  const showcaseImage2 = useContent("academy.showcase.image2", "https://picsum.photos/seed/academy-show-2/500/650");
   const showcaseCaption2 = useContent("academy.showcase.caption2", "Concept Phase");
-  const showcaseImage3 = useContent("academy.showcase.image3", "https://picsum.photos/seed/academy-show-3/500/650");
   const showcaseCaption3 = useContent("academy.showcase.caption3", "Final Runway Look");
 
   const facilitiesTitle = useContent("academy.facilities.title", "Campus & Facilities");
   const facilitiesIntro = useContent("academy.facilities.intro", "Industry-standard tools from day one.");
-  const facilitiesImage = useContent("academy.facilities.image", "https://picsum.photos/seed/academy-lab/700/600");
   const facilitiesPoint1 = useContent("academy.facilities.point1", "Mac Labs with CLO 3D software");
   const facilitiesPoint2 = useContent("academy.facilities.point2", "Industrial sewing & pattern tables");
   const facilitiesPoint3 = useContent("academy.facilities.point3", "Fully equipped fabric library");
@@ -80,7 +88,7 @@ export default function FashionAcademy() {
   const admissionsStep1 = useContent("academy.admissions.step1", "Choose Program");
   const admissionsStep2 = useContent("academy.admissions.step2", "Submit Portfolio");
   const admissionsStep3 = useContent("academy.admissions.step3", "Interview");
-  const admissionsCta = useContent("academy.admissions.cta", "Download Admissions Guide");
+  const admissionsCta = useContent("academy.admissions.cta", "Request the Admissions Guide");
 
   const testimonialQuote = useContent("academy.testimonial.quote", "The mentorship here helped me launch my label right away.");
   const testimonialAuthor = useContent("academy.testimonial.author", "Sarah J., Class of '25");
@@ -115,22 +123,22 @@ export default function FashionAcademy() {
 
   return (
     <div>
-      <div className="relative flex h-[85vh] w-full items-center justify-center overflow-hidden bg-black text-center">
-        <video src={heroVideo} autoPlay loop muted playsInline className="absolute inset-0 h-full w-full object-cover opacity-60" />
+      <Reveal className="relative flex h-[85svh] w-full items-center justify-center overflow-hidden bg-black text-center">
+        <ContentVideo contentKey="academy.hero.video" file="academy-hero" className="absolute inset-0 opacity-60" />
         <div className="absolute inset-0 bg-black/40" />
         <div className="relative z-10 px-6">
-          <h1 className="font-heading text-3xl text-white sm:text-5xl">{heroTitle}</h1>
-          <p className="mt-4 text-sm text-white/85 sm:text-base">{heroSubtitle}</p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+          <h1 className="reveal-item font-heading text-3xl text-white sm:text-5xl">{heroTitle}</h1>
+          <p className="reveal-item mt-4 text-sm text-white/85 sm:text-base">{heroSubtitle}</p>
+          <div className="reveal-item mt-8 flex flex-wrap items-center justify-center gap-4">
             <a href="#programs" className="bg-brand-accent px-6 py-3 text-xs font-medium uppercase tracking-[0.15em] text-brand-text transition hover:opacity-90">
               {heroCta1}
             </a>
-            <a href="/contact" className="border border-white px-6 py-3 text-xs font-medium uppercase tracking-[0.15em] text-white transition hover:bg-white hover:text-brand-text">
+            <Link to="/contact" className="border border-white px-6 py-3 text-xs font-medium uppercase tracking-[0.15em] text-white transition hover:bg-white hover:text-brand-text">
               {heroCta2}
-            </a>
+            </Link>
           </div>
         </div>
-      </div>
+      </Reveal>
 
       <div className="bg-brand-primary py-8">
         <div className="mx-auto grid max-w-4xl grid-cols-3 gap-6 px-6 text-center">
@@ -143,16 +151,15 @@ export default function FashionAcademy() {
         </div>
       </div>
 
-      <div id="programs" className="mx-auto max-w-6xl px-6 py-16">
-        <Reveal>
-          <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-            <h2 className="font-heading text-2xl text-brand-text">Our Programs</h2>
-            <div className="flex gap-2">
+      <Reveal as="section" className="mx-auto max-w-6xl px-6 py-16">
+        <div id="programs" className="scroll-mt-20 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
+            <h2 className="reveal-item font-heading text-2xl text-brand-text">Our Programs</h2>
+            <div className="reveal-item flex flex-wrap gap-2">
               {(["all", "degree", "short"] as const).map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setCategoryFilter(cat)}
-                  className={`border px-4 py-2 text-xs uppercase tracking-[0.08em] transition ${
+                  className={`min-h-11 border px-4 py-2 text-xs uppercase tracking-[0.08em] transition ${
                     categoryFilter === cat ? "border-brand-primary bg-brand-primary text-[#f4f1e8]" : "border-brand-text/20 text-brand-text"
                   }`}
                 >
@@ -160,68 +167,59 @@ export default function FashionAcademy() {
                 </button>
               ))}
             </div>
-          </div>
-        </Reveal>
+        </div>
 
         <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {filteredPrograms.map((program, i) => (
-            <Reveal key={program.name} delay={i * 80}>
-              <div className="border border-brand-text/10">
-                <div className="aspect-[4/3] overflow-hidden bg-[#e5e1d8]">
-                  <img src={program.image} alt={program.name} className="h-full w-full object-cover" />
-                </div>
+          {filteredPrograms.map((program) => (
+              <div key={program.name} className="reveal-item border border-brand-text/10">
+                <ContentImage contentKey={program.imageKey} file={program.file} alt={program.name} className="aspect-[4/3] bg-[#e5e1d8]" />
                 <div className="p-5">
                   <h3 className="font-heading text-lg text-brand-text">{program.name}</h3>
                   <p className="mt-1 text-xs text-brand-text/60">{program.duration}</p>
                   <p className="mt-3 text-sm leading-relaxed text-brand-text/70">{program.description}</p>
                   <button
                     onClick={() => { setSelectedProgram(program.name); setSubmitted(false); }}
-                    className="mt-4 w-full bg-brand-primary py-2.5 text-xs font-medium uppercase tracking-[0.15em] text-[#f4f1e8] transition hover:opacity-90"
+                    className="mt-4 min-h-11 w-full bg-brand-primary py-3 text-xs font-medium uppercase tracking-[0.15em] text-[#f4f1e8] transition hover:opacity-90"
                   >
-                    Learn More
+                    Ask About This Program
                   </button>
                 </div>
               </div>
-            </Reveal>
           ))}
         </div>
-      </div>
+      </Reveal>
 
-      <div className="bg-brand-bg py-16">
+      <Reveal className="bg-brand-bg py-16">
         <div className="mx-auto max-w-6xl px-6">
-          <Reveal>
-            <h2 className="font-heading text-2xl text-brand-text">{showcaseTitle}</h2>
-          </Reveal>
+          <h2 className="reveal-item font-heading text-2xl text-brand-text">{showcaseTitle}</h2>
           <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-3">
             {[
-              { img: showcaseImage1, cap: showcaseCaption1 },
-              { img: showcaseImage2, cap: showcaseCaption2 },
-              { img: showcaseImage3, cap: showcaseCaption3 },
-            ].map((item, i) => (
-              <Reveal key={item.cap} delay={i * 100}>
-                <div className="aspect-[4/5] overflow-hidden bg-[#e5e1d8]">
-                  <img src={item.img} alt={item.cap} className="h-full w-full object-cover transition duration-500 hover:scale-105" />
-                </div>
+              { key: "academy.showcase.image1", file: "academy-showcase-1-lookbook.webp", cap: showcaseCaption1 },
+              { key: "academy.showcase.image2", file: "academy-showcase-2-concept.webp", cap: showcaseCaption2 },
+              { key: "academy.showcase.image3", file: "academy-showcase-3-final-look.webp", cap: showcaseCaption3 },
+            ].map((item) => (
+              <div key={item.key} className="reveal-item">
+                <ContentImage
+                  contentKey={item.key}
+                  file={item.file}
+                  alt={item.cap}
+                  className="aspect-[4/5] bg-[#e5e1d8]"
+                  imgClassName="transition duration-500 hover:scale-105"
+                />
                 <p className="mt-3 text-sm text-brand-text">{item.cap}</p>
-              </Reveal>
+              </div>
             ))}
           </div>
         </div>
-      </div>
+      </Reveal>
 
-      <div className="mx-auto max-w-6xl px-6 py-16">
-        <Reveal>
-          <h2 className="font-heading text-2xl text-brand-text">{facilitiesTitle}</h2>
-        </Reveal>
+      <Reveal className="mx-auto max-w-6xl px-6 py-16">
+        <h2 className="reveal-item font-heading text-2xl text-brand-text">{facilitiesTitle}</h2>
         <div className="mt-10 grid grid-cols-1 gap-10 md:grid-cols-2 md:items-center">
-          <Reveal>
-            <div className="aspect-[7/6] overflow-hidden bg-[#e5e1d8]">
-              <img src={facilitiesImage} alt="Facilities" className="h-full w-full object-cover" />
-            </div>
-          </Reveal>
-          <Reveal delay={150}>
-            <p className="text-sm font-medium text-brand-text">{facilitiesIntro}</p>
-            <ul className="mt-4 space-y-3 text-sm text-brand-text/70">
+          <ContentImage contentKey="academy.facilities.image" file="academy-facilities.webp" alt="Academy studio" className="reveal-item aspect-[7/6] bg-[#e5e1d8]" />
+          <div>
+            <p className="reveal-item text-sm font-medium text-brand-text">{facilitiesIntro}</p>
+            <ul className="reveal-item mt-4 space-y-3 text-sm text-brand-text/70">
               <li className="flex items-start gap-2">
                 <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-accent" />
                 {facilitiesPoint1}
@@ -235,15 +233,13 @@ export default function FashionAcademy() {
                 {facilitiesPoint3}
               </li>
             </ul>
-          </Reveal>
+          </div>
         </div>
-      </div>
+      </Reveal>
 
-      <div className="bg-brand-primary py-16 text-center">
-        <Reveal>
-          <h2 className="font-heading text-2xl text-[#f4f1e8]">{admissionsTitle}</h2>
-        </Reveal>
-        <div className="mx-auto mt-10 flex max-w-2xl flex-col items-center justify-center gap-4 px-6 sm:flex-row">
+      <Reveal className="bg-brand-primary py-16 text-center">
+        <h2 className="reveal-item font-heading text-2xl text-[#f4f1e8]">{admissionsTitle}</h2>
+        <div className="reveal-item mx-auto mt-10 flex max-w-2xl flex-col items-center justify-center gap-4 px-6 sm:flex-row">
           {[admissionsStep1, admissionsStep2, admissionsStep3].map((step, i) => (
             <div key={step} className="flex items-center gap-4">
               <div className="flex flex-col items-center">
@@ -256,37 +252,37 @@ export default function FashionAcademy() {
             </div>
           ))}
         </div>
-        
-         <a href="/contact"
-          className="mt-10 inline-block bg-brand-accent px-7 py-3 text-xs font-medium uppercase tracking-[0.15em] text-brand-text transition hover:opacity-90"
+                <Link
+          to="/contact"
+          className="reveal-item mt-10 inline-block bg-brand-accent px-7 py-3 text-xs font-medium uppercase tracking-[0.15em] text-brand-text transition hover:opacity-90"
         >
           {admissionsCta}
-        </a>
-      </div>
+        </Link>
+      </Reveal>
 
-      <div className="mx-auto max-w-3xl px-6 py-16 text-center">
-        <Reveal>
+      <Reveal className="mx-auto max-w-3xl px-6 py-16 text-center">
+        <div className="reveal-item">
           <p className="font-heading text-xl italic text-brand-text sm:text-2xl">"{testimonialQuote}"</p>
-          <p className="mt-3 text-sm text-brand-text/60">— {testimonialAuthor}</p>
-        </Reveal>
+          <p className="mt-3 text-sm text-brand-text/60">{testimonialAuthor}</p>
+        </div>
 
-        <Reveal delay={150}>
+        <div className="reveal-item">
           <p className="mt-14 text-xs uppercase tracking-[0.15em] text-brand-text/50">As Seen In</p>
           <div className="mt-4 flex flex-wrap items-center justify-center gap-8">
             <span className="font-heading text-lg text-brand-text/70">{pressLabel1}</span>
             <span className="font-heading text-lg text-brand-text/70">{pressLabel2}</span>
             <span className="font-heading text-lg text-brand-text/70">{pressLabel3}</span>
           </div>
-        </Reveal>
-      </div>
+        </div>
+      </Reveal>
 
       {selectedProgram && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 p-4" onClick={() => setSelectedProgram(null)}>
-          <div className="relative w-full max-w-md bg-brand-bg p-8" onClick={(e) => e.stopPropagation()}>
+        <div className="fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto bg-black/50 p-4" onClick={() => setSelectedProgram(null)}>
+          <div className="relative my-auto w-full max-w-md bg-brand-bg p-6 sm:p-8" onClick={(e) => e.stopPropagation()}>
             <button
               onClick={() => setSelectedProgram(null)}
               aria-label="Close"
-              className="absolute right-4 top-4 rounded-full p-1 text-brand-text/60 transition hover:bg-black/5 hover:text-brand-text"
+              className="absolute right-2 top-2 flex h-11 w-11 items-center justify-center rounded-full text-brand-text/60 transition hover:bg-black/5 hover:text-brand-text"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M18 6L6 18M6 6l12 12" />
@@ -295,9 +291,9 @@ export default function FashionAcademy() {
 
             {submitted ? (
               <div className="py-10 text-center">
-                <p className="font-heading text-xl text-brand-text">Thank you!</p>
+                <p className="font-heading text-xl text-brand-text">Thanks, we have your details.</p>
                 <p className="mt-2 text-sm text-brand-text/70">
-                  We've received your interest in {selectedProgram} and will be in touch soon.
+                  Our academy team will contact you about {selectedProgram}.
                 </p>
               </div>
             ) : (
@@ -332,7 +328,7 @@ export default function FashionAcademy() {
                   <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email address" className="w-full border border-brand-text/20 bg-transparent px-4 py-2.5 text-sm text-brand-text placeholder:text-brand-text/50 focus:border-brand-accent focus:outline-none" />
                   <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone number" className="w-full border border-brand-text/20 bg-transparent px-4 py-2.5 text-sm text-brand-text placeholder:text-brand-text/50 focus:border-brand-accent focus:outline-none" />
                   <button type="submit" disabled={sending} className="w-full bg-brand-primary py-3 text-xs font-medium uppercase tracking-[0.15em] text-[#f4f1e8] transition hover:opacity-90 disabled:opacity-60">
-                    {sending ? "Submitting..." : "Submit"}
+                    {sending ? "Sending..." : "Send My Details"}
                   </button>
                 </form>
               </>

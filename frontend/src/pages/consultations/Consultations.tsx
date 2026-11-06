@@ -5,6 +5,8 @@ import { formatNaira } from "../../lib/format";
 import { useAuthStore } from "../../store/authStore";
 import { useContent } from "../../lib/useContent";
 import Reveal from "../../components/common/Reveal";
+import { ContentImage, ContentVideo } from "../../components/content/ContentMedia";
+import { usePageMeta } from "../../lib/usePageMeta";
 
 interface Service {
   id: string;
@@ -22,24 +24,24 @@ export default function Consultations() {
   const navigate = useNavigate();
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
 
+  usePageMeta({
+    title: "Consultations",
+    description: "Book a one-on-one consultation with Favy Atelier for a bespoke or bridal piece. Bespoke starts at ₦150,000. Pick a service and time and pay online.",
+  });
+
   const heroTitle = useContent("consultations.hero.title", "Favy Consultation Services");
-  const heroSubtitle = useContent("consultations.hero.subtitle", "Elevate your style with a personalized Favy Atelier experience");
-  const heroBody = useContent("consultations.hero.body", "At Favy Atelier, we believe every garment should reflect your unique style and elegance. Our personalized consultations ensure your piece is meticulously crafted to perfection — whether for a special event or your wedding day.");
-  const womanImage = useContent("consultations.hero.womanImage", "https://picsum.photos/seed/favy-woman/600/800");
-  const brideImage = useContent("consultations.hero.brideImage", "https://picsum.photos/seed/favy-bride/600/800");
-  const tallBrideImage = useContent("consultations.bride.tallImage", "https://picsum.photos/seed/favy-bride-tall/700/1100");
-  const bridalVideo = useContent("consultations.bridal.video", "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4");
+  const heroSubtitle = useContent("consultations.hero.subtitle", "Plan your piece with our team before we make it.");
+  const heroBody = useContent("consultations.hero.body", "Every bespoke and bridal piece starts here. We talk through the design, fabric and fit with you, then make the piece for your event or your wedding day.");
 
   const brideTitle = useContent("consultations.bride.title", "Favy Bride");
   const bridePronunciation = useContent("consultations.bride.subtitle", "noun /fay-vee brahyd/");
-  const brideBody = useContent("consultations.bride.body", "Welcome to Favy Bride, where your wedding dreams come to life. Our bridal collection masterfully blends traditional artistry with modern elegance, featuring handcrafted gowns made from luxurious fabrics. Each dress is meticulously tailored to reflect your unique beauty and style, ensuring you feel extraordinary on your special day.");
+  const brideBody = useContent("consultations.bride.body", "Favy Bride is our bridal line. Each gown is handmade and cut to your measurements, with traditional beadwork on a modern shape.");
 
   const galleryTitle = useContent("consultations.gallery.title", "Real Favy Brides");
-  const galleryImage1 = useContent("consultations.gallery.image1", "https://picsum.photos/seed/real-bride-1/500/600");
-  const galleryImage2 = useContent("consultations.gallery.image2", "https://picsum.photos/seed/real-bride-2/500/600");
-  const galleryImage3 = useContent("consultations.gallery.image3", "https://picsum.photos/seed/real-bride-3/500/600");
-  const galleryImage4 = useContent("consultations.gallery.image4", "https://picsum.photos/seed/real-bride-4/500/600");
-  const GALLERY_IMAGES = [galleryImage1, galleryImage2, galleryImage3, galleryImage4];
+  const GALLERY_IMAGES = [1, 2, 3, 4].map((n) => ({
+    key: `consultations.gallery.image${n}`,
+    file: `consultations-real-brides-${n}.webp`,
+  }));
 
   const [services, setServices] = useState<Service[]>([]);
   const [loadingServices, setLoadingServices] = useState(true);
@@ -99,86 +101,91 @@ export default function Consultations() {
 
   return (
     <div>
-      <Reveal>
-        <div className="mx-auto max-w-7xl px-6 py-16">
-          <div className="grid grid-cols-1 gap-10 md:grid-cols-[0.85fr_1.15fr] md:items-center">
-            <div className="mx-auto max-w-sm md:mx-0">
-              <h1 className="font-heading text-3xl text-brand-text">{heroTitle}</h1>
-              <p className="mt-4 text-sm font-medium text-brand-text">{heroSubtitle}</p>
-              <p className="mt-4 text-sm leading-relaxed text-brand-text/70">{heroBody}</p>
-              <p className="mt-4 text-sm leading-relaxed text-brand-text/70">
-                <span className="font-medium text-brand-text">
-                  Please note that bespoke pieces start at ₦150,000, with fully hand-beaded designs beginning at ₦850,000.
-                </span>
-              </p>
-            </div>
+      <Reveal className="mx-auto max-w-7xl px-6 py-16">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-[0.85fr_1.15fr] md:items-center">
+          <div className="max-w-sm">
+            <h1 className="reveal-item font-heading text-3xl text-brand-text">{heroTitle}</h1>
+            <p className="reveal-item mt-4 text-sm font-medium text-brand-text">{heroSubtitle}</p>
+            <p className="reveal-item mt-4 text-sm leading-relaxed text-brand-text/70">{heroBody}</p>
+            <p className="reveal-item mt-4 text-sm font-medium leading-relaxed text-brand-text">
+              Bespoke pieces start at ₦150,000. Fully hand-beaded designs start at ₦850,000.
+            </p>
+          </div>
 
-            <div className="flex items-end justify-center gap-6">
-              <div className="w-1/2">
-                <div className="aspect-[3/4] overflow-hidden rounded-t-full bg-[#e5e1d8]">
-                  <img src={womanImage} alt="Favy Woman" className="h-full w-full object-cover" />
-                </div>
-                <p className="mt-3 bg-brand-primary py-2.5 text-center text-xs uppercase tracking-[0.15em] text-[#f4f1e8]">Favy Woman</p>
+          <div className="flex items-end justify-center gap-4 sm:gap-6">
+            {[
+              { key: "consultations.hero.womanImage", file: "consultations-favy-woman.webp", label: "Favy Woman" },
+              { key: "consultations.hero.brideImage", file: "consultations-favy-bride.webp", label: "Favy Bride" },
+            ].map((item) => (
+              <div key={item.key} className="reveal-item w-1/2">
+                <ContentImage
+                  contentKey={item.key}
+                  file={item.file}
+                  alt={item.label}
+                  eager
+                  className="aspect-[3/4] rounded-t-full bg-[#e5e1d8]"
+                />
+                <p className="mt-3 bg-brand-primary py-2.5 text-center text-xs uppercase tracking-[0.15em] text-[#f4f1e8]">{item.label}</p>
               </div>
-              <div className="w-1/2">
-                <div className="aspect-[3/4] overflow-hidden rounded-t-full bg-[#e5e1d8]">
-                  <img src={brideImage} alt="Favy Bride" className="h-full w-full object-cover" />
-                </div>
-                <p className="mt-3 bg-brand-primary py-2.5 text-center text-xs uppercase tracking-[0.15em] text-[#f4f1e8]">Favy Bride</p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </Reveal>
 
-      <Reveal>
-        <div className="mx-auto max-w-7xl px-6 py-16">
-          <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:items-center">
-            <div className="aspect-[3/5] overflow-hidden rounded-t-full bg-[#e5e1d8]">
-              <img src={tallBrideImage} alt="Favy Bride" className="h-full w-full object-cover" />
-            </div>
+      <Reveal className="mx-auto max-w-7xl px-6 pb-16 pt-4 md:py-16">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:items-center">
+          <ContentImage
+            contentKey="consultations.bride.tallImage"
+            file="consultations-bride-definition.webp"
+            alt="A Favy Atelier bride"
+            className="reveal-item aspect-[3/5] rounded-t-full bg-[#e5e1d8]"
+          />
 
-            <div>
-              <h2 className="font-heading text-2xl text-brand-text">{brideTitle}</h2>
-              <p className="mt-2 text-sm italic text-brand-text/60">{bridePronunciation}</p>
-              <p className="mt-4 text-sm leading-relaxed text-brand-text/70">{brideBody}</p>
-              <Link
-                to="/shop/bridals"
-                className="mt-6 inline-block bg-brand-primary px-6 py-3 text-xs font-medium uppercase tracking-[0.15em] text-[#f4f1e8] transition hover:opacity-90"
-              >
-                Shop Bridals
-              </Link>
-            </div>
+          <div>
+            <h2 className="reveal-item font-heading text-2xl text-brand-text">{brideTitle}</h2>
+            <p className="reveal-item mt-2 text-sm italic text-brand-text/60">{bridePronunciation}</p>
+            <p className="reveal-item mt-4 max-w-md text-sm leading-relaxed text-brand-text/70">{brideBody}</p>
+            <Link
+              to="/shop/bridals"
+              className="reveal-item mt-6 inline-block bg-brand-primary px-6 py-3 text-xs font-medium uppercase tracking-[0.15em] text-[#f4f1e8] transition hover:opacity-90"
+            >
+              Shop Bridals
+            </Link>
           </div>
         </div>
       </Reveal>
 
-      <div className="aspect-video w-full bg-black">
-        <video src={bridalVideo} autoPlay loop muted playsInline className="h-full w-full object-cover" />
-      </div>
+      <ContentVideo contentKey="consultations.bridal.video" file="consultations-bridal-video" className="aspect-[4/5] w-full bg-black sm:aspect-video" />
 
-      <div className="bg-brand-bg py-16">
-        <Reveal>
-          <h2 className="text-center font-heading text-2xl text-brand-text">{galleryTitle}</h2>
-        </Reveal>
-        <div className="mx-auto mt-10 grid max-w-6xl grid-cols-2 gap-4 px-6 sm:grid-cols-4">
-          {GALLERY_IMAGES.map((src, i) => (
-            <Reveal key={src} delay={i * 80}>
-              <div className="aspect-[3/4] overflow-hidden bg-[#e5e1d8]">
-                <img src={src} alt="Real Favy bride" className="h-full w-full object-cover" />
-              </div>
-            </Reveal>
-          ))}
+      <Reveal className="bg-brand-bg py-16">
+        <div className="mx-auto max-w-6xl px-6">
+          <h2 className="reveal-item font-heading text-2xl text-brand-text">{galleryTitle}</h2>
+          <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
+            {GALLERY_IMAGES.map((img, i) => (
+              <ContentImage
+                key={img.key}
+                contentKey={img.key}
+                file={img.file}
+                alt={`Favy Atelier bride, photo ${i + 1}`}
+                className="reveal-item aspect-[3/4] bg-[#e5e1d8]"
+              />
+            ))}
+          </div>
         </div>
-      </div>
+      </Reveal>
 
       <div className="mx-auto max-w-2xl px-6 py-16">
         <Reveal>
-          <h2 className="text-center font-heading text-2xl text-brand-text">Book a Consultation</h2>
+          <h2 className="reveal-item font-heading text-2xl text-brand-text">Book a Consultation</h2>
+          <p className="reveal-item mt-2 text-sm text-brand-text/70">Pick a service and a time, then pay online to confirm your slot.</p>
         </Reveal>
 
         {loadingServices ? (
-          <p className="mt-8 text-center text-sm text-brand-text/60">Loading services...</p>
+          <p className="mt-8 text-sm text-brand-text/60">Loading consultation services...</p>
+        ) : services.length === 0 ? (
+          <p className="mt-8 text-sm text-brand-text/70">
+            No consultation services are open for booking right now. <Link to="/contact" className="underline underline-offset-2">Contact us</Link> and we'll find a time.
+          </p>
         ) : (
           <div className="mt-10 space-y-8">
             <div>
@@ -217,7 +224,7 @@ export default function Consultations() {
               <div>
                 <p className="text-xs uppercase tracking-[0.1em] text-brand-text">Available Time Slots</p>
                 {loadingSlots ? (
-                  <p className="mt-3 text-sm text-brand-text/60">Loading...</p>
+                  <p className="mt-3 text-sm text-brand-text/60">Checking available times...</p>
                 ) : slots.length === 0 ? (
                   <p className="mt-3 text-sm text-brand-text/60">No slots available on this date. Please choose another date.</p>
                 ) : (
