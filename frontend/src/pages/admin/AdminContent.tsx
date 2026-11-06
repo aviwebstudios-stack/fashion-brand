@@ -26,13 +26,13 @@ const FIELD_GROUPS: FieldGroup[] = [
     group: "Home Page",
     fields: [
       { key: "home.hero.tagline", label: "Hero tagline", fallback: "Haute couture and ready-to-wear for the contemporary African woman." },
-      { key: "home.hero.cta", label: "Hero button text", fallback: "Explore the Collection" },
-      { key: "home.banner.rtw.subtitle", label: "Ready-to-Wear banner subtitle", fallback: "Effortless elegance for everyday wear." },
+      { key: "home.hero.cta", label: "Hero button text", fallback: "Shop Ready-to-Wear" },
+      { key: "home.banner.rtw.subtitle", label: "Ready-to-Wear banner subtitle", fallback: "Everyday pieces, ready to order in your size." },
       { key: "home.banner.bridals.subtitle", label: "Bridals banner subtitle", fallback: "Gowns that tell your story, on the day it matters most." },
-      { key: "home.banner.bespoke.subtitle", label: "Bespoke banner subtitle", fallback: "Tailored exclusively to your shape, taste, and occasion." },
-      { key: "home.banner.sales.subtitle", label: "Sales banner subtitle", fallback: "Limited pieces at final prices, while they last." },
+      { key: "home.banner.bespoke.subtitle", label: "Bespoke banner subtitle", fallback: "Made to your measurements, for the occasion you have in mind." },
+      { key: "home.banner.sales.subtitle", label: "Sales banner subtitle", fallback: "Final pieces at reduced prices. Once they sell, they're gone." },
       { key: "home.cta.title", label: "Consultation CTA heading", fallback: "Something made just for you" },
-      { key: "home.cta.subtitle", label: "Consultation CTA subtitle", fallback: "Book a one-on-one consultation with our team to design a piece as unique as you are.", multiline: true },
+      { key: "home.cta.subtitle", label: "Consultation CTA subtitle", fallback: "Book a one-on-one consultation and we'll design a piece around your measurements and your occasion.", multiline: true },
     ],
   },
   {
@@ -45,25 +45,25 @@ const FIELD_GROUPS: FieldGroup[] = [
     group: "Consultations Page",
     fields: [
       { key: "consultations.hero.title", label: "Hero heading", fallback: "Favy Consultation Services" },
-      { key: "consultations.hero.subtitle", label: "Hero subtitle", fallback: "Elevate your style with a personalized Favy Atelier experience" },
-      { key: "consultations.hero.body", label: "Hero body paragraph", fallback: "At Favy Atelier, we believe every garment should reflect your unique style and elegance. Our personalized consultations ensure your piece is meticulously crafted to perfection — whether for a special event or your wedding day.", multiline: true },
+      { key: "consultations.hero.subtitle", label: "Hero subtitle", fallback: "Plan your piece with our team before we make it." },
+      { key: "consultations.hero.body", label: "Hero body paragraph", fallback: "Every bespoke and bridal piece starts here. We talk through the design, fabric and fit with you, then make the piece for your event or your wedding day.", multiline: true },
       { key: "consultations.bride.title", label: "Bride section heading", fallback: "Favy Bride" },
       { key: "consultations.bride.subtitle", label: "Bride section pronunciation line", fallback: "noun /fay-vee brahyd/" },
-      { key: "consultations.bride.body", label: "Bride section body paragraph", fallback: "Welcome to Favy Bride, where your wedding dreams come to life. Our bridal collection masterfully blends traditional artistry with modern elegance, featuring handcrafted gowns made from luxurious fabrics. Each dress is meticulously tailored to reflect your unique beauty and style, ensuring you feel extraordinary on your special day.", multiline: true },
+      { key: "consultations.bride.body", label: "Bride section body paragraph", fallback: "Favy Bride is our bridal line. Each gown is handmade and cut to your measurements, with traditional beadwork on a modern shape.", multiline: true },
       { key: "consultations.gallery.title", label: "Real Brides gallery heading", fallback: "Real Favy Brides" },
     ],
   },
   {
-    group: "Academy — Hero",
+    group: "Academy: Hero",
     fields: [
       { key: "academy.hero.title", label: "Hero headline", fallback: "Design Your Future in Fashion" },
       { key: "academy.hero.subtitle", label: "Hero subheadline", fallback: "Learn from industry masters. Build your collection." },
-      { key: "academy.hero.cta1", label: "Primary button text", fallback: "Explore Programs" },
+      { key: "academy.hero.cta1", label: "Primary button text", fallback: "View Programs" },
       { key: "academy.hero.cta2", label: "Secondary button text", fallback: "Book a Tour" },
     ],
   },
   {
-    group: "Academy — Stats Bar",
+    group: "Academy: Stats Bar",
     fields: [
       { key: "academy.stats.stat1.number", label: "Stat 1 number", fallback: "94%" },
       { key: "academy.stats.stat1.label", label: "Stat 1 label", fallback: "Employment Rate" },
@@ -74,7 +74,7 @@ const FIELD_GROUPS: FieldGroup[] = [
     ],
   },
   {
-    group: "Academy — Program 1",
+    group: "Academy: Program 1",
     fields: [
       { key: "academy.program1.name", label: "Name", fallback: "Fashion Design & Masters" },
       { key: "academy.program1.duration", label: "Duration", fallback: "3 Years · Full Time" },
@@ -84,7 +84,7 @@ const FIELD_GROUPS: FieldGroup[] = [
     ],
   },
   {
-    group: "Academy — Program 2",
+    group: "Academy: Program 2",
     fields: [
       { key: "academy.program2.name", label: "Name", fallback: "Fashion Marketing & Brand" },
       { key: "academy.program2.duration", label: "Duration", fallback: "2 Years · Full Time" },
@@ -94,7 +94,7 @@ const FIELD_GROUPS: FieldGroup[] = [
     ],
   },
   {
-    group: "Academy — Program 3",
+    group: "Academy: Program 3",
     fields: [
       { key: "academy.program3.name", label: "Name", fallback: "Pattern Cutting & Garment Construction" },
       { key: "academy.program3.duration", label: "Duration", fallback: "8 weeks" },
@@ -104,7 +104,7 @@ const FIELD_GROUPS: FieldGroup[] = [
     ],
   },
   {
-    group: "Academy — Program 4",
+    group: "Academy: Program 4",
     fields: [
       { key: "academy.program4.name", label: "Name", fallback: "Bridal Couture Techniques" },
       { key: "academy.program4.duration", label: "Duration", fallback: "6 weeks" },
@@ -114,17 +114,17 @@ const FIELD_GROUPS: FieldGroup[] = [
     ],
   },
   {
-    group: "Academy — Program 5",
+    group: "Academy: Program 5",
     fields: [
       { key: "academy.program5.name", label: "Name", fallback: "Fashion Business & Entrepreneurship" },
       { key: "academy.program5.duration", label: "Duration", fallback: "4 weeks" },
       { key: "academy.program5.price", label: "Price", fallback: "₦150,000" },
-      { key: "academy.program5.description", label: "Description", fallback: "Build the business behind the brand — pricing, sourcing, and scaling a label in Nigeria.", multiline: true },
+      { key: "academy.program5.description", label: "Description", fallback: "Build the business behind the brand: pricing, sourcing and growing a label in Nigeria.", multiline: true },
       { key: "academy.program5.category", label: "Category (type exactly: degree or short)", fallback: "short" },
     ],
   },
   {
-    group: "Academy — Student Showcase",
+    group: "Academy: Student Showcase",
     fields: [
       { key: "academy.showcase.title", label: "Section heading", fallback: "Student Showcase" },
       { key: "academy.showcase.caption1", label: "Showcase image 1 caption", fallback: "Collection 2026" },
@@ -133,7 +133,7 @@ const FIELD_GROUPS: FieldGroup[] = [
     ],
   },
   {
-    group: "Academy — Campus & Facilities",
+    group: "Academy: Campus & Facilities",
     fields: [
       { key: "academy.facilities.title", label: "Section heading", fallback: "Campus & Facilities" },
       { key: "academy.facilities.intro", label: "Section intro line", fallback: "Industry-standard tools from day one." },
@@ -143,17 +143,17 @@ const FIELD_GROUPS: FieldGroup[] = [
     ],
   },
   {
-    group: "Academy — Admissions",
+    group: "Academy: Admissions",
     fields: [
       { key: "academy.admissions.title", label: "Section heading", fallback: "Admissions Process" },
       { key: "academy.admissions.step1", label: "Step 1", fallback: "Choose Program" },
       { key: "academy.admissions.step2", label: "Step 2", fallback: "Submit Portfolio" },
       { key: "academy.admissions.step3", label: "Step 3", fallback: "Interview" },
-      { key: "academy.admissions.cta", label: "Button text", fallback: "Download Admissions Guide" },
+      { key: "academy.admissions.cta", label: "Button text", fallback: "Request the Admissions Guide" },
     ],
   },
   {
-    group: "Academy — Testimonial & Press",
+    group: "Academy: Testimonial & Press",
     fields: [
       { key: "academy.testimonial.quote", label: "Testimonial quote", fallback: "The mentorship here helped me launch my label right away.", multiline: true },
       { key: "academy.testimonial.author", label: "Testimonial author", fallback: "Sarah J., Class of '25" },
@@ -165,29 +165,29 @@ const FIELD_GROUPS: FieldGroup[] = [
 ];
 
 const MEDIA_FIELDS: MediaFieldConfig[] = [
-  { key: "home.hero.video", file: "home-hero", label: "Home hero background video", type: "video", fallback: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" },
-  { key: "home.banner.rtw.image", file: "home-ready-to-wear", label: "Home — Ready-to-Wear banner image", type: "image", fallback: "https://picsum.photos/seed/home-rtw/1200/1200" },
-  { key: "home.banner.bridals.image", file: "home-bridals", label: "Home — Bridals banner image", type: "image", fallback: "https://picsum.photos/seed/home-bridals/1200/1200" },
-  { key: "home.banner.bespoke.image", file: "home-bespoke", label: "Home — Bespoke banner image", type: "image", fallback: "https://picsum.photos/seed/home-bespoke/1200/1200" },
-  { key: "home.banner.sales.image", file: "home-sales", label: "Home — Sales banner image", type: "image", fallback: "https://picsum.photos/seed/home-sales/1200/1200" },
-  { key: "consultations.hero.womanImage", file: "consultations-favy-woman", label: "Consultations — Favy Woman photo", type: "image", fallback: "https://picsum.photos/seed/favy-woman/600/800" },
-  { key: "consultations.hero.brideImage", file: "consultations-favy-bride", label: "Consultations — Favy Bride photo", type: "image", fallback: "https://picsum.photos/seed/favy-bride/600/800" },
-  { key: "consultations.bride.tallImage", file: "consultations-bride-definition", label: "Consultations — Bride definition photo", type: "image", fallback: "https://picsum.photos/seed/favy-bride-tall/700/1100" },
-  { key: "consultations.bridal.video", file: "consultations-bridal-video", label: "Consultations — Bridal video", type: "video", fallback: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" },
-  { key: "consultations.gallery.image1", file: "consultations-real-brides-1", label: "Consultations — Real Brides gallery photo 1", type: "image", fallback: "https://picsum.photos/seed/real-bride-1/500/600" },
-  { key: "consultations.gallery.image2", file: "consultations-real-brides-2", label: "Consultations — Real Brides gallery photo 2", type: "image", fallback: "https://picsum.photos/seed/real-bride-2/500/600" },
-  { key: "consultations.gallery.image3", file: "consultations-real-brides-3", label: "Consultations — Real Brides gallery photo 3", type: "image", fallback: "https://picsum.photos/seed/real-bride-3/500/600" },
-  { key: "consultations.gallery.image4", file: "consultations-real-brides-4", label: "Consultations — Real Brides gallery photo 4", type: "image", fallback: "https://picsum.photos/seed/real-bride-4/500/600" },
-  { key: "academy.hero.video", file: "academy-hero", label: "Academy — Hero background video", type: "video", fallback: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4" },
-  { key: "academy.program1.image", file: "academy-program-1", label: "Academy — Program 1 photo", type: "image", fallback: "https://picsum.photos/seed/academy-degree-1/500/400" },
-  { key: "academy.program2.image", file: "academy-program-2", label: "Academy — Program 2 photo", type: "image", fallback: "https://picsum.photos/seed/academy-degree-2/500/400" },
-  { key: "academy.program3.image", file: "academy-program-3", label: "Academy — Program 3 photo", type: "image", fallback: "https://picsum.photos/seed/academy-pattern/500/400" },
-  { key: "academy.program4.image", file: "academy-program-4", label: "Academy — Program 4 photo", type: "image", fallback: "https://picsum.photos/seed/academy-bridal/500/400" },
-  { key: "academy.program5.image", file: "academy-program-5", label: "Academy — Program 5 photo", type: "image", fallback: "https://picsum.photos/seed/academy-business/500/400" },
-  { key: "academy.showcase.image1", file: "academy-showcase-1-lookbook", label: "Academy — Showcase photo 1 (lookbook)", type: "image", fallback: "https://picsum.photos/seed/academy-show-1/500/650" },
-  { key: "academy.showcase.image2", file: "academy-showcase-2-concept", label: "Academy — Showcase photo 2 (sketch/concept)", type: "image", fallback: "https://picsum.photos/seed/academy-show-2/500/650" },
-  { key: "academy.showcase.image3", file: "academy-showcase-3-final-look", label: "Academy — Showcase photo 3 (final look)", type: "image", fallback: "https://picsum.photos/seed/academy-show-3/500/650" },
-  { key: "academy.facilities.image", file: "academy-facilities", label: "Academy — Facilities/lab photo", type: "image", fallback: "https://picsum.photos/seed/academy-lab/700/600" },
+  { key: "home.hero.video", file: "home-hero", label: "Home hero background video", type: "video", fallback: "/media-originals/home-hero.mp4" },
+  { key: "home.banner.rtw.image", file: "home-ready-to-wear", label: "Home: Ready-to-Wear banner image", type: "image", fallback: "/media-originals/home-ready-to-wear.webp" },
+  { key: "home.banner.bridals.image", file: "home-bridals", label: "Home: Bridals banner image", type: "image", fallback: "/media-originals/home-bridals.webp" },
+  { key: "home.banner.bespoke.image", file: "home-bespoke", label: "Home: Bespoke banner image", type: "image", fallback: "/media-originals/home-bespoke.webp" },
+  { key: "home.banner.sales.image", file: "home-sales", label: "Home: Sales banner image", type: "image", fallback: "/media-originals/home-sales.webp" },
+  { key: "consultations.hero.womanImage", file: "consultations-favy-woman", label: "Consultations: Favy Woman photo", type: "image", fallback: "/media-originals/consultations-favy-woman.webp" },
+  { key: "consultations.hero.brideImage", file: "consultations-favy-bride", label: "Consultations: Favy Bride photo", type: "image", fallback: "/media-originals/consultations-favy-bride.webp" },
+  { key: "consultations.bride.tallImage", file: "consultations-bride-definition", label: "Consultations: Bride definition photo", type: "image", fallback: "/media-originals/consultations-bride-definition.webp" },
+  { key: "consultations.bridal.video", file: "consultations-bridal-video", label: "Consultations: Bridal video", type: "video", fallback: "/media-originals/consultations-bridal-video.mp4" },
+  { key: "consultations.gallery.image1", file: "consultations-real-brides-1", label: "Consultations: Real Brides gallery photo 1", type: "image", fallback: "/media-originals/consultations-real-brides-1.webp" },
+  { key: "consultations.gallery.image2", file: "consultations-real-brides-2", label: "Consultations: Real Brides gallery photo 2", type: "image", fallback: "/media-originals/consultations-real-brides-2.webp" },
+  { key: "consultations.gallery.image3", file: "consultations-real-brides-3", label: "Consultations: Real Brides gallery photo 3", type: "image", fallback: "/media-originals/consultations-real-brides-3.webp" },
+  { key: "consultations.gallery.image4", file: "consultations-real-brides-4", label: "Consultations: Real Brides gallery photo 4", type: "image", fallback: "/media-originals/consultations-real-brides-4.webp" },
+  { key: "academy.hero.video", file: "academy-hero", label: "Academy: Hero background video", type: "video", fallback: "/media-originals/academy-hero.mp4" },
+  { key: "academy.program1.image", file: "academy-program-1", label: "Academy: Program 1 photo", type: "image", fallback: "/media-originals/academy-program-1.webp" },
+  { key: "academy.program2.image", file: "academy-program-2", label: "Academy: Program 2 photo", type: "image", fallback: "/media-originals/academy-program-2.webp" },
+  { key: "academy.program3.image", file: "academy-program-3", label: "Academy: Program 3 photo", type: "image", fallback: "/media-originals/academy-program-3.webp" },
+  { key: "academy.program4.image", file: "academy-program-4", label: "Academy: Program 4 photo", type: "image", fallback: "/media-originals/academy-program-4.webp" },
+  { key: "academy.program5.image", file: "academy-program-5", label: "Academy: Program 5 photo", type: "image", fallback: "/media-originals/academy-program-5.webp" },
+  { key: "academy.showcase.image1", file: "academy-showcase-1-lookbook", label: "Academy: Showcase photo 1 (lookbook)", type: "image", fallback: "/media-originals/academy-showcase-1-lookbook.webp" },
+  { key: "academy.showcase.image2", file: "academy-showcase-2-concept", label: "Academy: Showcase photo 2 (sketch/concept)", type: "image", fallback: "/media-originals/academy-showcase-2-concept.webp" },
+  { key: "academy.showcase.image3", file: "academy-showcase-3-final-look", label: "Academy: Showcase photo 3 (final look)", type: "image", fallback: "/media-originals/academy-showcase-3-final-look.webp" },
+  { key: "academy.facilities.image", file: "academy-facilities", label: "Academy: Facilities/lab photo", type: "image", fallback: "/media-originals/academy-facilities.webp" },
 ];
 
 export default function AdminContent() {
@@ -332,7 +332,7 @@ export default function AdminContent() {
         <div className="border-t border-[#2b2b26]/10 pt-10">
           <h2 className="text-xs uppercase tracking-[0.1em] text-[#c9a227]">Images & Video</h2>
           <p className="mt-2 text-xs text-[#2b2b26]/60">
-            Uploading replaces the current file immediately — no separate save needed.
+            Uploading replaces the current file straight away. You don't need to save.
           </p>
 
           {uploadError && <p className="mt-3 text-sm text-red-600">{uploadError}</p>}

@@ -7,7 +7,7 @@ export default function ContentProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     api
-      .get("/settings/content")
+      .get("/settings/content", { timeout: 8000 })
       .then((res) => setContent(res.data.data || {}))
       .catch(() => setContent({}));
   }, []);
