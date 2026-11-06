@@ -174,7 +174,7 @@ export default function AdminProducts() {
       </div>
 
       {loading ? (
-        <p className="mt-8 text-sm text-[#2b2b26]/60">Loading...</p>
+        <p className="mt-8 text-sm text-[#2b2b26]/60">Loading products...</p>
       ) : !data || data.products.length === 0 ? (
         <p className="mt-8 text-sm text-[#2b2b26]/60">No products yet.</p>
       ) : (

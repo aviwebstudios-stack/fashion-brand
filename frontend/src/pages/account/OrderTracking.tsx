@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { usePageMeta } from "../../lib/usePageMeta";
 import { useParams, Link } from "react-router-dom";
 import api from "../../lib/api";
 import { formatNaira } from "../../lib/format";
@@ -29,6 +30,7 @@ interface Order {
 }
 
 export default function OrderTracking() {
+  usePageMeta({ title: "Order Tracking", noindex: true });
   const { id } = useParams<{ id: string }>();
   const [order, setOrder] = useState<Order | null>(null);
   const [loading, setLoading] = useState(true);
@@ -42,11 +44,11 @@ export default function OrderTracking() {
   }, [id]);
 
   if (loading) {
-    return <p className="px-6 py-20 text-center text-sm text-brand-text/60">Loading...</p>;
+    return <p className="px-6 py-20 text-center text-sm text-brand-text/60">Loading your order...</p>;
   }
 
   if (!order) {
-    return <p className="px-6 py-20 text-center text-sm text-brand-text/60">Order not found.</p>;
+    return <p className="px-6 py-20 text-center text-sm text-brand-text/60">We couldn't find this order. Check My Orders for your past orders.</p>;
   }
 
   const timeline = [...order.statusHistory].reverse();

@@ -1,10 +1,12 @@
 import { useState, type FormEvent } from "react";
+import { usePageMeta } from "../../lib/usePageMeta";
 import { useNavigate } from "react-router-dom";
 import adminApi from "../../lib/adminApi";
 import { useAdminAuthStore } from "../../store/adminAuthStore";
 import PasswordInput from "../../components/common/PasswordInput";
 
 export default function AdminLogin() {
+  usePageMeta({ title: "Admin Sign In", noindex: true });
   const navigate = useNavigate();
   const setAdminAuth = useAdminAuthStore((s) => s.setAdminAuth);
 
@@ -38,7 +40,7 @@ export default function AdminLogin() {
       } else if (err.request) {
         // Request was sent but no response came back at all — network/CORS/server-down issue
         setError(
-          "Could not reach the server. It may be waking up (free tier) — wait 20 seconds and try again."
+          "Could not reach the server. It may be starting up, so wait 20 seconds and try again."
         );
       } else {
         setError(`Unexpected error: ${err.message}`);

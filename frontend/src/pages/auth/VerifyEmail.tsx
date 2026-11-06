@@ -99,7 +99,7 @@ export default function VerifyEmail() {
       </div>
 
       <p className="mt-4 text-center text-sm text-brand-text/70">
-        <Link to="/login" className="text-brand-accent hover:underline">
+        <Link to="/login" className="inline-block py-2 text-brand-accent hover:underline">
           Back to sign in
         </Link>
       </p>

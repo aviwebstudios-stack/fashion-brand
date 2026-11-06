@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { usePageMeta } from "../../lib/usePageMeta";
 import { Link } from "react-router-dom";
 import api from "../../lib/api";
 import { formatNaira } from "../../lib/format";
@@ -28,6 +29,7 @@ function statusColor(status: string) {
 }
 
 export default function MyBookings() {
+  usePageMeta({ title: "My Bookings", noindex: true });
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -44,13 +46,13 @@ export default function MyBookings() {
       <h1 className="text-center font-heading text-3xl text-brand-text">My Bookings</h1>
 
       {loading ? (
-        <p className="mt-10 text-center text-sm text-brand-text/60">Loading...</p>
+        <p className="mt-10 text-center text-sm text-brand-text/60">Loading your bookings...</p>
       ) : bookings.length === 0 ? (
         <div className="mt-10 text-center">
           <p className="text-sm text-brand-text/70">You haven't booked a consultation yet.</p>
           <Link
             to="/consultations"
-            className="mt-4 inline-block text-sm text-brand-accent hover:underline"
+            className="mt-4 inline-block py-2 text-sm text-brand-accent hover:underline"
           >
             Book a consultation
           </Link>

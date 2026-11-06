@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { usePageMeta } from "../../lib/usePageMeta";
 import { useSearchParams, Link } from "react-router-dom";
 import api from "../../lib/api";
 import { usePanelStore } from "../../store/panelStore";
@@ -6,6 +7,7 @@ import { usePanelStore } from "../../store/panelStore";
 type Status = "verifying" | "success" | "failed";
 
 export default function PaymentVerify() {
+  usePageMeta({ title: "Payment", noindex: true });
   const [searchParams] = useSearchParams();
   const setCartCount = usePanelStore((s) => s.setCartCount);
   const [status, setStatus] = useState<Status>("verifying");
@@ -42,7 +44,7 @@ export default function PaymentVerify() {
         <>
           <h1 className="font-heading text-2xl text-brand-text">Payment Successful</h1>
           <p className="mt-3 text-sm text-brand-text/70">
-            Thank you — your order has been placed and a confirmation email is on its way.
+            Thank you. Your order is placed and we've emailed you a confirmation.
           </p>
           <Link
             to="/"

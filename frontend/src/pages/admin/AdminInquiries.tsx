@@ -77,7 +77,7 @@ export default function AdminInquiries() {
       </div>
 
       {loading ? (
-        <p className="mt-8 text-sm text-[#2b2b26]/60">Loading...</p>
+        <p className="mt-8 text-sm text-[#2b2b26]/60">Loading inquiries...</p>
       ) : (
         <div className="mt-6">
           {tab === "contact" && (
@@ -119,7 +119,7 @@ export default function AdminInquiries() {
                       <tr key={a.id} className="border-b border-[#2b2b26]/10">
                         <td className="px-4 py-3 text-[#2b2b26]">{a.name}</td>
                         <td className="px-4 py-3 text-[#2b2b26]/70">{a.email}</td>
-                        <td className="px-4 py-3 text-[#2b2b26]/70">{a.phone || "—"}</td>
+                        <td className="px-4 py-3 text-[#2b2b26]/70">{a.phone || "Not given"}</td>
                         <td className="px-4 py-3 text-[#2b2b26]/70">{a.program}</td>
                         <td className="px-4 py-3 text-xs text-[#2b2b26]/60">{new Date(a.createdAt).toLocaleDateString()}</td>
                       </tr>
@@ -149,11 +149,11 @@ export default function AdminInquiries() {
                     {subscribers.map((s) => (
                       <tr key={s.id} className="border-b border-[#2b2b26]/10">
                         <td className="px-4 py-3 text-[#2b2b26]">
-                          {s.firstName ? `${s.firstName} ${s.lastName || ""}`.trim() : "—"}
+                          {s.firstName ? `${s.firstName} ${s.lastName || ""}`.trim() : "Not given"}
                         </td>
                         <td className="px-4 py-3 text-[#2b2b26]/70">{s.email}</td>
                         <td className="px-4 py-3 text-[#2b2b26]/70">
-                          {s.interests?.length ? s.interests.join(", ") : "—"}
+                          {s.interests?.length ? s.interests.join(", ") : "Not given"}
                         </td>
                         <td className="px-4 py-3">
                           <span className={`rounded-full px-2.5 py-1 text-xs ${

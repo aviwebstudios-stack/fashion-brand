@@ -56,7 +56,7 @@ export default function ForgotPassword() {
       </form>
 
       <p className="mt-6 text-center text-sm text-brand-text/70">
-        <Link to="/login" className="text-brand-accent hover:underline">
+        <Link to="/login" className="inline-block py-2 text-brand-accent hover:underline">
           Back to sign in
         </Link>
       </p>

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { usePageMeta } from "../../lib/usePageMeta";
 import { useParams, Link } from "react-router-dom";
 import api from "../../lib/api";
 import { formatNaira } from "../../lib/format";
@@ -24,6 +25,7 @@ interface Booking {
 }
 
 export default function BookingTracking() {
+  usePageMeta({ title: "Booking Details", noindex: true });
   const { id } = useParams<{ id: string }>();
   const [booking, setBooking] = useState<Booking | null>(null);
   const [loading, setLoading] = useState(true);
@@ -37,11 +39,11 @@ export default function BookingTracking() {
   }, [id]);
 
   if (loading) {
-    return <p className="px-6 py-20 text-center text-sm text-brand-text/60">Loading...</p>;
+    return <p className="px-6 py-20 text-center text-sm text-brand-text/60">Loading your booking...</p>;
   }
 
   if (!booking) {
-    return <p className="px-6 py-20 text-center text-sm text-brand-text/60">Booking not found.</p>;
+    return <p className="px-6 py-20 text-center text-sm text-brand-text/60">We couldn't find this booking. Check My Bookings for your consultations.</p>;
   }
 
   const timeline = [...booking.statusHistory].reverse();
@@ -60,7 +62,7 @@ export default function BookingTracking() {
       <div className="mt-6 border border-brand-text/10 p-5">
         <p className="text-sm text-brand-text">
           <span className="font-medium">Date & Time:</span>{" "}
-          {new Date(booking.date).toLocaleDateString()} · {booking.startTime} – {booking.endTime}
+          {new Date(booking.date).toLocaleDateString()} · {booking.startTime} to {booking.endTime}
         </p>
         {booking.notes && (
           <p className="mt-2 text-sm text-brand-text/80">

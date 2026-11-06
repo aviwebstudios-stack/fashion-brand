@@ -17,14 +17,16 @@ const PRESS_ITEMS = [
 
 export default function Press() {
   return (
-    <StaticPage title="Press">
+    <StaticPage
+      title="Press"
+      description="Press features on Favy Atelier and the email for press enquiries."
+    >
       <p className={legalStyles.paragraph}>
-        A selection of features and mentions. For press inquiries, reach us at{" "}
+        Some of the places Favy Atelier has been featured. For press enquiries, email{" "}
         <a
           href="mailto:press@favyatelier.com"
           className="text-brand-accent underline"
         >
-          {" "}
           press@favyatelier.com
         </a>
         .

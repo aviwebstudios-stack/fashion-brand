@@ -2,7 +2,10 @@ import StaticPage, { legalStyles } from "../../components/legal/StaticPage";
 
 export default function PrivacyPolicy() {
   return (
-    <StaticPage title="Privacy Policy">
+    <StaticPage
+      title="Privacy Policy"
+      description="What personal details Favy Atelier collects when you shop or book a consultation, how we use them, and who to contact about your data."
+    >
       <p className={legalStyles.paragraph}>
         <em>
           This is placeholder policy content for development purposes. Before
@@ -12,9 +15,9 @@ export default function PrivacyPolicy() {
       </p>
       <h2 className={legalStyles.heading}>Information We Collect</h2>
       <p className={legalStyles.paragraph}>
-        We collect information you provide directly — name, email, phone number,
-        delivery address, and measurements — when you create an account, place
-        an order, or book a consultation.
+        When you create an account, place an order or book a consultation, we
+        collect the details you give us: your name, email, phone number,
+        delivery address and measurements.
       </p>
       <h2 className={legalStyles.heading}>How We Use Your Information</h2>
       <p className={legalStyles.paragraph}>

@@ -1,3 +1,5 @@
+import { usePageMeta } from "../../lib/usePageMeta";
+
 interface TableSection {
   title: string;
   headers: string[];
@@ -216,13 +218,16 @@ const SECTIONS: TableSection[] = [
 ];
 
 export default function SizingGuide() {
+  usePageMeta({
+    title: "Sizing Guide",
+    description: "Favy Atelier size charts in inches and centimetres for dresses, pants and corseted blouses, in regular and curvy fits.",
+  });
   return (
     <div className="mx-auto max-w-4xl px-6 py-16">
-      <h1 className="text-center font-heading text-3xl text-brand-text">
+      <h1 className="font-heading text-3xl text-brand-text">
         Sizing Guide
       </h1>
-      <p className="mx-auto mt-4 max-w-xl text-center text-sm text-brand-text/70">
-        {" "}
+      <p className="mt-4 max-w-xl text-sm text-brand-text/70">
         Use the charts below to find your Favy Atelier size across dresses,
         pants, and blouses.
       </p>
@@ -232,8 +237,8 @@ export default function SizingGuide() {
           <div key={section.title}>
             <h2 className="font-heading text-lg text-brand-text">
               {section.title}
-            </h2>{" "}
-            <div className="mt-3 overflow-x-auto">
+            </h2>
+            <div className="mt-3 overflow-x-auto overscroll-x-contain">
               <table className="w-full min-w-[500px] border-collapse text-sm">
                 <thead>
                   <tr>

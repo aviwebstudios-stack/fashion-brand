@@ -58,7 +58,7 @@ export default function Login() {
         />
 
         <div className="text-right">
-          <Link to="/forgot-password" className="text-sm text-brand-accent hover:underline">
+          <Link to="/forgot-password" className="inline-block py-2 text-sm text-brand-accent hover:underline">
             Forgot password?
           </Link>
         </div>
@@ -74,7 +74,7 @@ export default function Login() {
 
       <p className="mt-6 text-center text-sm text-brand-text/70">
         Don't have an account?{" "}
-        <Link to="/register" className="text-brand-accent hover:underline">
+        <Link to="/register" className="inline-block py-2 text-brand-accent hover:underline">
           Create one
         </Link>
       </p>

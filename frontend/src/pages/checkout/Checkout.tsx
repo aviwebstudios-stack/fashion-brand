@@ -1,4 +1,5 @@
 import { useEffect, useState, type FormEvent } from "react";
+import { usePageMeta } from "../../lib/usePageMeta";
 import { Link } from "react-router-dom";
 import api from "../../lib/api";
 import { formatNaira } from "../../lib/format";
@@ -20,6 +21,7 @@ interface Cart {
 }
 
 export default function Checkout() {
+  usePageMeta({ title: "Checkout", noindex: true });
   const [cart, setCart] = useState<Cart | null>(null);
   const [loading, setLoading] = useState(true);
   const [deliveryAddress, setDeliveryAddress] = useState("");
@@ -59,15 +61,15 @@ export default function Checkout() {
   };
 
   if (loading) {
-    return <p className="px-6 py-20 text-center text-sm text-brand-text/60">Loading...</p>;
+    return <p className="px-6 py-20 text-center text-sm text-brand-text/60">Loading your bag...</p>;
   }
 
   if (!cart || cart.items.length === 0) {
     return (
       <div className="px-6 py-20 text-center">
         <p className="text-sm text-brand-text/70">Your bag is empty.</p>
-        <Link to="/" className="mt-4 inline-block text-sm text-brand-accent hover:underline">
-          Continue shopping
+        <Link to="/shop/rtw" className="mt-4 inline-block py-2 text-sm text-brand-accent hover:underline">
+          Shop Ready-to-Wear
         </Link>
       </div>
     );

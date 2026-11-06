@@ -69,7 +69,7 @@ export default function AccountView({ onOpenMeasurements, onClose }: AccountView
 
       <div className="mt-10 px-6">
         {loading ? (
-          <p className="text-sm text-brand-text/60">Loading...</p>
+          <p className="text-sm text-brand-text/60">Loading your account...</p>
         ) : profile ? (
           <>
             <p className="font-heading text-lg uppercase tracking-wide text-brand-text">

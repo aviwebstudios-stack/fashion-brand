@@ -67,8 +67,7 @@ export default function NewsletterPopup() {
           <>
             <h2 className="font-heading text-2xl leading-snug text-brand-text">10% off your first order</h2>
             <p className="mt-2 text-sm leading-relaxed text-brand-text/70">
-              Sign up for the Favy Atelier newsletter and be the first to discover new
-              collections, exclusive offers, and behind-the-scenes insights.
+              Join the Favy Atelier newsletter for new collections and offers, sent by email.
             </p>
 
             <form onSubmit={handleSubmit} className="mt-6 space-y-3">
@@ -77,7 +76,7 @@ export default function NewsletterPopup() {
                 required
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
-                placeholder="First Name"
+                placeholder="First name"
                 className="w-full border border-brand-text/20 bg-transparent px-4 py-2.5 text-sm text-brand-text placeholder:text-brand-text/50 focus:border-brand-accent focus:outline-none"
               />
               <input
@@ -85,7 +84,7 @@ export default function NewsletterPopup() {
                 required
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
-                placeholder="Last Name"
+                placeholder="Last name"
                 className="w-full border border-brand-text/20 bg-transparent px-4 py-2.5 text-sm text-brand-text placeholder:text-brand-text/50 focus:border-brand-accent focus:outline-none"
               />
               <input
@@ -93,17 +92,17 @@ export default function NewsletterPopup() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Email"
+                placeholder="Email address"
                 className="w-full border border-brand-text/20 bg-transparent px-4 py-2.5 text-sm text-brand-text placeholder:text-brand-text/50 focus:border-brand-accent focus:outline-none"
               />
 
               <div className="pt-1">
                 <p className="text-sm font-medium text-brand-text">
-                  What are you most interested in?
+                  I'm interested in
                 </p>
-                <div className="mt-2 space-y-2">
+                <div className="mt-1">
                   {["Ready-to-Wear", "Bespoke & Bridals"].map((interest) => (
-                    <label key={interest} className="flex items-center gap-2 text-sm text-brand-text/80">
+                    <label key={interest} className="flex min-h-11 items-center gap-3 text-sm text-brand-text/80">
                       <input
                         type="checkbox"
                         checked={interests.includes(interest)}

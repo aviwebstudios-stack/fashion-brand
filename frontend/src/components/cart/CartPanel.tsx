@@ -106,12 +106,12 @@ export default function CartPanel() {
 
         <div className="flex-1 overflow-y-auto px-6 py-6">
           {loading ? (
-            <p className="text-sm text-brand-text/60">Loading...</p>
+            <p className="text-sm text-brand-text/60">Loading your bag...</p>
           ) : !cart || cart.items.length === 0 ? (
             <div className="flex h-full flex-col items-center justify-center text-center">
               <p className="text-sm text-brand-text/70">Your bag is empty.</p>
-              <button onClick={toggleCart} className="mt-4 text-sm text-brand-accent hover:underline">
-                Continue shopping
+              <button onClick={toggleCart} className="mt-4 min-h-11 px-2 text-sm text-brand-accent hover:underline">
+                Continue Shopping
               </button>
             </div>
           ) : (

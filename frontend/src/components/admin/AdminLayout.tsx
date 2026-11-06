@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { usePageMeta } from "../../lib/usePageMeta";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard,
@@ -29,6 +30,7 @@ const NAV_ITEMS = [
 ];
 
 export default function AdminLayout() {
+  usePageMeta({ title: "Admin", noindex: true });
   const navigate = useNavigate();
   const adminLogout = useAdminAuthStore((s) => s.adminLogout);
   const adminUser = useAdminAuthStore((s) => s.adminUser);

@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { usePageMeta } from "../../lib/usePageMeta";
 
 interface AuthLayoutProps {
   title: string;
@@ -7,6 +8,7 @@ interface AuthLayoutProps {
 }
 
 export default function AuthLayout({ title, subtitle, children }: AuthLayoutProps) {
+  usePageMeta({ title, noindex: true });
   return (
     <div className="flex min-h-[70vh] items-center justify-center bg-[#faf8f3] px-4 py-16">
       <div className="w-full max-w-md">

@@ -2,7 +2,10 @@ import StaticPage, { legalStyles } from "../../components/legal/StaticPage";
 
 export default function TermsOfService() {
   return (
-    <StaticPage title="Terms of Service">
+    <StaticPage
+      title="Terms of Service"
+      description="Terms for ordering from Favy Atelier: prices in naira, payment before confirmation, and final sale on bespoke and bridal work."
+    >
       <p className={legalStyles.paragraph}>
         <em>
           This is placeholder terms content for development purposes. Before taking this site

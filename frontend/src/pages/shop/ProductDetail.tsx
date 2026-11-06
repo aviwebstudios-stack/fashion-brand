@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { usePageMeta } from "../../lib/usePageMeta";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import api from "../../lib/api";
 import { formatNaira } from "../../lib/format";
@@ -34,6 +35,11 @@ export default function ProductDetail() {
   const [adding, setAdding] = useState(false);
   const [error, setError] = useState("");
   const [showSizeGuide, setShowSizeGuide] = useState(false);
+  usePageMeta({
+    title: product?.name ?? "Product",
+    description: product ? `${product.name}, ${formatNaira(product.price)}. ${product.description}`.slice(0, 160) : undefined,
+    image: product?.images?.[0],
+  });
 
   useEffect(() => {
     setLoading(true);
@@ -84,12 +90,12 @@ export default function ProductDetail() {
   };
 
   if (loading) {
-    return <p className="px-6 py-20 text-center text-sm text-brand-text/60">Loading...</p>;
+    return <p className="px-6 py-20 text-center text-sm text-brand-text/60">Loading this piece...</p>;
   }
 
   if (!product) {
     return (
-      <p className="px-6 py-20 text-center text-sm text-brand-text/60">Product not found.</p>
+      <p className="px-6 py-20 text-center text-sm text-brand-text/60">We couldn't find this piece. It may have sold out or been removed.</p>
     );
   }
 

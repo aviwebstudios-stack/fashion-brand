@@ -8,16 +8,19 @@ const ROLES = [
 
 export default function Careers() {
   return (
-    <StaticPage title="Careers">
+    <StaticPage
+      title="Careers"
+      description="Open roles at the Favy Atelier studio on Lagos Island, and where to send your portfolio."
+    >
       <p className={legalStyles.paragraph}>
-        We're always looking for skilled, detail-obsessed people to join the
-        atelier. Below are our current openings.
+        We hire pattern cutters, seamstresses and consultants who care about the
+        details. These are the roles open now.
       </p>
       <div className="mt-8 space-y-4">
         {ROLES.map((role) => (
           <div
             key={role.title}
-            className="flex items-center justify-between border border-[#2b2b26]/10 px-5 py-4"
+            className="flex items-center justify-between gap-4 border border-[#2b2b26]/10 px-5 py-4"
           >
             <div>
               <p className="text-sm font-medium text-[#2b2b26]">{role.title}</p>
@@ -25,23 +28,23 @@ export default function Careers() {
             </div>
 
             <a
-              href="mailto:careers@favyatelier.com"
-              className="text-xs text-[#c9a227] underline"
+              href={`mailto:careers@favyatelier.com?subject=${encodeURIComponent(`Application: ${role.title}`)}`}
+              className="inline-flex min-h-11 shrink-0 items-center px-2 text-xs text-[#c9a227] underline"
             >
-              Apply
+              Apply by Email
             </a>
           </div>
         ))}
       </div>
       <p className={legalStyles.paragraph}>
-        Don't see a fit? Send your portfolio and resume to{" "}
+        If none of these fit, send your portfolio and CV to{" "}
         <a
           href="mailto:careers@favyatelier.com"
           className="text-brand-accent underline"
         >
           careers@favyatelier.com
-        </a>{" "}
-        — we keep every submission on file.
+        </a>
+        . We keep every application on file.
       </p>
     </StaticPage>
   );

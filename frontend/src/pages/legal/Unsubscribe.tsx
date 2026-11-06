@@ -1,7 +1,9 @@
 import { useState, type FormEvent } from "react";
+import { usePageMeta } from "../../lib/usePageMeta";
 import api from "../../lib/api";
 
 export default function Unsubscribe() {
+  usePageMeta({ title: "Unsubscribe", description: "Stop receiving the Favy Atelier newsletter.", noindex: true });
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
@@ -41,7 +43,7 @@ export default function Unsubscribe() {
             disabled={sending}
             className="w-full bg-brand-primary py-3 text-xs font-medium uppercase tracking-[0.15em] text-[#f4f1e8] transition hover:opacity-90 disabled:opacity-60"
           >
-            {sending ? "Submitting..." : "Unsubscribe"}
+            {sending ? "Unsubscribing..." : "Unsubscribe"}
           </button>
         </form>
       )}

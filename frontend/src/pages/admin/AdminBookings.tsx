@@ -106,7 +106,7 @@ export default function AdminBookings() {
       <h1 className="font-serif text-2xl text-[#2b2b26]">Bookings</h1>
 
       {loading ? (
-        <p className="mt-8 text-sm text-[#2b2b26]/60">Loading...</p>
+        <p className="mt-8 text-sm text-[#2b2b26]/60">Loading bookings...</p>
       ) : bookings.length === 0 ? (
         <p className="mt-8 text-sm text-[#2b2b26]/60">No bookings yet.</p>
       ) : (
@@ -205,7 +205,7 @@ export default function AdminBookings() {
                 </p>
                 <p className="mt-1 text-[#2b2b26]">
                   {new Date(viewingBooking.date).toLocaleDateString()} · {viewingBooking.startTime}{" "}
-                  – {viewingBooking.endTime}
+                  to {viewingBooking.endTime}
                 </p>
               </div>
               {viewingBooking.notes && (

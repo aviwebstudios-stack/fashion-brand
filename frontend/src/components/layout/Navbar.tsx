@@ -6,12 +6,12 @@ import { usePanelStore } from "../../store/panelStore";
 import AnnouncementBar from "./AnnouncementBar";
 
 const NAV_LINKS = [
-  { label: "Shop RTW", to: "/shop/rtw" },
+  { label: "Ready-to-Wear", to: "/shop/rtw" },
   { label: "Bridals", to: "/shop/bridals" },
   { label: "Bespoke", to: "/shop/bespoke" },
   { label: "Fashion Academy", to: "/academy" },
   { label: "Book a Consultation", to: "/consultations" },
-  { label: "Shop Sales", to: "/shop/sales" },
+  { label: "Sales", to: "/shop/sales" },
 ];
 
 export default function Navbar() {
@@ -45,8 +45,9 @@ export default function Navbar() {
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2">
           <button
             onClick={() => setIsMobileMenuOpen((v) => !v)}
-            className="p-1 text-brand-text md:hidden"
-            aria-label="Toggle menu"
+            className="-ml-3 flex h-11 w-11 items-center justify-center text-brand-text md:hidden"
+            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMobileMenuOpen}
           >
             {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
@@ -60,19 +61,19 @@ export default function Navbar() {
             </span>
           </Link>
 
-          <div className="flex items-center gap-4">
-            <button onClick={toggleSearch} aria-label="Search" className="text-brand-text transition hover:text-brand-accent">
+          <div className="-mr-3 flex items-center">
+            <button onClick={toggleSearch} aria-label="Search" className="flex h-11 w-11 items-center justify-center text-brand-text transition hover:text-brand-accent">
               <Search size={18} />
             </button>
 
             <button
               onClick={toggleCart}
-              aria-label="Open cart"
-              className="relative text-brand-text transition hover:text-brand-accent"
+              aria-label="Open bag"
+              className="relative flex h-11 w-11 items-center justify-center text-brand-text transition hover:text-brand-accent"
             >
               <ShoppingBag size={18} />
               {cartCount > 0 && (
-                <span className="absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-brand-accent text-[10px] font-medium text-white">
+                <span className="absolute right-0.5 top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-brand-accent text-[10px] font-medium text-white">
                   {cartCount}
                 </span>
               )}
@@ -82,12 +83,12 @@ export default function Navbar() {
               <button
                 onClick={toggleDashboard}
                 aria-label="Account"
-                className="text-brand-text transition hover:text-brand-accent"
+                className="flex h-11 w-11 items-center justify-center text-brand-text transition hover:text-brand-accent"
               >
                 <User size={18} />
               </button>
             ) : (
-              <Link to="/login" aria-label="Account" className="text-brand-text transition hover:text-brand-accent">
+              <Link to="/login" aria-label="Sign in" className="flex h-11 w-11 items-center justify-center text-brand-text transition hover:text-brand-accent">
                 <User size={18} />
               </Link>
             )}
@@ -124,14 +125,14 @@ export default function Navbar() {
 
         {isMobileMenuOpen && (
           <nav className="border-t border-[#e5e1d8] md:hidden">
-            <ul className="flex flex-col gap-4 px-6 py-4">
+            <ul className="flex flex-col px-6 py-2">
               {NAV_LINKS.map((link) => (
                 <li key={link.to}>
                   <NavLink
                     to={link.to}
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={({ isActive }) =>
-                      `text-sm uppercase tracking-[0.08em] ${
+                      `block py-3 text-sm uppercase tracking-[0.08em] ${
                         isActive ? "text-brand-text underline underline-offset-4" : "text-brand-text/80"
                       }`
                     }

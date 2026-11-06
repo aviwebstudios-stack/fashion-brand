@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { usePageMeta } from "../../lib/usePageMeta";
 import { useParams, Link } from "react-router-dom";
 import api from "../../lib/api";
 import { formatNaira } from "../../lib/format";
@@ -22,7 +23,7 @@ const CATEGORY_TITLES: Record<string, string> = {
   rtw: "Ready-to-Wear",
   bridals: "Bridals",
   bespoke: "Bespoke",
-  sales: "Shop Sales",
+  sales: "Sales",
 };
 
 export default function ProductListing() {
@@ -46,20 +47,24 @@ export default function ProductListing() {
   }, [category, page]);
 
   const title = category ? CATEGORY_TITLES[category] || category : "Shop";
+  usePageMeta({
+    title,
+    description: `Shop ${title} from Favy Atelier. Prices in naira, delivered across Nigeria.`,
+  });
 
   return (
     <div className="mx-auto max-w-7xl px-6 py-14">
-      <h1 className="text-center font-heading text-3xl text-brand-text">{title}</h1>
+      <h1 className="font-heading text-3xl text-brand-text">{title}</h1>
 
       {loading ? (
-        <p className="mt-12 text-center text-sm text-brand-text/60">Loading...</p>
+        <p className="mt-12 text-sm text-brand-text/60">Loading {title.toLowerCase()} pieces...</p>
       ) : !data || data.products.length === 0 ? (
-        <p className="mt-12 text-center text-sm text-brand-text/60">
-          No products found in this collection yet.
+        <p className="mt-12 text-sm text-brand-text/60">
+          There's nothing in {title} right now. New pieces are added often, so check back soon.
         </p>
       ) : (
         <>
-          <div className="mt-12 grid grid-cols-2 gap-x-6 gap-y-12 sm:grid-cols-3 lg:grid-cols-4">
+          <div className="mt-10 grid grid-cols-2 gap-x-4 gap-y-10 sm:grid-cols-3 sm:gap-x-6 sm:gap-y-12 lg:grid-cols-4">
             {data.products.map((product) => (
               <div key={product.id}>
                 <div className="group relative aspect-[3/4] overflow-hidden bg-[#e5e1d8]">
@@ -67,6 +72,8 @@ export default function ProductListing() {
                     <img
                       src={product.images[0]}
                       alt={product.name}
+                      loading="lazy"
+                      decoding="async"
                       className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
                     />
                   ) : (
@@ -75,9 +82,9 @@ export default function ProductListing() {
 
                   <button
                     onClick={() => setQuickViewId(product.id)}
-                    className="absolute inset-x-3 bottom-3 bg-brand-primary py-2.5 text-xs font-medium uppercase tracking-[0.15em] text-[#f4f1e8] opacity-0 transition hover:opacity-90 group-hover:opacity-100"
+                    className="absolute inset-x-2 bottom-2 min-h-11 bg-brand-primary py-2.5 text-xs font-medium uppercase tracking-[0.15em] text-[#f4f1e8] transition hover:opacity-90 sm:inset-x-3 sm:bottom-3 md:opacity-0 md:group-hover:opacity-100 md:focus-visible:opacity-100"
                   >
-                    Shop Now
+                    Quick View
                   </button>
                 </div>
 
@@ -94,7 +101,7 @@ export default function ProductListing() {
               <button
                 onClick={() => setPage((p) => Math.max(1, p - 1))}
                 disabled={page <= 1}
-                className="text-sm text-brand-text underline disabled:opacity-40"
+                className="min-h-11 px-2 text-sm text-brand-text underline disabled:opacity-40"
               >
                 Previous
               </button>
@@ -104,7 +111,7 @@ export default function ProductListing() {
               <button
                 onClick={() => setPage((p) => Math.min(data.pagination.pages, p + 1))}
                 disabled={page >= data.pagination.pages}
-                className="text-sm text-brand-text underline disabled:opacity-40"
+                className="min-h-11 px-2 text-sm text-brand-text underline disabled:opacity-40"
               >
                 Next
               </button>

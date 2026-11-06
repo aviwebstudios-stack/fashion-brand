@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { usePageMeta } from "../../lib/usePageMeta";
 import { Link } from "react-router-dom";
 import api from "../../lib/api";
 import { formatNaira } from "../../lib/format";
@@ -27,6 +28,7 @@ function statusColor(status: string) {
 }
 
 export default function MyOrders() {
+  usePageMeta({ title: "My Orders", noindex: true });
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -43,12 +45,12 @@ export default function MyOrders() {
       <h1 className="text-center font-heading text-3xl text-brand-text">My Orders</h1>
 
       {loading ? (
-        <p className="mt-10 text-center text-sm text-brand-text/60">Loading...</p>
+        <p className="mt-10 text-center text-sm text-brand-text/60">Loading your orders...</p>
       ) : orders.length === 0 ? (
         <div className="mt-10 text-center">
           <p className="text-sm text-brand-text/70">You haven't placed any orders yet.</p>
-          <Link to="/" className="mt-4 inline-block text-sm text-brand-accent hover:underline">
-            Start shopping
+          <Link to="/shop/rtw" className="mt-4 inline-block py-2 text-sm text-brand-accent hover:underline">
+            Shop Ready-to-Wear
           </Link>
         </div>
       ) : (

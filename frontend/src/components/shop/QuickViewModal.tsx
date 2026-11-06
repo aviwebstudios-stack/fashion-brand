@@ -109,7 +109,7 @@ export default function QuickViewModal({ productId, onClose }: QuickViewModalPro
           {loading || !product ? (
             <div className="col-span-2 flex items-center justify-center py-24">
               <p className="text-sm text-brand-text/60">
-                {loading ? "Loading..." : "Product not found."}
+                {loading ? "Loading this piece..." : "We couldn't find this piece. It may have sold out or been removed."}
               </p>
             </div>
           ) : (
@@ -187,7 +187,7 @@ export default function QuickViewModal({ productId, onClose }: QuickViewModalPro
                       disabled={adding}
                       className="mt-6 w-full bg-brand-primary py-3 text-xs font-medium uppercase tracking-[0.15em] text-[#f4f1e8] transition hover:opacity-90 disabled:opacity-60"
                     >
-                      {adding ? "Adding..." : "Add to Cart"}
+                      {adding ? "Adding..." : "Add to Bag"}
                     </button>
 
                     <button
@@ -207,7 +207,7 @@ export default function QuickViewModal({ productId, onClose }: QuickViewModalPro
                   }}
                   className="mt-4 text-sm text-brand-text/70 underline hover:text-brand-text"
                 >
-                  More details
+                  View Full Details
                 </button>
               </div>
             </>

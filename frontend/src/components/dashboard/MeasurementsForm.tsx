@@ -146,7 +146,7 @@ export default function MeasurementsForm({ onBack }: MeasurementsFormProps) {
       </h1>
 
       {loading ? (
-        <p className="mt-10 px-6 text-sm text-brand-text/60">Loading...</p>
+        <p className="mt-10 px-6 text-sm text-brand-text/60">Loading your measurements...</p>
       ) : (
         <div className="mt-8 space-y-8 px-6 pb-10">
           <section>

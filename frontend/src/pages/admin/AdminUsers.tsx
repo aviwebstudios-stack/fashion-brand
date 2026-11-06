@@ -73,7 +73,7 @@ export default function AdminUsers() {
       <h1 className="font-serif text-2xl text-[#2b2b26]">Users</h1>
 
       {loading ? (
-        <p className="mt-8 text-sm text-[#2b2b26]/60">Loading...</p>
+        <p className="mt-8 text-sm text-[#2b2b26]/60">Loading users...</p>
       ) : users.length === 0 ? (
         <p className="mt-8 text-sm text-[#2b2b26]/60">No users found.</p>
       ) : (
@@ -95,7 +95,7 @@ export default function AdminUsers() {
                 <tr key={user.id} className="border-b border-[#2b2b26]/10">
                   <td className="px-4 py-3 text-[#2b2b26]">{user.name}</td>
                   <td className="px-4 py-3 text-[#2b2b26]/70">{user.email}</td>
-                  <td className="px-4 py-3 text-[#2b2b26]/70">{user.phone || "—"}</td>
+                  <td className="px-4 py-3 text-[#2b2b26]/70">{user.phone || "Not given"}</td>
                   <td className="px-4 py-3 text-[#2b2b26]/70">{user.role}</td>
                   <td className="px-4 py-3">
                     <span

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { usePageMeta } from "../../lib/usePageMeta";
 import { Link } from "react-router-dom";
 import { Shield, Settings, BarChart3, Megaphone } from "lucide-react";
 import {
@@ -15,6 +16,10 @@ const DEFAULT_PREFS: CookiePreferences = {
 };
 
 export default function CookiePreferencesPage() {
+  usePageMeta({
+    title: "Cookie Preferences",
+    description: "Choose which cookies Favy Atelier can use. Essential cookies keep the site and your login working.",
+  });
   const [prefs, setPrefs] = useState<CookiePreferences>(DEFAULT_PREFS);
   const [saved, setSaved] = useState(false);
 
@@ -36,8 +41,7 @@ export default function CookiePreferencesPage() {
 
   return (
     <div className="mx-auto max-w-3xl px-6 py-16">
-      <p className="text-xs uppercase tracking-[0.15em] text-brand-accent">Legal</p>
-      <h1 className="mt-2 font-heading text-3xl text-brand-text">Cookie Preferences</h1>
+      <h1 className="font-heading text-3xl text-brand-text">Cookie Preferences</h1>
       <p className="mt-3 text-sm text-brand-text/70">
         Control how we use cookies on this site. Essential cookies stay on so the site works.
       </p>
@@ -77,6 +81,9 @@ export default function CookiePreferencesPage() {
             </div>
             <button
               onClick={() => toggle("functional")}
+              role="switch"
+              aria-checked={prefs.functional}
+              aria-label="Functional cookies"
               className={`mt-1 h-6 w-11 shrink-0 rounded-full transition ${
                 prefs.functional ? "bg-brand-accent" : "bg-brand-text/20"
               }`}
@@ -104,6 +111,9 @@ export default function CookiePreferencesPage() {
             </div>
             <button
               onClick={() => toggle("analytics")}
+              role="switch"
+              aria-checked={prefs.analytics}
+              aria-label="Analytics cookies"
               className={`mt-1 h-6 w-11 shrink-0 rounded-full transition ${
                 prefs.analytics ? "bg-brand-accent" : "bg-brand-text/20"
               }`}
@@ -131,6 +141,9 @@ export default function CookiePreferencesPage() {
             </div>
             <button
               onClick={() => toggle("marketing")}
+              role="switch"
+              aria-checked={prefs.marketing}
+              aria-label="Marketing cookies"
               className={`mt-1 h-6 w-11 shrink-0 rounded-full transition ${
                 prefs.marketing ? "bg-brand-accent" : "bg-brand-text/20"
               }`}
