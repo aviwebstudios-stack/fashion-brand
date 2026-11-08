@@ -5,17 +5,6 @@ export type ThemeMode = "light" | "dark";
 /** Must match the key read by the inline script in index.html. */
 export const THEME_STORAGE_KEY = "fb_theme";
 
-const media = () => window.matchMedia("(prefers-color-scheme: dark)");
-
-function readSaved(): ThemeMode | null {
-  try {
-    const v = localStorage.getItem(THEME_STORAGE_KEY);
-    return v === "light" || v === "dark" ? v : null;
-  } catch {
-    return null;
-  }
-}
-
 function current(): ThemeMode {
   return document.documentElement.dataset.theme === "dark" ? "dark" : "light";
 }
@@ -52,12 +41,10 @@ export function toggleThemeMode() {
   setThemeMode(current() === "dark" ? "light" : "dark");
 }
 
-// Follow the system setting until the visitor picks a mode themselves.
+// The site opens in light mode. The system setting is ignored; only a saved
+// toggle choice (set by the inline script in index.html) switches to dark.
 if (typeof window !== "undefined") {
   syncThemeColor(current());
-  media().addEventListener("change", (e) => {
-    if (!readSaved()) apply(e.matches ? "dark" : "light", true);
-  });
 }
 
 function subscribe(listener: () => void) {

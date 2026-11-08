@@ -6,11 +6,9 @@
     <script>
       // Set the colour theme before the app renders, so there's no flash.
       (function () {
-        var mode;
-        try { mode = localStorage.getItem("fb_theme"); } catch (e) {}
-        if (mode !== "light" && mode !== "dark") {
-          mode = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-        }
+        // Light by default. Dark only when the visitor chose it with the toggle.
+        var mode = "light";
+        try { if (localStorage.getItem("fb_theme") === "dark") mode = "dark"; } catch (e) {}
         document.documentElement.dataset.theme = mode;
       })();
     </script>
